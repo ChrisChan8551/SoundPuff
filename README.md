@@ -81,7 +81,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: api/users/:id
+  * URL: api/users/login
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -148,7 +148,7 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: POST  
-  * URL: api/users/:id
+  * URL: api/users/signup
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -408,7 +408,7 @@ Creates and returns a new song with or without an album.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: api/songs
+  * URL: api/songs/create
   * Headers:
     * Content-Type: application/json
   * Body without an album:
@@ -649,7 +649,7 @@ Creates and returns a new playlist.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: api/playlists
+  * URL: api/playlists/create
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -760,7 +760,7 @@ Returns the details of a playlist specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/playlists/playlistId
+  * URL: api/playlists/:playlistId
   * Body: none
 
 * Successful Response
@@ -949,7 +949,7 @@ Returns all the comments that belong to a song specified by id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/comments/:songId
+  * URL: api/songs/:songId/comments
   * Body: none
 
 * Successful Response
@@ -997,7 +997,7 @@ Create and return a new comment for a song specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: api/comments/:songId
+  * URL: api/songs/:songId/comments/create
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1062,7 +1062,7 @@ Update and return an existing comment.
 * Require proper authorization: Comment must belong to the current user
 * Request
   * Method: PUT
-  * URL: api/users/:userId/comments/:commentId
+  * URL: api/users/:userId/songs/:songId/comments/:commentId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1127,7 +1127,7 @@ Delete an existing comment.
 * Require proper authorization: Comment must belong to the current user
 * Request
   * Method: DELETE
-  * URL: api/users/:userId/comments/:commentId
+  * URL: api/users/:userId/songs/:songId/comments/:commentId
   * Body: none
 
 * Successful Response
@@ -1333,7 +1333,7 @@ Creates and returns a new album.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: api/albums
+  * URL: api/albums/create
   * Headers:
     * Content-Type: application/json
   * Body:
