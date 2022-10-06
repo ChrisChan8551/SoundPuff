@@ -1,9 +1,10 @@
-# soundcloud
+# SoundCloud
 
 ## Database Schema Design
 
-<img src="https://user-images.githubusercontent.com/103156299/192941786-1fcc31d6-998f-4d96-9db9-57b99fecaae8.png" width="785" height="641">
+<img src="https://user-images.githubusercontent.com/103156299/194212467-d87e5b84-8f5a-4a38-a735-1042a2836e18.png" width="785" height="641">
 <!-- ![SoundCloud](https://user-images.githubusercontent.com/103156299/192944396-5a25d095-4395-4d79-8494-7b909412defc.png) -->
+
 
 
 ## API Documentation
@@ -54,7 +55,7 @@ Returns the information about the current user that is logged in.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: api/users/:id
+  * URL: /api/session
   * Body: none
 
 * Successful Response
@@ -81,7 +82,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: api/users/login
+  * URL: /api/session
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -147,8 +148,8 @@ user's information.
 
 * Require Authentication: false
 * Request
-  * Method: POST  
-  * URL: api/users/signup
+  * Method: POST
+  * URL: /api/users
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -239,8 +240,8 @@ Returns all the songs.
 
 * Require Authentication: false
 * Request
-  * Method: GET 
-  * URL: api/songs
+  * Method: GET
+  * URL: /api/songs
   * Body: none
 
 * Successful Response
@@ -261,7 +262,12 @@ Returns all the songs.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url",
+          "User": {
+            "id": 1,
+            "username": "JohnSmith",
+            "imageUrl": "image url"
+          },
         }
       ]
     }
@@ -274,7 +280,7 @@ Returns all the songs created by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: api/users/:userId/songs
+  * URL: /api/songs/current
   * Body: none
 
 * Successful Response
@@ -295,20 +301,20 @@ Returns all the songs created by the current user.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
     ```
 
-### Get all Songs of an Artist from an id
+### Get all Songs of an Artist(User) from an id
 
-Returns all the songs created by the specified artist.
+Returns all the songs created by the specified artist(user).
 
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/artists/:artistId/songs
+  * URL: /api/artists/:artistId/songs
   * Body: none
 
 * Successful Response
@@ -329,13 +335,13 @@ Returns all the songs created by the specified artist.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
     ```
 
-* Error response: Couldn't find an Artist with the specified id
+* Error response: Couldn't find an Artist(User) with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -355,7 +361,7 @@ Returns the details of a song specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/songs/:songid
+  * URL: /api/songs/:songId
   * Body: none
 
 * Successful Response
@@ -374,16 +380,16 @@ Returns the details of a song specified by its id.
       "url": "audio url",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url",
-      "Artist": {
+      "imageUrl": "image url",
+      "User": {
         "id": 1,
         "username": "JohnSmith",
-        "previewImage": "image url"
+        "imageUrl": "image url"
       },
       "Album": {
         "id": 1,
         "title": "Time",
-        "previewImage": "image url"
+        "imageUrl": "image url"
       }
     }
     ```
@@ -408,7 +414,7 @@ Creates and returns a new song with or without an album.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: api/songs/create
+  * URL: /api/songs
   * Headers:
     * Content-Type: application/json
   * Body without an album:
@@ -451,7 +457,7 @@ Creates and returns a new song with or without an album.
       "url": "audio url",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -494,7 +500,7 @@ Updates and returns an existing song.
 * Require proper authorization: Song must belong to the current user
 * Request
   * Method: PUT
-  * URL: api/users/:userId/songs/:songId
+  * URL: /api/songs/:songId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -525,7 +531,7 @@ Updates and returns an existing song.
       "url": "audio url",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 20:00:00",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -567,7 +573,7 @@ Deletes an existing song.
 * Require proper authorization: Song must belong to the current user
 * Request
   * Method: DELETE
-  * URL: api/users/:userId/songs/:songId
+  * URL: /api/songs/:songId
   * Body: none
 
 * Successful Response
@@ -598,14 +604,14 @@ Deletes an existing song.
 
 ## PLAYLISTS
 
-### Get all Playlists of an Artist from an id
+### Get all Playlists of an Artist(User) from an id
 
-Returns all the playlists created by the specified artist.
+Returns all the playlists created by the specified artist(user).
 
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/users/username/playlist
+  * URL: /api/artists/:artistId/playlists
   * Body: none
 
 * Successful Response
@@ -623,13 +629,13 @@ Returns all the playlists created by the specified artist.
           "name": "Current Favorites",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
     ```
 
-* Error response: Couldn't find an Artist with the username
+* Error response: Couldn't find an Artist(User) with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -649,7 +655,7 @@ Creates and returns a new playlist.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: api/playlists/create
+  * URL: /api/playlists
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -674,7 +680,7 @@ Creates and returns a new playlist.
       "name": "Current Favorites",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -701,8 +707,8 @@ Add a song to a playlist specified by the playlist's id.
 * Require Authentication: true
 * Require proper authorization: Playlist must belong to the current user
 * Request
-  * Method: POST  
-  * URL: api/users/:userId/playlist/:playlistId/songs
+  * Method: POST
+  * URL: /api/playlists/:playlistId/songs
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -760,7 +766,7 @@ Returns the details of a playlist specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/playlists/:playlistId
+  * URL: /api/playlists/:playlistId
   * Body: none
 
 * Successful Response
@@ -776,7 +782,7 @@ Returns the details of a playlist specified by its id.
       "name": "Current Favorites",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url",
+      "imageUrl": "image url",
       "Songs": [
         {
           "id": 1,
@@ -787,7 +793,7 @@ Returns the details of a playlist specified by its id.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -814,7 +820,7 @@ Updates and returns an existing playlist.
 * Require proper authorization: Playlist must belong to the current user
 * Request
   * Method: PUT
-  * URL: api/users/:userId/playlist/:playlistId
+  * URL: /api/playlists/:playlistId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -839,7 +845,7 @@ Updates and returns an existing playlist.
       "name": "Current Favorites",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 20:00:00",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -880,7 +886,7 @@ Deletes an existing playlist.
 * Require proper authorization: Playlist must belong to the current user
 * Request
   * Method: DELETE
-  * URL: api/users/:userId/playlist/:playlistId
+  * URL: /api/playlists/:playlistId
   * Body: none
 
 * Successful Response
@@ -909,6 +915,56 @@ Deletes an existing playlist.
     }
     ```
 
+### Delete a Song From a Playlist
+
+Deletes a song from an existing playlist.
+
+* Require Authentication: true
+* Require proper authorization: Playlist must belong to the current user
+* Request
+  * Method: DELETE
+  * URL: /api/playlists/:playlistId/songs/:songId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted",
+      "statusCode": 200
+    }
+    ```
+
+* Error response: Couldn't find a Playlist with the specified id
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Playlist couldn't be found",
+      "statusCode": 404
+    }
+    ```
+    
+* Error response: Couldn't find a Song with the specified id on the specified Playlist
+  * Status Code: 404
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "The specified song was not on this playlist",
+      "statusCode": 404
+    }
+    ```
+
 ### Get all Playlists created by the Current User
 
 Returns all the playlists created by the current user.
@@ -916,7 +972,7 @@ Returns all the playlists created by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /users/:userId/playlists
+  * URL: /api/playlists/current
   * Body: none
 
 * Successful Response
@@ -934,7 +990,7 @@ Returns all the playlists created by the current user.
           "name": "Current Favorites",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -949,7 +1005,7 @@ Returns all the comments that belong to a song specified by id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/songs/:songId/comments
+  * URL: /api/songs/:songId/comments
   * Body: none
 
 * Successful Response
@@ -997,7 +1053,7 @@ Create and return a new comment for a song specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: api/songs/:songId/comments/create
+  * URL: /api/songs/:songId/comments
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1062,7 +1118,7 @@ Update and return an existing comment.
 * Require proper authorization: Comment must belong to the current user
 * Request
   * Method: PUT
-  * URL: api/users/:userId/songs/:songId/comments/:commentId
+  * URL: /api/comments/:commentId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1127,7 +1183,7 @@ Delete an existing comment.
 * Require proper authorization: Comment must belong to the current user
 * Request
   * Method: DELETE
-  * URL: api/users/:userId/songs/:songId/comments/:commentId
+  * URL: /api/comments/:commentId
   * Body: none
 
 * Successful Response
@@ -1165,7 +1221,7 @@ Returns all the Albums.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/albums
+  * URL: /api/albums
   * Body: none
 
 * Successful Response
@@ -1184,7 +1240,7 @@ Returns all the Albums.
           "description": "An album about time.",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -1197,7 +1253,7 @@ Returns all the Albums created by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: api/users/:usersId/albums
+  * URL: /api/albums/current
   * Body: none
 
 * Successful Response
@@ -1216,20 +1272,20 @@ Returns all the Albums created by the current user.
           "description": "An album about time.",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
     ```
 
-### Get all Albums of an Artist from an id
+### Get all Albums of an Artist(User) from an id
 
-Returns all the albums created by the specified artist.
+Returns all the albums created by the specified artist(user).
 
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/albums/:artistId
+  * URL: /api/artists/:artistId/albums
   * Body: none
 
 * Successful Response
@@ -1248,13 +1304,13 @@ Returns all the albums created by the specified artist.
           "description": "An album about time.",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
     ```
 
-* Error response: Couldn't find an Artist with the specified id
+* Error response: Couldn't find an Artist(User) with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -1274,7 +1330,7 @@ Returns the details of an album specified by its id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/albums/:albumId
+  * URL: /api/albums/:albumId
   * Body: none
 
 * Successful Response
@@ -1291,11 +1347,11 @@ Returns the details of an album specified by its id.
       "description": "An album about time.",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url",
-      "Artist": {
+      "imageUrl": "image url",
+      "User": {
         "id": 1,
         "username": "JohnSmith",
-        "previewImage": "image url"
+        "imageUrl": "image url"
       },
       "Songs": [
         {
@@ -1307,7 +1363,7 @@ Returns the details of an album specified by its id.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url"
         }
       ]
     }
@@ -1333,7 +1389,7 @@ Creates and returns a new album.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: api/albums/create
+  * URL: /api/albums
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1360,7 +1416,7 @@ Creates and returns a new album.
       "description": "An album about time.",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -1388,7 +1444,7 @@ Updates and returns an existing album.
 * Require proper authorization: Album must belong to the current user
 * Request
   * Method: PUT
-  * URL: api/users/:userId/album/:albumId
+  * URL: /api/albums/:albumId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1415,7 +1471,7 @@ Updates and returns an existing album.
       "description": "An album about time.",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 20:00:00",
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
@@ -1456,7 +1512,7 @@ Deletes an existing album.
 * Require proper authorization: Album must belong to the current user
 * Request
   * Method: DELETE
-  * URL: api/users/:userId/albums/:albumId
+  * URL: /api/albums/:albumId
   * Body: none
 
 * Successful Response
@@ -1485,16 +1541,16 @@ Deletes an existing album.
     }
     ```
 
-## ARTISTS
+## ARTISTS(Users)
 
-### Get details of an Artist from an id
+### Get details of an Artist(User) from an id
 
-Returns the details of an artist specified by their id.
+Returns the details of an artist(user) specified by their id.
 
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/artists/:artistId
+  * URL: /api/artists/:artistId
   * Body: none
 
 * Successful Response
@@ -1509,11 +1565,11 @@ Returns the details of an artist specified by their id.
       "username": "JohnSmith",
       "totalSongs": 10,
       "totalAlbums": 2,
-      "previewImage": "image url"
+      "imageUrl": "image url"
     }
     ```
 
-* Error response: Couldn't find an Artists with the specified id
+* Error response: Couldn't find an Artist(User) with the specified id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -1533,10 +1589,10 @@ Return songs filtered by query parameters.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: api/songs
+  * URL: /api/songs
   * Query Parameters
-    * page: integer, minimum: 0, maximum: 10, default: 0
-    * size: integer, minimum: 0, maximum: 20, default: 20
+    * page: integer, minimum: 1, maximum: 10, default: 1
+    * size: integer, minimum: 1, maximum: 20, default: 20
     * title: string, optional
     * createdAt: string, optional
   * Body: none
@@ -1559,7 +1615,12 @@ Return songs filtered by query parameters.
           "url": "audio url",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "imageUrl": "image url",
+          "User": {
+            "id": 1,
+            "username": "JohnSmith",
+            "imageUrl": "image url"
+          },
         }
       ],
       "page": 2,
@@ -1578,8 +1639,8 @@ Return songs filtered by query parameters.
       "message": "Validation Error",
       "statusCode": 400,
       "errors": {
-        "page": "Page must be greater than or equal to 0",
-        "size": "Size must be greater than or equal to 0",
+        "page": "Page must be greater than or equal to 1",
+        "size": "Size must be greater than or equal to 1",
         "createdAt": "CreatedAt is invalid"
       }
     }
