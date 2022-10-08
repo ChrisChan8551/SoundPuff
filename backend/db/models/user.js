@@ -1,6 +1,7 @@
 'use strict';
 const bcrypt = require('bcryptjs');
 const { Model, Validator } = require('sequelize');
+const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
 		toSafeObject() {
@@ -30,34 +31,27 @@ module.exports = (sequelize, DataTypes) => {
 			}
 		}
 
-		static async signup({ username, firstName, lastName, email, password }) {
+		static async signup({firstName, lastName, email, username, password }) {
 			const hashedPassword = bcrypt.hashSync(password);
 			const user = await User.create({
-				username,
 				firstName,
 				lastName,
 				email,
+				username,
 				hashedPassword,
 			});
 			return await User.scope('currentUser').findByPk(user.id);
 		}
 
 		static associate(models) {
-			User.belongsToMany(models.Comment, { foreignKey: 'userId' });
-			User.belongsToMany(models.Song, { foreignKey: 'userId' });
-			User.belongsToMany(models.Playlist, { foreignKey: 'userId' });
-			User.belongsToMany(models.Album, { foreignKey: 'userId' });
+			// User.hasMany(models.Comment, { foreignKey: 'userId' });
+			// User.hasMany(models.Song, { foreignKey: 'userId' });
+			// User.hasMany(models.Playlist, { foreignKey: 'userId' });
+			// User.hasMany(models.Album, { foreignKey: 'userId' });
 		}
 	}
 	User.init(
 		{
-			username: {
-				type: DataTypes.STRING,
-				allowNull: false,
-				validate: {
-					len: [3, 30],
-				},
-			},
 			firstName: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -72,13 +66,6 @@ module.exports = (sequelize, DataTypes) => {
 					len: [3, 30],
 				},
 			},
-			hashedPassword: {
-				type: DataTypes.STRING.BINARY,
-				allowNull: false,
-				validate: {
-					len: [60, 60],
-				},
-			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -87,18 +74,33 @@ module.exports = (sequelize, DataTypes) => {
 					isEmail: true,
 				},
 			},
+			username: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					len: [3, 30],
+				},
+			},
+			hashedPassword: {
+				type: DataTypes.STRING.BINARY,
+				allowNull: false,
+				validate: {
+					len: [6, 60],
+				},
+			},
+
 		},
 		{
 			sequelize,
 			modelName: 'User',
 			defaultScope: {
 				attributes: {
-					exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
+					exclude: ['password', 'email', 'createdAt', 'updatedAt'],
 				},
 			},
 			scopes: {
 				currentUser: {
-					attributes: { exclude: ['hashedPassword', 'createdAt', 'updatedAt'] },
+					attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
 				},
 				loginUser: {
 					attributes: {},
