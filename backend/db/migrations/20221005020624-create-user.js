@@ -24,14 +24,18 @@ module.exports = {
         allowNull: false,
         unique: true
       },
+      hashedPassword: {
+        type: Sequelize.STRING.BINARY,
+        allowNull: false
+      },
       email: {
         type: Sequelize.STRING(256),
         allowNull: false,
         unique: true
       },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
-        allowNull: false
+      imageUrl: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

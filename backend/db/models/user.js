@@ -43,7 +43,10 @@ module.exports = (sequelize, DataTypes) => {
 		}
 
 		static associate(models) {
-			// define association here
+			User.belongsToMany(models.Comment, { foreignKey: 'userId' });
+			User.belongsToMany(models.Song, { foreignKey: 'userId' });
+			User.belongsToMany(models.Playlist, { foreignKey: 'userId' });
+			User.belongsToMany(models.Album, { foreignKey: 'userId' });
 		}
 	}
 	User.init(
@@ -69,19 +72,19 @@ module.exports = (sequelize, DataTypes) => {
 					len: [3, 30],
 				},
 			},
+			hashedPassword: {
+				type: DataTypes.STRING.BINARY,
+				allowNull: false,
+				validate: {
+					len: [60, 60],
+				},
+			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					len: [3, 256],
 					isEmail: true,
-				},
-			},
-			hashedPassword: {
-				type: DataTypes.STRING.BINARY,
-				allowNull: false,
-				validate: {
-					len: [60, 60],
 				},
 			},
 		},
@@ -95,7 +98,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			scopes: {
 				currentUser: {
-					attributes: { exclude: ['hashedPassword'] },
+					attributes: { exclude: ['hashedPassword', 'createdAt', 'updatedAt'] },
 				},
 				loginUser: {
 					attributes: {},
