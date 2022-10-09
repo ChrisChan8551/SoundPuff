@@ -53,7 +53,7 @@ router.get('/', restoreUser, (req, res) => {
 });
 
 // Get current user
-router.get('/api/session', (req, res) => {
+router.get('/', (req, res) => {
 	const { user } = req.params;
 	res.json(user);
 });
