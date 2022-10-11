@@ -9,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// Album.belongsTo(models.Song, { foreignKey: 'albumId' });
-			// Album.hasMany(models.User);
+			// Album.hasMany(models.User, { foreignKey: 'id' });
 		}
 	}
 	Album.init(
 		{
-			userId: DataTypes.INTEGER,
-			title: DataTypes.STRING,
-			description: DataTypes.STRING,
-			imageUrl: DataTypes.STRING,
+			userId: { type: DataTypes.INTEGER },
+			title: { type: DataTypes.STRING },
+			description: { type: DataTypes.STRING },
+			imageUrl: { type: DataTypes.STRING },
 		},
 		{
 			sequelize,
