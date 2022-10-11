@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 			}
 		}
 
-		static async signup({firstName, lastName, email, username, password }) {
+		static async signup({ firstName, lastName, email, username, password }) {
 			const hashedPassword = bcrypt.hashSync(password);
 			const user = await User.create({
 				firstName,
@@ -44,11 +44,10 @@ module.exports = (sequelize, DataTypes) => {
 		}
 
 		static associate(models) {
-			// User.belongsTo(models.Song, { foreignKey: 'userId' });
+			User.hasMany(models.Song, { foreignKey: 'userId' });
 			// User.belongsTo(models.Comment, { foreignKey: 'userId' });
 			// User.belongsTo(models.Album, { foreignKey: 'userId' });
 			// User.belongsTo(models.Playlist, { foreignKey: 'userId' });
-
 		}
 	}
 	User.init(
@@ -89,7 +88,6 @@ module.exports = (sequelize, DataTypes) => {
 					len: [6, 60],
 				},
 			},
-
 		},
 		{
 			sequelize,
@@ -101,10 +99,14 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			scopes: {
 				currentUser: {
-					attributes: { exclude: ['hashedPassword', 'createdAt', 'updatedAt'] },
+					attributes: {
+						exclude: ['hashedPassword', 'createdAt', 'updatedAt'],
+					},
 				},
 				loginUser: {
-					attributes: {},
+					attributes: {
+						imageUrl: 'image url',
+					},
 				},
 			},
 		}

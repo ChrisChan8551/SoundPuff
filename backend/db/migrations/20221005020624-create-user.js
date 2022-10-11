@@ -36,6 +36,7 @@ module.exports = {
       imageUrl: {
         type: Sequelize.STRING(255),
         allowNull: true,
+        defaultValue: 'image url'
       },
       createdAt: {
         allowNull: false,
