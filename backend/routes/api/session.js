@@ -23,10 +23,7 @@ const validateLogin = [
 router.post('/', validateLogin, async (req, res, next) => {
 	const { credential, password } = req.body;
 
-	const user = await User.login({
-		credential,
-		password,
-	});
+	const user = await User.login({ credential, password });
 
 	if (!user) {
 		const err = new Error('Login failed');
@@ -38,9 +35,7 @@ router.post('/', validateLogin, async (req, res, next) => {
 
 	await setTokenCookie(res, user);
 
-	return res.json({
-		user,
-	});
+	return res.json({ user });
 });
 
 router.get('/', restoreUser, (req, res) => {
@@ -57,8 +52,6 @@ router.get('/', (req, res) => {
 	const { user } = req.params;
 	res.json(user);
 });
-
-
 
 router.delete('/', (_req, res) => {
 	res.clearCookie('token');
