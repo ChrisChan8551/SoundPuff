@@ -15,12 +15,12 @@ module.exports = {
         unique: true
       },
       firstName: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING,
         allowNull: false,
 
       },
       lastName: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING,
         allowNull: false,
 
       },
@@ -34,7 +34,7 @@ module.exports = {
         unique: true
       },
       imageUrl: {
-        type: Sequelize.STRING(255),
+        type: Sequelize.STRING,
         allowNull: true,
         defaultValue: 'image url'
       },

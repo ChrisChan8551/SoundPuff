@@ -1,24 +1,40 @@
 const express = require('express');
 const { session } = require('./session.js');
-const {User,Song,Comment,Playlist,Album,PlaylistSong} = require('../../db/models');
+const {
+	User,
+	Song,
+	Comment,
+	Playlist,
+	Album,
+	PlaylistSong,
+} = require('../../db/models');
+const { requireAuth } = require('../../utils/auth.js');
 
 const router = express.Router();
 
-
-router.post('/', async (req, res) => {
-	console.log("********************************")
-	console.log(req.body)
+// Create an Album
+router.post('/', requireAuth, async (req, res) => {
 	const { title, description, imageUrl } = req.body;
-	const userId = req.user.id
-	const newAlbum = await Album.create({ userId, title, description, imageUrl });
-	return res.json(newAlbum);
-});
 
+	if (!title) {
+		res.status(400).json({
+			message: 'Validation Error',
+			statusCode: 400,
+			errors: {
+				title: 'Album title is required',
+			},
+		});
+	}
+
+	const userId = req.user.id;
+	const newAlbum = await Album.create({ userId, title, description, imageUrl });
+	return res.status(201).json(newAlbum);
+});
 
 //Get all Albums
 router.get('/', async (req, res) => {
 	const Albums = await Album.findAll();
-	return res.json({ Albums });
+	return res.json({ Albums: Albums });
 });
 
 // Get all Albums by Current User

@@ -13,22 +13,18 @@ module.exports = {
 				type: Sequelize.INTEGER,
 			},
 			userId: {
-				 type: Sequelize.INTEGER,
-         references: {
-          model: 'Users',
-          key: 'id',
-				},
+				type: Sequelize.INTEGER,
 			},
 			title: {
 				type: Sequelize.STRING,
-        allowNull: false,
+				allowNull: false,
 			},
 			description: {
 				type: Sequelize.STRING,
 			},
 			url: {
 				type: Sequelize.STRING,
-        allowNull: false,
+				allowNull: false,
 			},
 			imageUrl: {
 				type: Sequelize.STRING,
