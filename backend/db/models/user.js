@@ -78,14 +78,19 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					len: [3, 30],
+					len: [4, 30],
+					isNotEmail(value){
+						if(Validator.isEmail(value)){
+							throw new Error("Cannot be an email.");
+						}
+					}
 				},
 			},
 			hashedPassword: {
 				type: DataTypes.STRING.BINARY,
 				allowNull: false,
 				validate: {
-					len: [6, 60],
+					len: [60, 60],
 				},
 			},
 		},
@@ -100,7 +105,7 @@ module.exports = (sequelize, DataTypes) => {
 			scopes: {
 				currentUser: {
 					attributes: {
-						exclude: ['hashedPassword', 'createdAt', 'updatedAt'],
+						exclude: ['hashedPassword', 'createdAt', 'updatedAt', 'imageUrl', 'username'],
 					},
 				},
 				loginUser: {

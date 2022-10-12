@@ -24,16 +24,21 @@ router.get('/current', async (req, res) => {
 // Get a Song By Id
 router.get('/:songId', async (req, res) => {
 	const id = req.params.songId;
-	const song = await Song.findByPk(id);
-	if (song !== null) {
-		return res.json(song);
-	}
-	if (song === null) {
+	const song = await Song.findAll({
+		where: { id },
+		include: [
+			{ model: Album, attributes: ['id', 'title', 'imageUrl'] },
+			{ model: User, attributes: ['id', 'username', 'imageUrl'] },
+		],
+	});
+
+	if (!song) {
 		return res.status(404).json({
 			message: "Song couldn't be found",
 			statusCode: 404,
 		});
 	}
+	return res.json(song);
 });
 
 // Get songs
@@ -44,7 +49,7 @@ router.get('/', async (req, res) => {
 			attributes: ['id', 'username', 'imageUrl'],
 		},
 	});
-	res.json(songs);
+	res.json({ Songs: songs });
 });
 
 // Create a Song Based on Album id
@@ -69,7 +74,7 @@ router.post('/', async (req, res) => {
 		return res.json(newSong);
 	}
 
-	if (id === null) {
+	if (!id === null) {
 		return res.status(404).json({
 			message: "Album couldn't be found",
 			statusCode: 404,
