@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable('Comments', {
+		await queryInterface.createTable('PlaylistSongs', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
@@ -11,15 +11,20 @@ module.exports = {
 			},
 			songId: {
 				type: Sequelize.INTEGER,
-
+				references: {
+					model: 'Songs',
+					key: 'id',
+				},
 			},
-			userId: {
+			playlistId: {
 				type: Sequelize.INTEGER,
-				
+				references: {
+					model: 'Playlists',
+					key: 'id',
+				},
 			},
-			body: {
-				type: Sequelize.STRING,
-				allowNull: false,
+			order: {
+				type: Sequelize.INTEGER,
 			},
 			createdAt: {
 				allowNull: false,
@@ -34,6 +39,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable('Comments');
+		await queryInterface.dropTable('PlaylistSongs');
 	},
 };

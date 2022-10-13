@@ -45,8 +45,25 @@ router.get('/current', async (req, res) => {
 	res.json(customeralbums);
 });
 
-// router.get('/current', async (req, res) => {
-// 	return res.json(currentUser)
-// });
+//Get Details of an Album By Id
+router.get('/:albumId', async (req, res) => {
+	const { albumId } = req.params;
+	const oneAlbum = await Album.findOne({
+		where: { id: albumId },
+		include: [
+			{ model: User, attributes: ['id', 'username', 'imageUrl'] },
+			{ model: Song },
+		],
+	});
+
+	if (!oneAlbum) {
+		return res.status(404).json({
+			message: "Album couldn't be found",
+			statusCode: 404,
+		});
+	}
+
+	return res.json(oneAlbum);
+});
 
 module.exports = router;

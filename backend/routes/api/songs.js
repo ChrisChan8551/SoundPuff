@@ -14,99 +14,15 @@ const { request } = require('express');
 
 const router = express.Router();
 
-// Get all Songs by Current User
-
-router.get('/current', requireAuth, async (req, res) => {
-	const userId = req.user.id;
-	console.log(userId);
-	const customersongs = await Song.findAll({ where: { userId: userId } });
-	res.status(200).json({ Songs: customersongs });
-});
-
-// Get a Song By Id
-router.get('/:songId', async (req, res) => {
-	const id = req.params.songId;
-	const song = await Song.findOne({
-		where: { id },
-		include: [
-			{ model: Album, attributes: ['id', 'title', 'imageUrl'] },
-			{ model: User, attributes: ['id', 'username', 'imageUrl'] },
-		],
-	});
-
-	if (!song) {
-		return res.status(404).json({
-			message: "Song couldn't be found",
-			statusCode: 404,
-		});
-	}
-	return res.json(song);
-});
-
-// Get songs
-router.get('/', async (req, res) => {
-	const songs = await Song.findAll({
-		include: {
-			model: User,
-			attributes: ['id', 'username', 'imageUrl'],
-		},
-	});
-	res.json({ Songs: songs });
-});
-
-// Create a Song Based on Album id
-
-router.post('/', requireAuth, async (req, res) => {
-	const userId = req.user.id;
-	const { title, description, url, imageUrl, albumId } = req.body;
-	const album = await Album.findByPk(albumId)
-
-	if(!album){
-		res.status(404);
-		return res.json({
-				"message": "Album couldn't be found",
-				"statusCode": 404
-		});
-}
-
-	if(!title || !url) {
-		res.status(400);
-		return res.json({
-				"message": "Validation Error",
-				"statusCode": 400,
-						"errors": {
-								"title": "Song title is required",
-								"url": "Audio is required"
-						}
-				});
-		}
-		if(album.userId === req.user.id){
-			const newSong = await Song.create({
-					userId,
-					albumId,
-					title,
-					description,
-					url,
-					imageUrl
-			});
-
-			return res.status(201).json(newSong);
-	} else {
-			return res.json({"message": "A song can only be added by the album owner"});
-	}
-});
-
 //Edit a Song
-router.put('/:songId', requireAuth, async (req, res) => {
+router.put('/:songId', requireAuth, async (req, res, next) => {
 	const { title, description, url, imageUrl } = req.body;
 	const { songId } = req.params;
-	const updatedSong = await Song.findByPk(songId);
+	const updateSong = await Song.findByPk(songId);
 
-	if (!updatedSong) {
-		res.status(404).json({
-			message: "Song couldn't be found",
-			statusCode: 404,
-		});
+	if (!updateSong) {
+		res.status(404);
+		return res.json({ message: "Song couldn't be found", statusCode: 404 });
 	}
 
 	if (!title || !url) {
@@ -120,9 +36,83 @@ router.put('/:songId', requireAuth, async (req, res) => {
 		});
 	}
 
-	if (updatedSong.userId === req.user.id) {
-		updatedSong.update({ title, description, url, imageUrl });
+	if (updateSong.userId === req.user.id) {
+		updateSong.update({
+			title,
+			description,
+			url,
+			imageUrl: imageUrl,
+		});
+		return res.json(updateSong);
+	} else {
+		return res.json({
+			message: 'A song can only be updated by the song owner',
+		});
 	}
+});
+
+// Get all Songs by Current User
+
+router.get('/current', requireAuth, async (req, res) => {
+	const userId = req.user.id;
+	console.log(userId);
+	const customersongs = await Song.findAll({ where: { userId: userId } });
+	res.status(200).json({ Songs: customersongs });
+});
+
+// Create a Song Based on Album id
+
+router.post('/', requireAuth, async (req, res) => {
+	const userId = req.user.id;
+	const { title, description, url, imageUrl, albumId } = req.body;
+	const album = await Album.findByPk(albumId);
+
+	if (album === null) {
+		const newSong = await Song.create({
+			userId,
+			albumId,
+			title,
+			description,
+			url,
+			imageUrl,
+		});
+		res.status(200).json(newSong);
+	} else {
+		return res.status(404).json({
+			message: "Album couldn't be found",
+			statusCode: 404,
+		});
+	}
+
+	// if (!album) {
+	//
+	// }
+
+	// if (!title || !url) {
+	// 	res.status(400);
+	// 	return res.json({
+	// 		message: 'Validation Error',
+	// 		statusCode: 400,
+	// 		errors: {
+	// 			title: 'Song title is required',
+	// 			url: 'Audio is required',
+	// 		},
+	// 	});
+	// }
+	// 	if (album.userId === req.user.id) {
+	// 		const newSong = await Song.create({
+	// 			userId,
+	// 			albumId,
+	// 			title,
+	// 			description,
+	// 			url,
+	// 			imageUrl,
+	// 		});
+
+	// 		return res.status(201).json(newSong);
+	// 	} else {
+	// 		return res.json({ message: 'A song can only be added by the album owner' });
+	// 	}
 });
 
 //Delete a song
@@ -142,6 +132,41 @@ router.delete('/:songId', requireAuth, async (req, res) => {
 			message: 'Only the owner of the song is authorized to delete',
 		});
 	}
+});
+
+// Get a Song By Id
+router.get('/:songId', async (req, res, next) => {
+	const { songId } = req.params;
+	console.log('********************************');
+	console.log(songId);
+	const song = await Song.findOne({
+		where: { id: songId },
+		include: [
+			{ model: Album, attributes: ['id', 'title', 'imageUrl'] },
+			{ model: User, attributes: ['id', 'username', 'imageUrl'] },
+		],
+	});
+	// console.log('********************************');
+	// console.log(song);
+	if (!song) {
+		return res.status(404).json({
+			message: "Song couldn't be found",
+			statusCode: 404,
+		});
+	}
+
+	return res.json(song);
+});
+
+// Get all songs
+router.get('/', async (req, res) => {
+	const songs = await Song.findAll({
+		include: {
+			model: User,
+			attributes: ['id', 'username', 'imageUrl'],
+		},
+	});
+	res.json({ Songs: songs });
 });
 
 module.exports = router;
