@@ -12,6 +12,36 @@ const { requireAuth } = require('../../utils/auth.js');
 
 const router = express.Router();
 
+//Edit an Album
+router.put('/:albumId', async (req, res, next) => {
+	const { title, description, imageUrl } = req.body;
+	const { albumId } = req.params;
+	const updateAlbum = await Album.findByPk(albumId);
+
+	if (!updateAlbum) {
+		return res
+			.status(404)
+			.json({ message: "Album couldn't be found", statusCode: 404 });
+	}
+
+	if (!title) {
+		return res.status(400).json({
+			message: 'Validation Error',
+			statusCode: 400,
+			errors: {
+				title: 'Album title is required',
+			},
+		});
+	}
+
+	updateAlbum.update({
+		title,
+		description,
+		imageUrl: imageUrl,
+	});
+	return res.json(updateAlbum);
+});
+
 // Create an Album
 router.post('/', requireAuth, async (req, res) => {
 	const { title, description, imageUrl } = req.body;
