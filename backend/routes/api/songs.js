@@ -14,6 +14,60 @@ const { request } = require('express');
 
 const router = express.Router();
 
+//Create a Comment Based on a Song Id
+router.post('/:songId/comments', requireAuth, async (req, res) => {
+	const { body } = req.body;
+	const { songId } = req.params;
+	const oneSong = await Song.findByPk(songId);
+	const user = req.user;
+
+	if (!oneSong) {
+		return res
+			.status(404)
+			.json({ message: "Song couldn't be found", statusCode: 404 });
+	}
+
+	if (!body) {
+		return res.status(400).json({
+			message: 'Validation Error',
+			statusCode: 400,
+			errors: {
+				body: 'Comment body text is required',
+			},
+		});
+	}
+
+	const newComment = await Comment.create({
+		userId: req.user.id,
+		songId,
+		body,
+	});
+
+	return res.status(200).json(newComment);
+});
+
+// Get all Comments by a Song's id
+router.get('/:songId/comments', async (req, res) => {
+	const { songId } = req.params;
+	const song = await Song.findByPk(songId);
+	if (!song) {
+		return res
+			.status(404)
+			.json({ message: "Song couldn't be found", statusCode: 404 });
+	}
+
+	const allSongComments = await Comment.findAll({
+		where: { songId },
+		include: [
+			{
+				model: User,
+				attributes: ['id', 'username'],
+			},
+		],
+	});
+	return res.json({ Comments: allSongComments });
+});
+
 //Edit a Song
 router.put('/:songId', requireAuth, async (req, res, next) => {
 	const { title, description, url, imageUrl } = req.body;
@@ -68,7 +122,7 @@ router.post('/', requireAuth, async (req, res) => {
 	console.log(req.body);
 	const album = await Album.findByPk(albumId);
 
-	if ((albumId === null) || album) {
+	if (albumId === null || album) {
 		const newSong = await Song.create({
 			userId,
 			albumId,
@@ -79,7 +133,6 @@ router.post('/', requireAuth, async (req, res) => {
 		});
 		res.status(200).json(newSong);
 	} else {
-
 		return res.status(404).json({
 			message: "Album couldn't be found",
 			statusCode: 404,
