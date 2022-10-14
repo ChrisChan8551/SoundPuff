@@ -10,6 +10,9 @@ const {
 	PlaylistSong,
 } = require('../../db/models');
 
+//Get All Playlists By Artist Id
+
+
 // Get details of a Playlist from an id
 router.get('/:playlistId', async (req, res) => {
   const { playlistId } = req.params;
