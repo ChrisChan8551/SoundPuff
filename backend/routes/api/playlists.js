@@ -11,9 +11,10 @@ const {
 } = require('../../db/models');
 
 //Delete A Playlist
-router.delete('/:playlistId', requireAuth, async (req, res) => {
-	const { playlistId } = req.params;
+router.delete('/:playlistId/songs/:songId', requireAuth, async (req, res) => {
+	const { playlistId, songId } = req.params;
 	const playlist = await Playlist.findByPk(playlistId);
+  const song = await Song.findByPk(songId)
 
 	if (!playlist) {
 		return res

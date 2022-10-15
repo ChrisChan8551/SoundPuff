@@ -15,6 +15,7 @@ module.exports = {
 					model: 'Songs',
 					key: 'id',
 				},
+				onDelete: 'CASCADE',
 			},
 			userId: {
 				type: Sequelize.INTEGER,
@@ -22,6 +23,7 @@ module.exports = {
 					model: 'Users',
 					key: 'id',
 				},
+				onDelete: 'CASCADE',
 			},
 			body: {
 				type: Sequelize.STRING,

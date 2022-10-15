@@ -14,6 +14,28 @@ const { request } = require('express');
 
 const router = express.Router();
 
+//Delete a song
+router.delete('/:songId', requireAuth, async (req, res) => {
+	const { songId } = await req.params;
+	console.log('************************************')
+	console.log(songId)
+	const findSong = await Song.findByPk(songId);
+	console.log('************************************')
+	console.log(findSong)
+	if (!findSong) {
+		res.status(404);
+		return res.json({ message: "Song couldn't be found", statusCode: 404 });
+	}
+	if (findSong.userId === req.user.id) {
+		await findSong.destroy();
+		return res.json({ message: 'Successfully deleted', statusCode: 200 });
+	} else {
+		return res.json({
+			message: 'Only the owner of the song is authorized to delete',
+		});
+	}
+});
+
 // Get all Comments by a Song's id
 router.get('/:songId/comments', async (req, res) => {
 	const { songId } = req.params;
@@ -140,30 +162,12 @@ router.post('/', requireAuth, async (req, res) => {
 	}
 });
 
-//Delete a song
-router.delete('/:songId', requireAuth, async (req, res) => {
-	const { songId } = req.params;
-	const findSong = await Song.findByPk(songId);
-
-	if (!findSong) {
-		res.status(404);
-		return res.json({ message: "Song couldn't be found", statusCode: 404 });
-	}
-	if (findSong.userId === req.user.id) {
-		await findSong.destroy();
-		return res.json({ message: 'Successfully deleted', statusCode: 200 });
-	} else {
-		return res.json({
-			message: 'Only the owner of the song is authorized to delete',
-		});
-	}
-});
 
 // Get a Song By Id
 router.get('/:songId', async (req, res, next) => {
 	const { songId } = req.params;
-	console.log('********************************');
-	console.log(songId);
+	// console.log('********************************');
+	// console.log(songId);
 	const song = await Song.findOne({
 		where: { id: songId },
 		include: [
