@@ -138,51 +138,26 @@ router.get('/current', requireAuth, async (req, res) => {
 router.post('/', requireAuth, async (req, res) => {
 	const userId = req.user.id;
 	const { title, description, url, imageUrl, albumId } = req.body;
-	console.log(req.body);
+
 	const album = await Album.findByPk(albumId);
-
-	if (!title) {
-		return res.status(400).json({
-			message: 'Validation Error',
-			statusCode: 400,
-			errors: {
-				title: 'Song title is required',
-				url: 'Audio is required',
-			},
-		});
-	}
-
-	if (!url) {
-		return res.status(400).json({
-			message: 'Validation Error',
-			statusCode: 400,
-			errors: {
-				title: 'Song title is required',
-				url: 'Audio is required',
-			},
-		});
-	}
-
-	if (!albumId && !album) {
-		return res.status(404).json({
-			message: "Album couldn't be found",
-			statusCode: 404,
-		});
-	}
-
-	if (album.userId === req.user.id) {
-	  	const newSong = await Song.create({
-			userId: req.user.id,
+	console.log('********************************')
+	console.log(album);
+	if ((albumId === null) || album) {
+		const newSong = await Song.create({
+			userId,
 			albumId,
 			title,
 			description,
 			url,
-			previewImage: imageUrl,
+			imageUrl,
 		});
-
-		return res.status(201).json(newSong);
+		res.status(200).json(newSong);
 	} else {
-		return res.json({ message: 'A song can only be added by the album owner' });
+
+		return res.status(404).json({
+			message: "Album couldn't be found",
+			statusCode: 404,
+		});
 	}
 });
 
