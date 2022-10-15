@@ -12,6 +12,7 @@ const { requireAuth } = require('../../utils/auth.js');
 
 const router = express.Router();
 
+
 //Edit an Album
 router.put('/:albumId', async (req, res, next) => {
 	const { title, description, imageUrl } = req.body;
