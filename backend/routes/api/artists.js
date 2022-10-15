@@ -50,8 +50,7 @@ router.get('/:userId/playlists',
         const artist = await User.findByPk(userId);
 
         if(!artist){
-            res.status(404);
-            return res.json({
+          return res.status(404).json({
                 "message": "Artist couldn't be found",
                 "statusCode": 404
             });

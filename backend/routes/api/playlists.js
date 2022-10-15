@@ -11,10 +11,9 @@ const {
 } = require('../../db/models');
 
 //Delete A Playlist
-router.delete('/:playlistId/songs/:songId', requireAuth, async (req, res) => {
-	const { playlistId, songId } = req.params;
+router.delete('/:playlistId', requireAuth, async (req, res) => {
+	const { playlistId } = req.params;
 	const playlist = await Playlist.findByPk(playlistId);
-  const song = await Song.findByPk(songId)
 
 	if (!playlist) {
 		return res
@@ -51,8 +50,7 @@ router.put('/:playlistId', requireAuth, async (req, res) => {
 			.json({ message: "Playlist couldn't be found", statusCode: 404 });
 	}
 	if (!name) {
-		res.status(400);
-		return res.json({
+		return res.status(400).json({
 			message: 'Validation Error',
 			statusCode: 400,
 			errors: {
@@ -79,19 +77,17 @@ router.post('/:playlistId/songs', requireAuth, async (req, res) => {
 	const { songId } = req.body;
 	const { playlistId } = req.params;
 	const song = await Song.findByPk(songId);
-	const onePlaylist = await Playlist.findByPk(playlistId);
+	const playlist = await Playlist.findByPk(playlistId);
 
 	if (!song) {
-		res.status(404);
-		return res.json({ message: "Song couldn't be found", statusCode: 404 });
+		return res.status(404).json({ message: "Song couldn't be found", statusCode: 404 });
 	}
-	if (!onePlaylist) {
-		res.status(404);
-		return res.json({ message: "Playlist couldn't be found", statusCode: 404 });
+	if (!playlist) {
+		return res.status(404).json({ message: "Playlist couldn't be found", statusCode: 404 });
 	}
 
-	if (onePlaylist.userId === req.user.id) {
-		await onePlaylist.addSong(song);
+	if (playlist.userId === req.user.id) {
+		await playlist.addSong(song);
 
 		const newSong = await PlaylistSong.findOne({
 			where: { songId },
