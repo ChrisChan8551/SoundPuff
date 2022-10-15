@@ -2,11 +2,8 @@
 
 ## Database Schema Design
 
-<img src="https://user-images.githubusercontent.com/103156299/194212467-d87e5b84-8f5a-4a38-a735-1042a2836e18.png" width="785" height="641">
-<!-- ![SoundCloud](https://user-images.githubusercontent.com/103156299/192944396-5a25d095-4395-4d79-8494-7b909412defc.png) -->
-
-
-
+<img src="https://user-images.githubusercontent.com/103156299/196011380-bf37ba0a-0aab-4b2a-b235-f4d877f3e2ec.png" width="785" height="641">
+                                                                                                                                          
 ## API Documentation
 
 ## USER AUTHENTICATION/AUTHORIZATION
