@@ -10,7 +10,7 @@ module.exports = {
       title: 'Swipe Left Swipe Right',
       description: 'Are you the one',
       url: 'audio url',
-      imageUrl: 'image url'
+      previewImage: 'image url'
     },
     {
       userId: 1,
@@ -18,7 +18,7 @@ module.exports = {
       title: 'Coding to the Edge',
       description: 'Getting Hexed',
       url: 'audio url',
-      imageUrl: 'image url'
+      previewImage: 'image url'
     },
     {
       userId: 2,
@@ -26,7 +26,7 @@ module.exports = {
       title: 'Sleeping on my Keyboard',
       description: 'Keys imprinted on my Face',
       url: 'audio url',
-      imageUrl: 'image url'
+      previewImage: 'image url'
     }
    ])
   },

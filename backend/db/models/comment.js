@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Comment.init(
 		{
-			songId: {
+			userId: {
 				type: DataTypes.INTEGER,
 			},
-			userId: {
+			songId: {
 				type: DataTypes.INTEGER,
 			},
 			body: {

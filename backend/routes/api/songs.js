@@ -17,17 +17,16 @@ const router = express.Router();
 //Delete a song
 router.delete('/:songId', requireAuth, async (req, res) => {
 	const { songId } = await req.params;
-	console.log('************************************')
-	console.log(songId)
-	const findSong = await Song.findByPk(songId);
-	console.log('************************************')
-	console.log(findSong)
-	if (!findSong) {
-		res.status(404);
-		return res.json({ message: "Song couldn't be found", statusCode: 404 });
+	console.log('************************************');
+	console.log(songId);
+	const song = await Song.findByPk(songId);
+	console.log('************************************');
+	console.log(song);
+	if (!song) {
+		return res.status(404).json({ message: "Song couldn't be found", statusCode: 404 });
 	}
-	if (findSong.userId === req.user.id) {
-		await findSong.destroy();
+	if (song.userId === req.user.id) {
+		await song.destroy();
 		return res.json({ message: 'Successfully deleted', statusCode: 200 });
 	} else {
 		return res.json({
@@ -65,13 +64,11 @@ router.post('/:songId/comments', requireAuth, async (req, res) => {
 	const song = await Song.findByPk(songId);
 
 	if (!song) {
-		res.status(404);
-		return res.json({ message: "Song couldn't be found", statusCode: 404 });
+		return res.status(404).json({ message: "Song couldn't be found", statusCode: 404 });
 	}
 
 	if (!body) {
-		res.status(400);
-		return res.json({
+		return res.status(400).json({
 			message: 'Validation Error',
 			statusCode: 400,
 			errors: {
@@ -96,8 +93,9 @@ router.put('/:songId', requireAuth, async (req, res, next) => {
 	const updateSong = await Song.findByPk(songId);
 
 	if (!updateSong) {
-		res.status(404);
-		return res.json({ message: "Song couldn't be found", statusCode: 404 });
+		return res
+			.status(404)
+			.json({ message: "Song couldn't be found", statusCode: 404 });
 	}
 
 	if (!title || !url) {
@@ -116,7 +114,7 @@ router.put('/:songId', requireAuth, async (req, res, next) => {
 			title,
 			description,
 			url,
-			imageUrl: imageUrl,
+			previewImage: imageUrl,
 		});
 		return res.json(updateSong);
 	} else {
@@ -143,25 +141,50 @@ router.post('/', requireAuth, async (req, res) => {
 	console.log(req.body);
 	const album = await Album.findByPk(albumId);
 
-	if (albumId === null || album) {
-		const newSong = await Song.create({
-			userId,
-			albumId,
-			title,
-			description,
-			url,
-			imageUrl,
+	if (!title) {
+		return res.status(400).json({
+			message: 'Validation Error',
+			statusCode: 400,
+			errors: {
+				title: 'Song title is required',
+				url: 'Audio is required',
+			},
 		});
+	}
 
-		res.status(200).json(newSong);
-	} else {
+	if (!url) {
+		return res.status(400).json({
+			message: 'Validation Error',
+			statusCode: 400,
+			errors: {
+				title: 'Song title is required',
+				url: 'Audio is required',
+			},
+		});
+	}
+
+	if (!albumId && !album) {
 		return res.status(404).json({
 			message: "Album couldn't be found",
 			statusCode: 404,
 		});
 	}
-});
 
+	if (album.userId === req.user.id) {
+	  	const newSong = await Song.create({
+			userId: req.user.id,
+			albumId,
+			title,
+			description,
+			url,
+			previewImage: imageUrl,
+		});
+
+		return res.status(201).json(newSong);
+	} else {
+		return res.json({ message: 'A song can only be added by the album owner' });
+	}
+});
 
 // Get a Song By Id
 router.get('/:songId', async (req, res, next) => {
@@ -171,8 +194,8 @@ router.get('/:songId', async (req, res, next) => {
 	const song = await Song.findOne({
 		where: { id: songId },
 		include: [
-			{ model: Album, attributes: ['id', 'title', 'imageUrl'] },
-			{ model: User, attributes: ['id', 'username', 'imageUrl'] },
+			{ model: Album, attributes: ['id', 'title', 'previewImage'] },
+			{ model: User, attributes: ['id', 'username', 'previewImage'] },
 		],
 	});
 	// console.log('********************************');
@@ -192,7 +215,7 @@ router.get('/', async (req, res) => {
 	const songs = await Song.findAll({
 		include: {
 			model: User,
-			attributes: ['id', 'username', 'imageUrl'],
+			attributes: ['id', 'username', 'previewImage'],
 		},
 	});
 	res.json({ Songs: songs });

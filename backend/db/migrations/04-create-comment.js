@@ -9,18 +9,18 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			songId: {
-				type: Sequelize.INTEGER,
-				references: {
-					model: 'Songs',
-					key: 'id',
-				},
-				onDelete: 'CASCADE',
-			},
 			userId: {
 				type: Sequelize.INTEGER,
 				references: {
 					model: 'Users',
+					key: 'id',
+				},
+				onDelete: 'CASCADE',
+			},
+			songId: {
+				type: Sequelize.INTEGER,
+				references: {
+					model: 'Songs',
 					key: 'id',
 				},
 				onDelete: 'CASCADE',

@@ -7,7 +7,7 @@ module.exports = {
     {
       userId: 3,
       name: "My Playlist",
-      imageUrl: "image url"
+      previewImage: "image url"
     }
    ])
   },

@@ -1,8 +1,19 @@
 // backend/routes/api/session.js
 const express = require('express');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const {
+	setTokenCookie,
+	restoreUser,
+	requireAuth,
+} = require('../../utils/auth');
+const {
+	User,
+	Song,
+	Comment,
+	Playlist,
+	Album,
+	PlaylistSong,
+} = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -22,37 +33,60 @@ const validateLogin = [
 // Log in
 router.post('/', validateLogin, async (req, res, next) => {
 	const { credential, password } = req.body;
-
 	const user = await User.login({ credential, password });
 
 	if (!user) {
 		return res.status(401).json({
-			"message": "Invalid credentials",
-			"statusCode": 401
+			message: 'Invalid credentials',
+			statusCode: 401,
 		});
 
 		// return next(err);
 	}
+	const token = await setTokenCookie(res, user);
 
-	await setTokenCookie(res, user);
+	if (token) {
+		user.dataValues.token = token;
+	} else {
+		user.dataValues.token = '';
+	}
 
-	return res.json({ user });
+	return res.json(user);
 });
 
-router.get('/', restoreUser, (req, res) => {
-	const { user } = req;
+// Get Current User
+router.get('/', restoreUser, async (req, res) => {
+	let { user } = req;
+
+	const token = await setTokenCookie(res, user);
 	if (user) {
+		user = user.toSafeObject();
+		if (token) {
+			user.token = token;
+		} else {
+			user.token = '';
+		}
 		return res.json({
-			user: user.toSafeObject(),
+			user: user,
 		});
 	} else return res.json({});
 });
 
 // Get current user
-router.get('/', (req, res) => {
-	const { user } = req.params;
-	res.json(user);
-});
+// router.get('/', requireAuth, async (req, res) => {
+// 	const user = await req.user.id;
+// 	console.log('*******************')
+// 	const token = await setTokenCookie(res, user);
+
+// 	if (token) {
+// 		user.dataValues.token = token;
+// 	} else {
+// 		user.dataValues.token = '';
+// 	}
+// 	console.log('*******************')
+// 	console.log(token)
+// 	return res.json(user);
+// });
 
 router.delete('/', (_req, res) => {
 	res.clearCookie('token');

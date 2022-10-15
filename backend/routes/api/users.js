@@ -4,7 +4,14 @@ const express = require('express');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const {
+	User,
+	Song,
+	Comment,
+	Playlist,
+	Album,
+	PlaylistSong,
+} = require('../../db/models');
 
 const router = express.Router();
 
@@ -60,6 +67,12 @@ router.post('/', validateSignup, async (req, res) => {
 	});
 
 	const token = await setTokenCookie(res, user);
+
+	if (token) {
+		user.dataValues.token = token;
+	} else {
+		user.dataValues.token = '';
+	}
 
 	return res.json(user);
 });

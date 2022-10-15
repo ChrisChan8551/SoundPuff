@@ -7,17 +7,14 @@ module.exports = {
 			{
 				songId: 1,
 				playlistId: 1,
-        order: 1
 			},
 			{
 				songId: 2,
 				playlistId: 1,
-        order: 2
 			},
 			{
 				songId: 3,
 				playlistId: 1,
-        order: 3
 			},
 		]);
 	},

@@ -16,12 +16,13 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Song.init(
 		{
-			albumId: {
-				type: DataTypes.INTEGER,
-			},
 			userId: {
 				type: DataTypes.INTEGER,
 			},
+			albumId: {
+				type: DataTypes.INTEGER,
+			},
+
 			title: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -33,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			imageUrl: {
+			previewImage: {
 				type: DataTypes.STRING,
 			},
 		},

@@ -54,7 +54,7 @@ router.put('/:albumId', async (req, res, next) => {
 	updateAlbum.update({
 		title,
 		description,
-		imageUrl: imageUrl,
+		previewImage: imageUrl,
 	});
 	return res.json(updateAlbum);
 });
@@ -74,7 +74,8 @@ router.post('/', requireAuth, async (req, res) => {
 	}
 
 	const userId = req.user.id;
-	const newAlbum = await Album.create({ userId, title, description, imageUrl });
+	const newAlbum = await Album.create({ userId, title, description, previewImage: imageUrl });
+	
 	return res.status(201).json(newAlbum);
 });
 
@@ -95,22 +96,22 @@ router.get('/current', async (req, res) => {
 //Get Details of an Album By Id
 router.get('/:albumId', async (req, res) => {
 	const { albumId } = req.params;
-	const album = await Album.findOne({
+	const oneAlbum = await Album.findOne({
 		where: { id: albumId },
 		include: [
-			{ model: User, attributes: ['id', 'username', 'imageUrl'] },
+			{ model: User, attributes: ['id', 'username', 'previewImage'] },
 			{ model: Song },
 		],
 	});
 
-	if (!album) {
+	if (!oneAlbum) {
 		return res.status(404).json({
 			message: "Album couldn't be found",
 			statusCode: 404,
 		});
 	}
 
-	return res.json(album);
+	return res.json(oneAlbum);
 });
 
 module.exports = router;

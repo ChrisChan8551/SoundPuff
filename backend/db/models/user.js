@@ -55,28 +55,15 @@ module.exports = (sequelize, DataTypes) => {
 			firstName: {
 				type: DataTypes.STRING,
 				allowNull: false,
-				validate: {
-					len: [3, 30],
-				},
 			},
 			lastName: {
 				type: DataTypes.STRING,
 				allowNull: false,
-				validate: {
-					len: [3, 30],
-				},
-			},
-			email: {
-				type: DataTypes.STRING,
-				allowNull: false,
-				validate: {
-					len: [3, 256],
-					isEmail: true,
-				},
 			},
 			username: {
 				type: DataTypes.STRING,
 				allowNull: false,
+				unique:true,
 				validate: {
 					len: [4, 30],
 					isNotEmail(value){
@@ -86,12 +73,25 @@ module.exports = (sequelize, DataTypes) => {
 					}
 				},
 			},
+			email: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				unique: true,
+				validate: {
+					len: [3, 256],
+					isEmail: true,
+				},
+			},
+
 			hashedPassword: {
 				type: DataTypes.STRING.BINARY,
 				allowNull: false,
 				validate: {
 					len: [60, 60],
 				},
+			},
+			previewImage: {
+				type:DataTypes.STRING
 			},
 		},
 		{
@@ -105,13 +105,11 @@ module.exports = (sequelize, DataTypes) => {
 			scopes: {
 				currentUser: {
 					attributes: {
-						exclude: ['hashedPassword', 'createdAt', 'updatedAt'],
+						exclude: ['hashedPassword', 'createdAt', 'updatedAt','previewImage'],
 					},
 				},
 				loginUser: {
-					attributes: {
-						imageUrl: 'image url',
-					},
+					attributes: {}
 				},
 			},
 		}

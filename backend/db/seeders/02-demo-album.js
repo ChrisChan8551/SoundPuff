@@ -8,13 +8,13 @@ module.exports = {
       userId: 1,
       title: 'Appify',
       description: 'Coderama',
-      imageUrl: 'image url'
+      previewImage: 'image url'
     },
     {
       userId: 2,
       title: 'JavaMania',
       description: 'Java On!',
-      imageUrl: 'image url'
+      previewImage: 'image url'
     }
    ])
   },

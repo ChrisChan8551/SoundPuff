@@ -9,18 +9,18 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			albumId: {
-				type: Sequelize.INTEGER,
-				references: {
-					model: 'Albums',
-					key: 'id',
-				},
-				onDelete: 'CASCADE',
-			},
 			userId: {
 				type: Sequelize.INTEGER,
 				references: {
 					model: 'Users',
+					key: 'id',
+				},
+				onDelete: 'CASCADE',
+			},
+			albumId: {
+				type: Sequelize.INTEGER,
+				references: {
+					model: 'Albums',
 					key: 'id',
 				},
 				onDelete: 'CASCADE',
@@ -36,9 +36,6 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
-			imageUrl: {
-				type: Sequelize.STRING,
-			},
 			createdAt: {
 				allowNull: false,
 				type: Sequelize.DATE,
@@ -48,6 +45,9 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.DATE,
 				defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+			},
+			previewImage: {
+				type: Sequelize.STRING,
 			},
 		});
 	},
