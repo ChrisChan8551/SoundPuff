@@ -75,7 +75,7 @@ router.post('/', requireAuth, async (req, res) => {
 
 	const userId = req.user.id;
 	const newAlbum = await Album.create({ userId, title, description, previewImage: imageUrl });
-	
+
 	return res.status(201).json(newAlbum);
 });
 
@@ -88,7 +88,7 @@ router.get('/', async (req, res) => {
 // Get all Albums by Current User
 router.get('/current', async (req, res) => {
 	const userId = req.user.id;
-	console.log(userId);
+
 	const customeralbums = await Album.findAll({ where: { userId: userId } });
 	res.json(customeralbums);
 });

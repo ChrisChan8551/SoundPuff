@@ -17,11 +17,9 @@ const router = express.Router();
 //Delete a song
 router.delete('/:songId', requireAuth, async (req, res) => {
 	const { songId } = await req.params;
-	console.log('************************************');
-	console.log(songId);
+
 	const song = await Song.findByPk(songId);
-	console.log('************************************');
-	console.log(song);
+	
 	if (!song) {
 		return res.status(404).json({ message: "Song couldn't be found", statusCode: 404 });
 	}
@@ -128,7 +126,6 @@ router.put('/:songId', requireAuth, async (req, res, next) => {
 
 router.get('/current', requireAuth, async (req, res) => {
 	const userId = req.user.id;
-	console.log(userId);
 	const customersongs = await Song.findAll({ where: { userId: userId } });
 	res.status(200).json({ Songs: customersongs });
 });
@@ -140,8 +137,6 @@ router.post('/', requireAuth, async (req, res) => {
 	const { title, description, url, imageUrl, albumId } = req.body;
 
 	const album = await Album.findByPk(albumId);
-	console.log('********************************')
-	console.log(album);
 	if ((albumId === null) || album) {
 		const newSong = await Song.create({
 			userId,
@@ -164,8 +159,7 @@ router.post('/', requireAuth, async (req, res) => {
 // Get a Song By Id
 router.get('/:songId', async (req, res, next) => {
 	const { songId } = req.params;
-	// console.log('********************************');
-	// console.log(songId);
+
 	const song = await Song.findOne({
 		where: { id: songId },
 		include: [
@@ -173,8 +167,7 @@ router.get('/:songId', async (req, res, next) => {
 			{ model: User, attributes: ['id', 'username', 'previewImage'] },
 		],
 	});
-	// console.log('********************************');
-	// console.log(song);
+
 	if (!song) {
 		return res.status(404).json({
 			message: "Song couldn't be found",

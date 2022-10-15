@@ -31,7 +31,7 @@ const validateLogin = [
 ];
 
 // Log in
-router.post('/', validateLogin, async (req, res, next) => {
+router.post('/', validateLogin, async (req, res) => {
 	const { credential, password } = req.body;
 	const user = await User.login({ credential, password });
 
@@ -41,7 +41,7 @@ router.post('/', validateLogin, async (req, res, next) => {
 			statusCode: 401,
 		});
 
-		// return next(err);
+
 	}
 	const token = await setTokenCookie(res, user);
 
@@ -72,21 +72,6 @@ router.get('/', restoreUser, async (req, res) => {
 	} else return res.json({});
 });
 
-// Get current user
-// router.get('/', requireAuth, async (req, res) => {
-// 	const user = await req.user.id;
-// 	console.log('*******************')
-// 	const token = await setTokenCookie(res, user);
-
-// 	if (token) {
-// 		user.dataValues.token = token;
-// 	} else {
-// 		user.dataValues.token = '';
-// 	}
-// 	console.log('*******************')
-// 	console.log(token)
-// 	return res.json(user);
-// });
 
 router.delete('/', (_req, res) => {
 	res.clearCookie('token');
