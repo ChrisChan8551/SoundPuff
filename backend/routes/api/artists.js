@@ -31,7 +31,8 @@ router.get("/:userId/songs", requireAuth, async (req, res) => {
 router.get("/:userId", requireAuth, async (req, res) => {
   const { userId } = req.params;
   const user = await User.findByPk(userId);
-
+  console.log('*******************')
+  console.log(userId)
   if (!user) {
     res.status(404).json({
       message: "Artist couldn't be found",

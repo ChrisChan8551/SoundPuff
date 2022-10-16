@@ -10,6 +10,21 @@ const {
 	PlaylistSong,
 } = require('../../db/models');
 
+//Delete a song from a Playlist
+router.delete('/:playlistId/songs/:songId', requireAuth, async (req, res) => {
+	const { playlistId, songId } = req.params;
+	const playlistsong = await PlaylistSong.findOne({
+		where: { songId, playlistId },
+	});
+	if(playlistsong) {
+		await playlistsong.destroy()
+		return res.json({ message: 'Successfully deleted', statusCode: 200 });
+	} else {
+		return res.status(404)
+			.json({ message: "Song couldn't be found", statusCode: 404 });
+	}
+});
+
 //Delete A Playlist
 router.delete('/:playlistId', requireAuth, async (req, res) => {
 	const { playlistId } = req.params;
