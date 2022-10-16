@@ -139,8 +139,20 @@ router.get('/current', requireAuth, async (req, res) => {
 router.post('/', requireAuth, async (req, res) => {
 	const userId = req.user.id;
 	const { title, description, url, imageUrl, albumId } = req.body;
-
 	const album = await Album.findByPk(albumId);
+
+	if(!title || !url){
+		res.status(400);
+		return res.json({
+				"message": "Validation Error",
+				"statusCode": 400,
+						"errors": {
+								"title": "Song title is required",
+								"url": "Audio is required"
+						}
+				});
+		}
+
 	if (albumId === null || album) {
 		const newSong = await Song.create({
 			userId,
@@ -160,7 +172,7 @@ router.post('/', requireAuth, async (req, res) => {
 });
 
 // Get a Song By Id
-router.get('/:songId', async (req, res, next) => {
+router.get('/:songId', async (req, res) => {
 	const { songId } = req.params;
 
 	const song = await Song.findOne({
@@ -183,13 +195,31 @@ router.get('/:songId', async (req, res, next) => {
 
 // Get all songs
 router.get('/', async (req, res) => {
+	let { page, size, title, createdAt } = req.query;
+
+	if (!page || isNaN(page) || page <= 0) {
+		page = 1;
+	}
+	if (!size || isNaN(size) || size <= 0) {
+		size = 20;
+	}
+
+	if (size > 20) size = 20;
+
+	if (page > 10) size = 10;
+
+	page = Number(page);
+	size = Number(size);
+
 	const songs = await Song.findAll({
 		include: {
 			model: User,
 			attributes: ['id', 'username', 'previewImage'],
 		},
+		limit: size,
+		offset: size * (page - 1),
 	});
-	res.json({ Songs: songs });
+	res.json({ Songs: songs, page, size });
 });
 
 module.exports = router;

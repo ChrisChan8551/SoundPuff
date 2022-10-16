@@ -13,24 +13,27 @@ const { requireAuth } = require('../../utils/auth.js');
 const router = express.Router();
 
 // Delete an Album
-router.delete('/:albumId',requireAuth,async (req, res) => {
-				const { albumId } = req.params;
-				const album = await Album.findByPk(albumId);
+router.delete('/:albumId', requireAuth, async (req, res) => {
+	const { albumId } = req.params;
+	const album = await Album.findByPk(albumId);
 
-				if(!album){
-					return res.status(404).json({ "message": "Album couldn't be found",  "statusCode": 404 });
-				}
-				if(album.userId === req.user.id){
-						await album.destroy();
-						return res.json({ "message": "Successfully deleted",  "statusCode": 200 });
-				}  else {
-						return res.json({"message": "An album can only be deleted by the album owner"});
-				}
+	if (!album) {
+		return res
+			.status(404)
+			.json({ message: "Album couldn't be found", statusCode: 404 });
+	}
+	if (album.userId === req.user.id) {
+		await album.destroy();
+		return res.json({ message: 'Successfully deleted', statusCode: 200 });
+	} else {
+		return res.json({
+			message: 'An album can only be deleted by the album owner',
+		});
+	}
 });
 
-
 //Edit an Album
-router.put('/:albumId', async (req, res, next) => {
+router.put('/:albumId', requireAuth, async (req, res, next) => {
 	const { title, description, imageUrl } = req.body;
 	const { albumId } = req.params;
 	const updateAlbum = await Album.findByPk(albumId);
@@ -50,13 +53,18 @@ router.put('/:albumId', async (req, res, next) => {
 			},
 		});
 	}
-
-	updateAlbum.update({
-		title,
-		description,
-		previewImage: imageUrl,
-	});
-	return res.json(updateAlbum);
+	if (updateAlbum.userId === req.user.id) {
+		updateAlbum.update({
+			title,
+			description,
+			previewImage: imageUrl,
+		});
+		return res.json(updateAlbum);
+	} else {
+		return res.json({
+			message: 'Only the owner of the album is authorized to edit',
+		});
+	}
 });
 
 // Create an Album
@@ -74,7 +82,12 @@ router.post('/', requireAuth, async (req, res) => {
 	}
 
 	const userId = req.user.id;
-	const newAlbum = await Album.create({ userId, title, description, previewImage: imageUrl });
+	const newAlbum = await Album.create({
+		userId,
+		title,
+		description,
+		previewImage: imageUrl,
+	});
 
 	return res.status(201).json(newAlbum);
 });
