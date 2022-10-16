@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	PlaylistSong.init(
 		{
+			id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 			playlistId: { type: DataTypes.INTEGER },
 			songId: { type: DataTypes.INTEGER },
 		},

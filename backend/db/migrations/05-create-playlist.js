@@ -23,6 +23,7 @@ module.exports = {
 			},
 			previewImage: {
 				type: Sequelize.STRING,
+				defaultValue: 'image url',
 			},
 			createdAt: {
 				allowNull: false,
