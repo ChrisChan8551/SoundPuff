@@ -90,10 +90,9 @@ router.post('/:songId/comments', requireAuth, async (req, res) => {
 
 //Edit a Song
 router.put('/:songId', requireAuth, async (req, res, next) => {
-	const { title, description, url, imageUrl } = req.body;
+	const { title, description, url, imageUrl, albumId } = req.body;
 	const { songId } = req.params;
 	const updateSong = await Song.findByPk(songId);
-
 	if (!updateSong) {
 		return res
 			.status(404)
@@ -113,10 +112,11 @@ router.put('/:songId', requireAuth, async (req, res, next) => {
 
 	if (updateSong.userId === req.user.id) {
 		updateSong.update({
-			title,
-			description,
-			url,
+			title: title,
+			description: description,
+			url: url,
 			previewImage: imageUrl,
+			albumId: albumId
 		});
 		return res.json(updateSong);
 	} else {

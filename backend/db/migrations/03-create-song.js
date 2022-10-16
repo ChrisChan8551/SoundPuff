@@ -23,6 +23,7 @@ module.exports = {
 					model: 'Albums',
 					key: 'id',
 				},
+				defaultValue: null,
 				onDelete: 'CASCADE',
 			},
 			title: {
