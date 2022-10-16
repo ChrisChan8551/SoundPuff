@@ -19,9 +19,11 @@ router.delete('/:songId', requireAuth, async (req, res) => {
 	const { songId } = await req.params;
 
 	const song = await Song.findByPk(songId);
-	
+
 	if (!song) {
-		return res.status(404).json({ message: "Song couldn't be found", statusCode: 404 });
+		return res
+			.status(404)
+			.json({ message: "Song couldn't be found", statusCode: 404 });
 	}
 	if (song.userId === req.user.id) {
 		await song.destroy();
@@ -62,7 +64,9 @@ router.post('/:songId/comments', requireAuth, async (req, res) => {
 	const song = await Song.findByPk(songId);
 
 	if (!song) {
-		return res.status(404).json({ message: "Song couldn't be found", statusCode: 404 });
+		return res
+			.status(404)
+			.json({ message: "Song couldn't be found", statusCode: 404 });
 	}
 
 	if (!body) {
@@ -137,18 +141,17 @@ router.post('/', requireAuth, async (req, res) => {
 	const { title, description, url, imageUrl, albumId } = req.body;
 
 	const album = await Album.findByPk(albumId);
-	if ((albumId === null) || album) {
+	if (albumId === null || album) {
 		const newSong = await Song.create({
 			userId,
 			albumId,
 			title,
 			description,
 			url,
-			imageUrl,
+			previewImage: imageUrl,
 		});
 		res.status(200).json(newSong);
 	} else {
-
 		return res.status(404).json({
 			message: "Album couldn't be found",
 			statusCode: 404,
