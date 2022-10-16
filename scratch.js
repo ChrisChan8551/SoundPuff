@@ -8,44 +8,62 @@
 
 //git push heroku main
 
-//Delete a song from a Playlist
-// router.delete('/:playlistId/songs/:songId', requireAuth, async (req, res) => {
-// 	const { playlistId, songId } = req.params;
-// 	const playlist = await Playlist.findByPk(playlistId);
-// 	const song = await Song.findByPk(songId);
-// 	const playlistsong = await PlaylistSong.findOne({
-// 		where: { songId, playlistId },
-// 	});
-// 	console.log('********************************');
-// 	console.log(playlistsong);
-// 	res.json();
+router.get('/', async (req, res) => {
+	let { page, size, title, createdAt } = req.query;
 
-	// if (playlistsong.userId === req.user.id) {
-	// 		await playlistsong.destroy();
-	// 		return res.json({ message: 'Successfully deleted', statusCode: 200 });
-	// 	} else {
-	// 		return res.json({
-	// 			message: 'A playlist can only be deleted by the playlist owner',
-	// 		});
-	// 	}
-	// console.log('playlistId: ', playlistId)
-	// console.log('********************************')
-	// console.log('songId: ', songId)
+	if (!page || isNaN(page) || page <= 0) {
+		page = 1;
+	}
+	if (!size || isNaN(size) || size <= 0) {
+		size = 20;
+	}
 
-	// if (!song) {
-	// 	return res.status(404).json({ message: "Song couldn't be found", statusCode: 404 });
-	// }
-	// if (!playlist) {
-	// 	return res
-	// 		.status(404)
-	// 		.json({ message: "Playlist couldn't be found", statusCode: 404 });
-	// }
-	// 	if (playlist.userId === req.user.id) {
-	// 	await playlist.destroy();
-	// 	return res.json({ message: 'Successfully deleted', statusCode: 200 });
-	// } else {
-	// 	return res.json({
-	// 		message: 'A playlist can only be deleted by the playlist owner',
-	// 	});
-	// }
-// });
+	if (size > 20) {
+		size = 20;
+	}
+
+	page = Number(page);
+	size = Number(size);
+
+	const where = {};
+	if (title) {
+		where.title = title;
+	}
+	if (createdAt) {
+		where.createdAt = createdAt;
+	}
+
+	if (number) {
+		if (!isNaN(number) && number >= 1) {
+			where.number = parseInt(number);
+		} else {
+			res.status(400);
+			return res.json({
+				errors: [
+					{
+						page: 'Page must be greater than or equal to 1',
+						size: 'Size must be greater than or equal to 1',
+						createdAt: 'CreatedAt is invalid',
+					},
+				],
+			});
+		}
+	}
+
+  // const user = await Song.findAll({
+	// 	include: {
+	// 		model: User,
+	// 		attributes: ['id', 'username', 'previewImage'],
+	// 	},
+
+	const song = await Song.findAll({
+		where,
+		limit: size,
+		offset: size * (page - 1),
+	});
+	return res.json({
+		songs,
+		page,
+		size,
+	});
+});
