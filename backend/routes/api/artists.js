@@ -12,6 +12,20 @@ const { requireAuth } = require('../../utils/auth.js');
 
 const router = express.Router();
 
+//Get all Albums of an Artist based on the Artist's id
+router.get('/:userId/albums', requireAuth, async (req,res) => {
+	const { userId } = req.params;
+	const albums = await Album.findAll({ where: { userId: userId } })
+	if(!albums.length) {
+		return res.status(404).json({
+			message: "Artist couldn't be found",
+			statusCode: 404,
+		});
+	} else {
+		return res.status(200).json({ Albums: albums });
+	}
+})
+
 //Get all songs of an Artist by Id
 router.get('/:userId/songs', requireAuth, async (req, res) => {
 	const { userId } = req.params;
