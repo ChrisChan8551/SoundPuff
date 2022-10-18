@@ -195,7 +195,14 @@ router.get('/:songId', async (req, res) => {
 
 // Get all songs
 router.get('/', async (req, res) => {
+
+
 	let { page, size, title, createdAt } = req.query;
+
+	if (!page && !size && !title && !createdAt) {
+		const songs = await Song.findAll();
+		return res.json({Songs: songs});
+	}
 
 	if (!page || isNaN(page) || page <= 0) {
 		page = 1;
@@ -214,14 +221,12 @@ router.get('/', async (req, res) => {
 	if (title) {
 		const songs = await Song.findAll({
 			where: { title: title },
-			include: {
-				model: User,
-				attributes: ['id', 'username', 'previewImage'],
-			},
 			limit: size,
 			offset: size * (page - 1),
 		});
+
 		if (songs.length) {
+
 			return res.json({ Songs: songs, page, size });
 		} else {
 			return res
@@ -233,13 +238,10 @@ router.get('/', async (req, res) => {
 	if (createdAt) {
 		const songs = await Song.findAll({
 			where: { createdAt },
-			include: {
-				model: User,
-				attributes: ['id', 'username', 'previewImage'],
-			},
 			limit: size,
 			offset: size * (page - 1),
 		});
+		
 		if (songs.length) {
 			return res.json({ Songs: songs, page, size });
 		} else {
@@ -248,9 +250,11 @@ router.get('/', async (req, res) => {
 				.json({ message: "Song couldn't be found", statusCode: 404 });
 		}
 	} else {
-		return res
-			.status(404)
-			.json({ message: "Song couldn't be found", statusCode: 404 });
+		const songs = await Song.findAll({
+			limit: size,
+			offset: size * (page - 1),
+		});
+		return res.json({ Songs: songs, page, size });
 	}
 });
 
