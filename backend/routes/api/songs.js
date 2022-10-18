@@ -16,7 +16,7 @@ const router = express.Router();
 
 //Delete a song
 router.delete('/:songId', requireAuth, async (req, res) => {
-	const { songId } = await req.params;
+	const { songId } = req.params;
 
 	const song = await Song.findByPk(songId);
 
@@ -241,7 +241,7 @@ router.get('/', async (req, res) => {
 			limit: size,
 			offset: size * (page - 1),
 		});
-		
+
 		if (songs.length) {
 			return res.json({ Songs: songs, page, size });
 		} else {
