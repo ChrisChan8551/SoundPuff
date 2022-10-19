@@ -2,6 +2,8 @@ const express = require('express');
 const { session, route } = require('./session.js');
 const { setTokenCookie, requireAuth } = require('../../utils/auth.js');
 
+const { Op } = require('sequelize');
+
 const {
 	User,
 	Song,
@@ -195,13 +197,11 @@ router.get('/:songId', async (req, res) => {
 
 // Get all songs
 router.get('/', async (req, res) => {
-
-
 	let { page, size, title, createdAt } = req.query;
 
 	if (!page && !size && !title && !createdAt) {
 		const songs = await Song.findAll();
-		return res.json({Songs: songs});
+		return res.json({ Songs: songs });
 	}
 
 	if (!page || isNaN(page) || page <= 0) {
@@ -220,13 +220,16 @@ router.get('/', async (req, res) => {
 
 	if (title) {
 		const songs = await Song.findAll({
-			where: { title: title },
+			where: {
+				title: {
+					[Op.like]: `%${title}%`,
+				},
+			},
 			limit: size,
 			offset: size * (page - 1),
 		});
 
 		if (songs.length) {
-
 			return res.json({ Songs: songs, page, size });
 		} else {
 			return res
