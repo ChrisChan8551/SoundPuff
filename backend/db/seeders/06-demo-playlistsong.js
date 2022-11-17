@@ -1,9 +1,16 @@
 'use strict';
 const bcrypt = require('bcryptjs');
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
+}
+
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.bulkInsert('PlaylistSongs', [
+		options.tableName = 'PlaylistSongs';
+
+		await queryInterface.bulkInsert(options, [
 			{
 				songId: 1,
 				playlistId: 1,
@@ -20,6 +27,7 @@ module.exports = {
 	},
 
 	async down(queryInterface, Sequelize) {
-		await queryInterface.bulkDelete('PlaylistSongs', null, {});
+		options.tableName = 'PlaylistSongs';
+		await queryInterface.bulkDelete(options, null, {});
 	},
 };
