@@ -21,6 +21,6 @@
   "bugs": {
     "url": "https://github.com/ChrisChan8551/API-project/issues"
   },
-  "homepage": "https://github.com/ChrisChan8551/API-project#readme"
-
+  "homepage": "https://github.com/ChrisChan8551/API-project#readme",
+  "proxy": "http://localhost:8000"
 }
