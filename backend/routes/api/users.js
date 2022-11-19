@@ -47,7 +47,6 @@ const validateSignup = [
 router.post('/', validateSignup, async (req, res) => {
 	const { firstName, lastName, email, username, password } = req.body;
 	const verify = await User.findOne({ where: { email } });
-
 	if (verify) {
 		return res.status(403).json({
 			message: 'User already exists',
