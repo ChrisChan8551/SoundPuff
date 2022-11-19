@@ -5,6 +5,14 @@ const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 const SIGNUP_USER = 'session/signupUser';
 
+export const logout = () => async (dispatch) => {
+  const response = await csrfFetch('/api/session', {
+    method: 'DELETE',
+  });
+  dispatch(removeUser());
+  return response;
+};
+
 export const signup = (user) => async (dispatch) => {
 	const { firstName, lastName, username, email, password } = user;
 	const response = await csrfFetch('/api/users', {

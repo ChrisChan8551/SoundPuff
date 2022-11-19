@@ -7,3 +7,5 @@
 //heroku run npm run sequelize db:migrate && heroku run npm run sequelize db:seed:all
 
 //git push heroku main
+
+//<script src="https://kit.fontawesome.com/23e74cd26b.js" crossorigin="anonymous"></script>

@@ -1,0 +1,23 @@
+#navigation-bar{
+  background-color: #333;
+}
+.nav-text {
+  color: #ccc;
+  font-size: large;
+  font-weight: bold;
+}
+
+.nav-item {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px 0px 10px;
+}
+
+#all-nav-items {
+  display: inline-flex;
+}
+
+.profile-dropdown {
+  color: #ccc;
+}
