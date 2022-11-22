@@ -1,23 +1,39 @@
-#navigation-bar{
-  background-color: #333;
+#navigation-bar {
+	background-color: #141414;
+	/* font: 12px/1.4 Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda,
+		Verdana, Tahoma, sans-serif; */
+    font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
+    max-width: 1920px;
 }
+
+.nav-text-title {
+	color: rgb(240, 240, 240);
+	font-size: xx-large;
+	font-weight: bolder;
+}
+
 .nav-text {
-  color: #ccc;
-  font-size: large;
-  font-weight: bold;
+	color: rgb(230, 230, 230);
+	font-size: large;
+	font-weight: bold;
+}
+.nav-text:hover {
+	color: #f50;
+	font-size: large;
+	font-weight: bold;
 }
 
 .nav-item {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0px 10px 0px 10px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px 10px 0px 10px;
 }
 
 #all-nav-items {
-  display: inline-flex;
+	display: inline-flex;
 }
 
 .profile-dropdown {
-  color: #ccc;
+	color: #ccc;
 }
