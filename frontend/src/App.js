@@ -19,16 +19,22 @@ function App() {
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
 				<Switch>
-					<Route exact path='/'></Route>
+					<Route exact path='/'>
+            <div className='navigation-background'></div>
+          </Route>
 					<Route path='/login'>
 						<LoginFormPage />
 					</Route>
 					<Route path='/signup'>
 						<SignupFormPage />
 					</Route>
-					<Route exact path='/songs'></Route>
+					<Route exact path='/songs'>
+            <div className='songs-background'></div>
+          </Route>
 					<Route path='/songs/:songId'></Route>
-					<Route exact path='/albums'></Route>
+					<Route exact path='/albums'>
+            <div className='albums-background'></div>
+          </Route>
 					<Route path='/albums/:albumId'></Route>
 				</Switch>
 			)}
