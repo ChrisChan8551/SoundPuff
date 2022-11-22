@@ -41,7 +41,7 @@ function SignupFormPage() {
 	};
 
 	return (
-		<div className='background-image'>
+		// <div className='background-image'>
 		<form onSubmit={handleSubmit}>
 			<ul className='signupform-ul'>
 				{errors.map((error, idx) => (
@@ -112,7 +112,7 @@ function SignupFormPage() {
 			<button className='button-font' type='submit'>Sign Up</button>
 			</div>
 		</form>
-		</div>
+		// </div>
 	);
 }
 

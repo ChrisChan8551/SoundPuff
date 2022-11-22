@@ -6,15 +6,13 @@ form {
 	flex-direction: column;
 }
 
-.background-image {
+/* .background-image {
 	background-image: url(https://cdn.pixabay.com/photo/2018/01/16/10/18/headphones-3085681_960_720.jpg);
 	max-width: 1920px;
 	min-height: 1080px;
 	background-size: cover;
 	background-repeat: no-repeat;
-}
-
-
+} */
 
 .input-form {
 	display: flex;
@@ -34,6 +32,8 @@ form {
 	background-color: #f50;
 	border-color: #f50;
 	color: #fff;
+	border-radius: 3px;
+	padding: 2px 15px;
 }
 
 .button-font:hover {

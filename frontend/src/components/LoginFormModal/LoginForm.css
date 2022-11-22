@@ -5,9 +5,13 @@
 form {
 	border-radius: 100px;
 }
-.button-font {
-  /* display: inline-block;
-  position: relative; */
+.login-button-font {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: black;
+	border-color: white;
+	color: #fff;
 	border-radius: 3px;
 	padding: 2px 15px;
 }

@@ -1,14 +1,18 @@
 // frontend/src/components/LoginFormModal/LoginForm.js
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginForm() {
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+	const loggedInUser = useSelector((state) => state.session.user);
+	const [credential, setCredential] = useState('');
+	const [password, setPassword] = useState('');
+	const [errors, setErrors] = useState([]);
+
+  if (loggedInUser?.id) return <Redirect to='/' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -20,7 +20,7 @@ function App() {
 			{isLoaded && (
 				<Switch>
 					<Route exact path='/'>
-            <div className='navigation-background'></div>
+            
           </Route>
 					<Route path='/login'>
 						<LoginFormPage />
