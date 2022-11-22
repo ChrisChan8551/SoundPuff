@@ -1,0 +1,13 @@
+.login-ul {
+	padding: 0px;
+	margin: 0px;
+}
+form {
+	border-radius: 100px;
+}
+.button-font {
+  /* display: inline-block;
+  position: relative; */
+	border-radius: 3px;
+	padding: 2px 15px;
+}

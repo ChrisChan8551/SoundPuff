@@ -1,6 +1,8 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
 
 function Navigation() {
@@ -9,12 +11,14 @@ function Navigation() {
 	if (loggedInUser === null) {
 		sessionNavLinks = (
 			<>
+
 				<NavLink className='nav-text nav-item' to='/signup'>
 					Sign Up
 				</NavLink>
-				<NavLink className='nav-text nav-item' to='/login'>
+				<LoginFormModal className='nav-text nav-item' to='/login'/>
+				{/* <NavLink className='nav-text nav-item' to='/login'> */}
 					Login
-				</NavLink>
+				{/* </NavLink> */}
 			</>
 		);
 	} else if (loggedInUser)

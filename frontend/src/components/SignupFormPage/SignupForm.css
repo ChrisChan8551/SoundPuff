@@ -6,6 +6,10 @@ form {
 	flex-direction: column;
 }
 
+.signupform-ul {
+	padding: 0px;
+}
+
 .background-image {
 	background-image: url(https://cdn.pixabay.com/photo/2018/01/16/10/18/headphones-3085681_960_720.jpg);
 	/* max-width: 960px;
@@ -15,12 +19,12 @@ form {
 }
 
 .box_input {
-    display: flex;
+	display: flex;
 }
 
 .signup-label-form {
-	font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;
-
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
 }
 
 .signup-container {

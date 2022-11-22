@@ -43,7 +43,7 @@ function SignupFormPage() {
 	return (
 		<div className='background-image'>
 		<form onSubmit={handleSubmit}>
-			<ul>
+			<ul className='signupform-ul'>
 				{errors.map((error, idx) => (
 					<li key={idx}>{error}</li>
 				))}
