@@ -31,7 +31,6 @@ function Navigation() {
 		);
 	return (
 		<div className='Nav-container'>
-			<div className='navigation-background'>
 				<nav id='navigation-bar'>
 					<ul id='all-nav-items'>
 						<p className='nav-text-title nav-item'>SoundCloud Project</p>
@@ -46,9 +45,11 @@ function Navigation() {
 						</NavLink>
 						{sessionNavLinks}
 					</ul>
-				</nav>
-			</div>
-		</div>
+					</nav>
+					{/* <div className='navigation-background'> <img src='https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg' alt='nav pic'></img></div> */}
+
+				</div>
+
 	);
 }
 

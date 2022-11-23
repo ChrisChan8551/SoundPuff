@@ -4,28 +4,39 @@
 		Verdana, Tahoma, sans-serif; */
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
+	/* max-width: 1920px; */
+}
+
+.Nav-container {
+	/* display: block; */
+	margin: auto;
 	max-width: 1920px;
 }
 
-.navigation-background {
-	background-image: url(https://pixabay.com/get/g86a5425255457bab1a2581cac82dd7eaafe84e9304081966a624ea7ea0164696a5d1029306cbacb94bdae1cdb8807a3ba23e631a11108a751dc7cce6a3b8c14553d7a327fd65e927b17f3593d6eab57c_1920.jpg);
-  max-width: 1920px;
-	min-height: 1080px;
-	background-size: cover;
-	background-repeat: no-repeat;
+img {
+	max-width: 100%
 }
 
+/* .navigation-background {
+	background-image: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg);
+	margin: auto;
+	max-width: 1920px;
+	min-height: 1080px;
+	background-size: cover;
+	background-repeat: no-repeat; */
+/* } */
+
 .albums-background {
-  background-image: url(https://pixabay.com/get/g3e328ed2d681f9f3598bb78fe8b5a3d3ac9536a11d14d55dd595ed240c71db284c62cf88b73c3f2963103c18ed98d30ade16919e5296dd22d1e126e318cc3cf9f93767f53437d6fd07b285a6109017a3_1920.jpg);
-  max-width: 1920px;
+	background-image: url(https://pixabay.com/get/g3e328ed2d681f9f3598bb78fe8b5a3d3ac9536a11d14d55dd595ed240c71db284c62cf88b73c3f2963103c18ed98d30ade16919e5296dd22d1e126e318cc3cf9f93767f53437d6fd07b285a6109017a3_1920.jpg);
+	max-width: 1920px;
 	min-height: 1080px;
 	background-size: cover;
 	background-repeat: no-repeat;
 }
 
 .songs-background {
-  background-image: url(https://pixabay.com/get/gb0bc3977039e6b4b8285a7833db72fb31dd4eae92b51d278c70c801378a0636898a74c0f5d6e74d6ac06ea8a3b7139641a39636201e93ac4e181cd7479153511a70503bb0eebebef9048b8e7fdb9bf7b_1920.jpg);
-  max-width: 1920px;
+	background-image: url(https://pixabay.com/get/gb0bc3977039e6b4b8285a7833db72fb31dd4eae92b51d278c70c801378a0636898a74c0f5d6e74d6ac06ea8a3b7139641a39636201e93ac4e181cd7479153511a70503bb0eebebef9048b8e7fdb9bf7b_1920.jpg);
+	max-width: 1920px;
 	min-height: 1080px;
 	background-size: cover;
 	background-repeat: no-repeat;
