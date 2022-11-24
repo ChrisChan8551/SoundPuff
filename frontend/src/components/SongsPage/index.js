@@ -26,10 +26,10 @@ const SongsPage = () => {
     <div className='song-container'>
 			<div className='navigation-background'>
 
-				<img
+				{/* <img
 					src='https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg'
-					alt='nav pic'
-				></img>
+					alt='song pic'
+				></img> */}
         <div className='song-detail'>
 				<ul>
 					{songs &&

@@ -8,6 +8,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import SongsPage from './components/SongsPage';
 import HomePage from './components/HomePage';
+import AlbumsPage from './components/AlbumsPage';
 
 function App() {
 	const dispatch = useDispatch();
@@ -34,7 +35,9 @@ function App() {
 						<SongsPage />
 					</Route>
 					<Route path='/songs/:songId'></Route>
-					<Route exact path='/albums'></Route>
+					<Route exact path='/albums'>
+					<AlbumsPage />
+					</Route>
 					<Route path='/albums/:albumId'></Route>
 				</Switch>
 			)}

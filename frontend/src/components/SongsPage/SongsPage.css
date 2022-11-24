@@ -5,13 +5,13 @@
 
 .song-detail {
   position: absolute;
-  top: 50px;
-  left: 70px;
+  /* top: 50px;
+  left: 70px; */
 	display: flex;
 	justify-content: center;
 	width: 80%;
 	margin: auto;
-  color: white;
+  color: black;
 }
 
 /* .song-list-image {
