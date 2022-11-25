@@ -33,7 +33,9 @@ function Navigation() {
 		<div className='Nav-container'>
 				<nav id='navigation-bar'>
 					<ul id='all-nav-items'>
-						<p className='nav-text-title nav-item'>SoundCloud Project</p>
+						<img src='https://a-v2.sndcdn.com/assets/images/peace-cloud-28ad0963.svg' className='logo' alt='logo' ></img>
+
+						<p className='nav-text-title nav-item'>SOUNDCLOUD</p>
 						<NavLink className='nav-text nav-item' to='/'>
 							Home
 						</NavLink>

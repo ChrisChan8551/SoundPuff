@@ -4,17 +4,24 @@
 		Verdana, Tahoma, sans-serif; */
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
-	/* max-width: 1920px; */
+	width: 1920px;
+}
+
+.logo {
+	position: relative;
+	max-width: 13%;
+	max-height: 13%;
+	opacity: 0.7;
 }
 
 .Nav-container {
 	/* display: block; */
 	margin: auto;
-	max-width: 1920px;
+	width: 1920px;
 }
 
 img {
-	max-width: 100%
+	max-width: 100%;
 }
 
 /* .navigation-background {
@@ -43,7 +50,7 @@ img {
 }
 .nav-text-title {
 	color: rgb(240, 240, 240);
-	font-size: xx-large;
+	font-size: large;
 	font-weight: bolder;
 }
 
