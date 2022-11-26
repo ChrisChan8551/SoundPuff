@@ -56,7 +56,7 @@ function LoginFormPage() {
 					required
 				/>
 			</label>
-			<button className='button-font' type='submit'>Log In</button>
+			<button className='login-button-font' type='submit'>Sign In</button>
       </div>
 		</form>
     </div>

@@ -53,7 +53,7 @@ function LoginForm() {
 					required
 				/>
 			</label>
-			<button className='button-font' type='submit'>Log In</button>
+			<button className='login-button-font-modal' type='submit'>Sign In</button>
       </div>
     </form>
   );

@@ -109,7 +109,7 @@ function SignupFormPage() {
 					required
 				/>
 			</label>
-			<button className='button-font' type='submit'>Sign Up</button>
+			<button className='create-button-font-modal' type='submit'>Create Account</button>
 			</div>
 		</form>
 		// </div>

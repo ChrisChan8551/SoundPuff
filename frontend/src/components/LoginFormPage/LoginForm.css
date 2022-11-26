@@ -24,8 +24,7 @@ form {
 		Garuda, Verdana, Tahoma, sans-serif;
 	/* font-weight:bold; */
 }
-
-.button-font {
+.create-button-font {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
@@ -34,10 +33,32 @@ form {
 	color: #fff;
 	border-radius: 3px;
 	padding: 2px 15px;
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
 }
 
-.button-font:hover {
+.create-button-font:hover {
+	cursor: pointer;
+}
+
+.login-button-font {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: black;
+	border-color: #ccc;
+	color: #fff;
+	border-radius: 3px;
+	padding: 2px 15px;
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+
+.login-button-font:hover {
 	border-color: white;
+	cursor: pointer;
 }
 
 .login-container {

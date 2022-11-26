@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getAlbums } from '../../store/album';
+import './AlbumsPage.css'
 
 const AlbumsPage = () => {
 	const dispatch = useDispatch();
@@ -24,8 +25,9 @@ const AlbumsPage = () => {
 	};
 
 	return (
+		<div className='album-container'>
 		<div className='album-detail'>
-			<ul>
+			<ul className='ul-albums'>
 				<li>{content}</li>
 				{albums &&
 					albums.map((album) => {
@@ -47,6 +49,7 @@ const AlbumsPage = () => {
 						);
 					})}
 			</ul>
+		</div>
 		</div>
 	);
 };

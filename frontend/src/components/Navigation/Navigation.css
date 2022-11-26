@@ -1,53 +1,51 @@
 #navigation-bar {
 	background-color: #141414;
-	/* font: 12px/1.4 Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda,
-		Verdana, Tahoma, sans-serif; */
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
-	width: 1920px;
+	min-width: 720px;
+	max-width: 2480px;
+	height: 60px;
+	margin: auto;
+	position: relative;
 }
 
 .logo {
 	position: relative;
-	max-width: 13%;
-	max-height: 13%;
+	max-width: 60px;
+	max-height: 10%;
+	opacity: 0.7;
+}
+
+.logo2 {
+	position: relative;
+	max-width: 110px;
+	/* max-height: 16%; */
+	margin-left: 5px;
 	opacity: 0.7;
 }
 
 .Nav-container {
-	/* display: block; */
-	margin: auto;
-	width: 1920px;
-}
-
-img {
+	display: block;
+	position: relative;
+	margin: 0;
+	min-width: 390px;
 	max-width: 100%;
 }
 
-/* .navigation-background {
-	background-image: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg);
+img {
 	margin: auto;
-	max-width: 1920px;
-	min-height: 1080px;
-	background-size: cover;
-	background-repeat: no-repeat; */
-/* } */
-
-.albums-background {
-	background-image: url(https://pixabay.com/get/g3e328ed2d681f9f3598bb78fe8b5a3d3ac9536a11d14d55dd595ed240c71db284c62cf88b73c3f2963103c18ed98d30ade16919e5296dd22d1e126e318cc3cf9f93767f53437d6fd07b285a6109017a3_1920.jpg);
-	max-width: 1920px;
-	min-height: 1080px;
-	background-size: cover;
-	background-repeat: no-repeat;
+	max-width: 100%;
+	/* max-height: 100%; */
 }
 
-.songs-background {
-	background-image: url(https://pixabay.com/get/gb0bc3977039e6b4b8285a7833db72fb31dd4eae92b51d278c70c801378a0636898a74c0f5d6e74d6ac06ea8a3b7139641a39636201e93ac4e181cd7479153511a70503bb0eebebef9048b8e7fdb9bf7b_1920.jpg);
-	max-width: 1920px;
-	min-height: 1080px;
-	background-size: cover;
-	background-repeat: no-repeat;
+.profile-button {
+	position: absolute;
+	top: 10px;
+	right: 213px;
+	width: 40px;
+	height: 40px;
 }
+
 .nav-text-title {
 	color: rgb(240, 240, 240);
 	font-size: large;
@@ -59,6 +57,7 @@ img {
 	font-size: large;
 	font-weight: bold;
 }
+
 .nav-text:hover {
 	color: #f50;
 	font-size: large;
@@ -77,5 +76,34 @@ img {
 }
 
 .profile-dropdown {
+	position: absolute;
 	color: #ccc;
+	top: 35px;
+	right: 120px;
+	border: black solid;
+	background-color: black;
+	padding:5px;
+	border-radius:5px;
+}
+
+.logout-button-font {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: black;
+	border-color: #ccc;
+	color: #fff;
+	border-radius: 3px;
+	padding: 2px 15px;
+	margin-top: 5px;
+
+}
+
+.logout-button-font:hover {
+	border-color: white;
+	cursor: pointer;
+}
+
+.li {
+	list-style: none;
 }

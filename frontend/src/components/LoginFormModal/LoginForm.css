@@ -5,7 +5,8 @@
 form {
 	border-radius: 100px;
 }
-.login-button-font {
+
+.login-button-font-modal {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
@@ -14,4 +15,9 @@ form {
 	color: #fff;
 	border-radius: 3px;
 	padding: 2px 15px;
+	margin-top: 5px;
+}
+
+.login-button-font-modal:hover {
+	cursor: pointer;
 }

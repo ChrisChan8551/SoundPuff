@@ -12,15 +12,15 @@ function Navigation() {
 	if (loggedInUser === null) {
 		sessionNavLinks = (
 			<>
-				<LoginFormModal className='nav-text nav-item' to='/login' />
-				{/* <NavLink className='nav-text nav-item' to='/login'> */}
-				{/* Login */}
-				{/* </NavLink> */}
-
 				<SignupFormModal className='nav-text nav-item' to='/signup' />
 				{/* <NavLink className='nav-text nav-item' to='/signup'>
 					Sign Up
 				</NavLink> */}
+
+				<LoginFormModal className='nav-text nav-item' to='/login' />
+				{/* <NavLink className='nav-text nav-item' to='/login'> */}
+				{/* Login */}
+				{/* </NavLink> */}
 			</>
 		);
 	} else if (loggedInUser)
@@ -31,27 +31,32 @@ function Navigation() {
 		);
 	return (
 		<div className='Nav-container'>
-				<nav id='navigation-bar'>
-					<ul id='all-nav-items'>
-						<img src='https://a-v2.sndcdn.com/assets/images/peace-cloud-28ad0963.svg' className='logo' alt='logo' ></img>
-
-						<p className='nav-text-title nav-item'>SOUNDCLOUD</p>
-						<NavLink className='nav-text nav-item' to='/'>
-							Home
-						</NavLink>
-						<NavLink className='nav-text nav-item' to='/songs'>
-							Songs
-						</NavLink>
-						<NavLink className='nav-text nav-item' to='/albums'>
-							Albums
-						</NavLink>
-						{sessionNavLinks}
-					</ul>
-					</nav>
-					{/* <div className='navigation-background'> <img src='https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg' alt='nav pic'></img></div> */}
-
-				</div>
-
+			<nav id='navigation-bar'>
+				<ul id='all-nav-items'>
+					<img
+						src='https://a-v2.sndcdn.com/assets/images/peace-cloud-28ad0963.svg'
+						className='logo'
+						alt='logo'
+					></img>
+					<img
+						src='https://a-v2.sndcdn.com/assets/images/wordmark@2x-8fdb346f.png'
+						className='logo2'
+						alt='logo2'
+					></img>
+					{/* <p className='nav-text-title nav-item'>SOUNDCLOUD</p> */}
+					<NavLink className='nav-text nav-item' to='/'>
+						Home
+					</NavLink>
+					<NavLink className='nav-text nav-item' to='/songs'>
+						Songs
+					</NavLink>
+					<NavLink className='nav-text nav-item' to='/albums'>
+						Albums
+					</NavLink>
+				</ul>
+				{sessionNavLinks}
+			</nav>
+		</div>
 	);
 }
 

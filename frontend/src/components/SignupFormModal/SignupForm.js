@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
-import './SignupForm.css';
+import './SignupFormModal.css';
 
 function SignupFormPage() {
 	const dispatch = useDispatch();
@@ -109,8 +109,8 @@ function SignupFormPage() {
 							required
 						/>
 					</label>
-					<button className='button-font' type='submit'>
-						Sign Up
+					<button className='create-button-font' type='submit'>
+						Create Account
 					</button>
 				</div>
 			</form>
