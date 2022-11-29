@@ -82,8 +82,8 @@ img {
 	right: 120px;
 	border: black solid;
 	background-color: black;
-	padding:5px;
-	border-radius:5px;
+	padding: 5px;
+	border-radius: 5px;
 }
 
 .logout-button-font {
@@ -96,7 +96,6 @@ img {
 	border-radius: 3px;
 	padding: 2px 15px;
 	margin-top: 5px;
-
 }
 
 .logout-button-font:hover {
@@ -106,4 +105,19 @@ img {
 
 .li {
 	list-style: none;
+}
+
+.guest-log-in-button {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: blue;
+	border-color: #ccc;
+	color: #fff;
+	border-radius: 3px;
+	padding: 2px 15px;
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+	/* padding: 0px */
 }

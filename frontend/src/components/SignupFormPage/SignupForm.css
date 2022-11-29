@@ -1,6 +1,7 @@
 form {
 	display: flex;
-	margin-top: 0em;
+	/* margin-top: 0em; */
+	margin: 5px;
 	align-items: flex-start;
 	align-content: flex-start;
 	flex-direction: column;
@@ -23,8 +24,15 @@ form {
 	cursor: pointer;
 }
 .signupform-ul {
+	word-wrap: break-word;
+	margin: 0px;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	color: red;
 	padding: 0px;
+	max-width: 195px;
 }
+
 
 /* .background-image {
 	background-image: url(https://cdn.pixabay.com/photo/2018/01/16/10/18/headphones-3085681_960_720.jpg);

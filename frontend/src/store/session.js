@@ -1,16 +1,16 @@
 // frontend/src/store/session.js
 import { csrfFetch } from './csrf';
-
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
-const SIGNUP_USER = 'session/signupUser';
+
 
 export const logout = () => async (dispatch) => {
   const response = await csrfFetch('/api/session', {
     method: 'DELETE',
   });
   dispatch(removeUser());
-  return response;
+
+  return (response);
 };
 
 export const signup = (user) => async (dispatch) => {
@@ -63,7 +63,7 @@ export const login = (user) => async (dispatch) => {
 		}),
 	});
 	const data = await response.json();
-	console.log(data);
+	// console.log(data);
 	dispatch(setUser(data));
 	return response;
 };

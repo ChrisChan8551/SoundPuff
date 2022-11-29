@@ -1,6 +1,10 @@
 .login-ul {
 	padding: 0px;
 	margin: 0px;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	color: red;
+	justify-content: left;
 }
 form {
 	border-radius: 100px;

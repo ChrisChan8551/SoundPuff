@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import GuestUserButton from './GuestUserButton';
 import './Navigation.css';
 
 function Navigation() {
@@ -21,6 +22,7 @@ function Navigation() {
 				{/* <NavLink className='nav-text nav-item' to='/login'> */}
 				{/* Login */}
 				{/* </NavLink> */}
+				<GuestUserButton className='nav-text nav-item'/>
 			</>
 		);
 	} else if (loggedInUser)

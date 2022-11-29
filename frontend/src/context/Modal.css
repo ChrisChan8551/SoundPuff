@@ -19,8 +19,10 @@
 }
 
 #modal-content {
+	word-wrap: break-word;
 	position: absolute;
-	/* background-color: white; */
+	background-color: white;
 	border-radius: 10px;
 	padding: 0;
+	max-width: 195px;
 }
