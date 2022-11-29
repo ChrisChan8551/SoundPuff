@@ -42,7 +42,9 @@ const AlbumsPage = () => {
 											style={{
 												backgroundImage: `url('${album.previewImage}')`,
 											}}
-										></div>
+										>
+											<img src={album.previewImage} alt='album icon' />
+										</div>
 										<div>
 											<p className='album-list-title'>{album.title}</p>
 										</div>
