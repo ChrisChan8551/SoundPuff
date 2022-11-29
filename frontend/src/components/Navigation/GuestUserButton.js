@@ -8,11 +8,13 @@ function GuestUserButton() {
     const [errors, setErrors] = useState([]);
 
 
+
+    //demo user info from seeder
     const credential = 'demo@user.io';
     const password = 'password';
     const user = {credential, password}
 
-    // guest id === 1
+
 
     const logInGuest = () => {
         return dispatch(sessionActions.login(user))
@@ -25,8 +27,8 @@ function GuestUserButton() {
     return (
         <>
             <button className='guest-log-in-button' onClick={logInGuest}>
-                {/* <i className="fa-regular fa-user"></i> */}
-                Guest Log In
+                <i className="fa-regular fa-user">&nbsp;</i>
+                 Guest Log In
             </button>
         </>
     );
