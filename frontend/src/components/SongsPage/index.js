@@ -33,16 +33,17 @@ const SongsPage = () => {
 				<ul className='ul-songs'>
 					{songs &&
 						songs.map((song) => {
+							let { image } = song.previewImage;
+							console.log(image);
 							return (
 								<li key={song.id}>
 									<div
 										className='song-list-item'
 										onClick={() => goToDetails(song.id)}
 									>
-										<div
-											className='song-list-image'
-											style={{ backgroundImage: `url('${song.previewImage}')` }}
-										></div>
+										<div className='song-list-image'>
+											<img src={song.previewImage} alt='Song icon' />
+										</div>
 										<div>
 											<p className='song-list-title'>{song.title}</p>
 										</div>

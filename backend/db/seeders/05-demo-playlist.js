@@ -13,7 +13,7 @@ module.exports = {
     {
       userId: 3,
       name: "My Playlist",
-      previewImage: "image url"
+      previewImage: "https://i1.sndcdn.com/artworks-000248333499-5htllp-t500x500.jpg"
     }
    ])
   },

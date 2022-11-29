@@ -16,7 +16,7 @@ module.exports = {
       title: 'Swipe Left Swipe Right',
       description: 'Are you the one',
       url: 'audio url',
-      previewImage: 'image url'
+      previewImage: 'https://i1.sndcdn.com/artworks-18ZkGmlFxMngNE9R-r8pWpA-t200x200.jpg'
     },
     {
       userId: 1,
@@ -24,7 +24,7 @@ module.exports = {
       title: 'Coding to the Edge',
       description: 'Getting Hexed',
       url: 'audio url',
-      previewImage: 'image url'
+      previewImage: 'https://i1.sndcdn.com/artworks-000070477001-w3c2e2-t200x200.jpg'
     },
     {
       userId: 2,
@@ -32,7 +32,7 @@ module.exports = {
       title: 'Sleeping on my Keyboard',
       description: 'Keys imprinted on my Face',
       url: 'audio url',
-      previewImage: 'image url'
+      previewImage: 'https://i1.sndcdn.com/artworks-000076241050-65m4y3-t200x200.jpg'
     }
    ])
   },
