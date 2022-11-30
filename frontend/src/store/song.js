@@ -31,6 +31,15 @@ const deleteSong = (songId) => ({
 	songId,
 });
 
+export const getOneSong = (songId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/songs/${songId}`);
+
+	if (response.ok) {
+		const song = await response.json();
+		dispatch(loadASong(song));
+	}
+};
+
 export const getSongs = () => async (dispatch) => {
 	const response = await csrfFetch('/api/songs');
 
@@ -41,6 +50,14 @@ export const getSongs = () => async (dispatch) => {
 		dispatch(loadSongs(songs));
 	}
 };
+
+export const removeSong = (songId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/songs/${songId}`, {
+        method: 'DELETE'
+    });
+		dispatch(deleteSong(songId));
+        return response;
+	};
 
 const initialState = {};
 
