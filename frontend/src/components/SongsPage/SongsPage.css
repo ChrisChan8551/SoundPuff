@@ -19,6 +19,14 @@
 	border: orange solid;
 	/* width: 50%; */
 	/* padding-bottom: 50%; */
+	background: linear-gradient(
+		135deg,
+		rgb(232, 232, 232) 0%,
+		rgb(121, 121, 121) 100%
+	);
+}
+.song-list-item:hover {
+	cursor: pointer;
 }
 
 .ul-songs {

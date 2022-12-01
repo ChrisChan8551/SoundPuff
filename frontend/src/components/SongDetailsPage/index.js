@@ -11,7 +11,7 @@ const SongDetailPage = () => {
 
 	const { songId } = useParams();
 	const song = useSelector((state) => state.song[songId]);
-
+  const loggedInUser = useSelector(state => state.session.user);
 	// const [showCreateCommentForm, setShowCreateCommentForm] = useState(false);
 
 
@@ -43,7 +43,11 @@ const SongDetailPage = () => {
 					<li id='song-artist'>{song?.Artist?.username}</li>
 					<li id='song-description'>{`Description: ${song.description}`}</li>
 					<li id='song-url'>
-						
+          <div className='song-detail-buttons'>
+          {(song.userId === loggedInUser?.id) && (
+                <button className='song-delete-button' onClick={() => (deleteSong(songId))}>Delete</button>
+              )}
+          </div>
 					</li>
 				</ul>
 			</div>

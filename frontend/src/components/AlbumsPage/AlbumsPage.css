@@ -19,6 +19,7 @@
 .album-list-item {
   display: inline-flex;
 	border: orange solid;
+	background: linear-gradient(135deg, rgb(232, 232, 232) 0%, rgb(121, 121, 121) 100%);
 	/* width: 50%; */
 	/* padding-bottom: 50%; */
 }
