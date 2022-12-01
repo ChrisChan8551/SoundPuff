@@ -55,7 +55,7 @@ router.post('/', validateLogin, async (req, res) => {
 // Get Current User
 router.get('/', restoreUser, async (req, res) => {
 	let { user } = req;
-	console.log('USER:', user);
+	// console.log('USER:', user);
 
 	if (user) {
     const token = await setTokenCookie(res, user);
