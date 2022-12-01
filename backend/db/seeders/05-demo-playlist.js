@@ -20,6 +20,6 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Playlists';
-   await queryInterface.bulkDelete(options, null, {});
+   await queryInterface.bulkDelete(options);
   }
 };
