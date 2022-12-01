@@ -40,6 +40,7 @@ const SongDetailPage = () => {
 					className='song-detail-image'
 					// style={{ backgroundImage: `url('${song?.previewImage}')` }}
 				>
+					////
 					<img src={song.previewImage} alt='songimage'></img>
 				</div>
 				<ul>
