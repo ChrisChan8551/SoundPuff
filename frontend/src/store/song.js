@@ -31,6 +31,23 @@ const deleteSong = (songId) => ({
 	songId,
 });
 
+export const editCurrentSong = (songId, song) => async (dispatch) => {
+	const response = await csrfFetch(`/api/songs/${songId}`, {
+			method: 'PUT',
+			headers: {
+					"Content-Type": "application/json"
+			},
+			body: JSON.stringify(song)
+	});
+
+	if(response.ok){
+			const song = await response.json();
+			console.log(song);
+			dispatch(editSong(song));
+			return song;
+	}
+};
+
 export const getOneSong = (songId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/songs/${songId}`);
 

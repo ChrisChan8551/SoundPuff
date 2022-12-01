@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
+import EditSongForm from '../EditSongForm';
 import { Modal } from '../../context/Modal';
-import LoginForm from './LoginForm';
 
-function LoginFormModal() {
+function EditSongFormModal() {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className='login-button-font'onClick={() => setShowModal(true)}>Sign In</button>
+      <button className='edit-song-button-font'onClick={() => setShowModal(true)}>Edit Song</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <LoginForm />
+          <EditSongForm />
         </Modal>
       )}
     </>
   );
 }
 
-export default LoginFormModal;
+export default EditSongFormModal;

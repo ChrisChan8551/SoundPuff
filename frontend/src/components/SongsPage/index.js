@@ -24,17 +24,10 @@ const SongsPage = () => {
 
 	return (
 		<div className='song-container'>
-			{/* <div className='navigation-background'> */}
-			{/* <img
-					src='https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_b@2x-7e5ff471.jpg'
-					alt='song pic'
-				></img> */}
 			<div className='song-detail'>
 				<ul className='ul-songs'>
 					{songs &&
 						songs.map((song) => {
-							let { image } = song.previewImage;
-							console.log(image);
 							return (
 								<li key={song.id}>
 									<div
@@ -54,7 +47,6 @@ const SongsPage = () => {
 				</ul>
 			</div>
 		</div>
-		// </div>
 	);
 };
 
