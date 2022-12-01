@@ -39,9 +39,9 @@ const AlbumsPage = () => {
 									>
 										<div
 											className='album-list-image'
-											style={{
-												backgroundImage: `url('${album.previewImage}')`,
-											}}
+											// style={{
+											// 	backgroundImage: `url('${album.previewImage}')`,
+											// }}
 										>
 											<img src={album.previewImage} alt='album icon' />
 										</div>
