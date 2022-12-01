@@ -30,7 +30,6 @@ const SongDetailPage = () => {
 	};
 
 	if (showEditSongForm && song.userId === loggedInUser?.id) {
-
 	}
 
 	return (
@@ -40,7 +39,6 @@ const SongDetailPage = () => {
 					className='song-detail-image'
 					// style={{ backgroundImage: `url('${song?.previewImage}')` }}
 				>
-					////
 					<img src={song.previewImage} alt='songimage'></img>
 				</div>
 				<ul>
@@ -50,13 +48,7 @@ const SongDetailPage = () => {
 					<li id='song-url'>
 						<div className='song-detail-buttons'>
 							{song.userId === loggedInUser?.id && (
-								<button
-									className='song-edit-button'
-									onClick={() => setShowEditSongForm(true)}
-									// <EditSongForm/>
-								>
-									Edit
-								</button>
+								<button className='song-edit-button' onClick={() => setShowEditSongForm(true)}>Edit</button>
 							)}
 							{song.userId === loggedInUser?.id && (
 								<button
