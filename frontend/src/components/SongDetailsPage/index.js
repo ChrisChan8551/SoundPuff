@@ -10,15 +10,13 @@ const SongDetailPage = () => {
 	const history = useHistory();
 
 	const { songId } = useParams();
-	const song = useSelector((state) => state.song[songId]); //is this line necessary???
+	const song = useSelector((state) => state.song[songId]);
 	const [showEditSongForm, setShowEditSongForm] = useState(false);
-	// const [showCreateCommentForm, setShowCreateCommentForm] = useState(false);
 	const loggedInUser = useSelector((state) => state.session.user);
 	let otherInfo;
 
 	useEffect(() => {
 		setShowEditSongForm(false);
-		// setShowCreateCommentForm(false);
 		dispatch(getOneSong(songId));
 	}, [songId, dispatch]);
 
