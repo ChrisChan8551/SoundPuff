@@ -53,8 +53,8 @@ li {
   font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
-	background-color: #f50;
-	border-color: #f50;
+	background-color: black;
+	border-color: #ccc;
 	color: #fff;
 	border-radius: 3px;
 	margin-left: 10px;
@@ -64,8 +64,9 @@ li {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
-	background-color: black;
-	border-color: #ccc;
+	background-color: #f50;
+	border-color: #f50;
+
 	color: #fff;
 	border-radius: 3px;
 	/* padding: 2px 15px; */

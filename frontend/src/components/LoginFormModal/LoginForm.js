@@ -28,7 +28,6 @@ function LoginForm() {
 
 	return (
 		<form onSubmit={handleSubmit}>
-
 			<div className='login-container'>
 				<label className='login-label-form'>
 					Username or Email

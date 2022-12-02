@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import EditSongForm from '../EditSongForm';
 import { Modal } from '../../context/Modal';
+import EditSongForm from '../EditSongForm';
 
-function EditSongFormModal() {
-  const [showModal, setShowModal] = useState(false);
+function EditSongFormModal({ song, hideForm }) {
 
   return (
     <>
-      <button className='edit-song-button-font'onClick={() => setShowModal(true)}>Edit Song</button>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <EditSongForm />
+      {hideForm && (
+        <Modal>
+          <EditSongForm song={song} hideForm={hideForm}/>
         </Modal>
       )}
     </>
