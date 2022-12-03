@@ -30,6 +30,16 @@ const deleteAlbum = (albumId) => ({
 	type: DELETE_ALBUM,
 	albumId,
 });
+
+export const getOneAlbum = (albumId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/albums/${albumId}`);
+
+	if (response.ok) {
+		const album = await response.json();
+		dispatch(loadAnAlbum(album));
+	}
+};
+
 export const getAlbums = () => async (dispatch) => {
 	const response = await csrfFetch('/api/albums');
 

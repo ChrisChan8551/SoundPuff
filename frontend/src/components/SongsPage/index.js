@@ -30,12 +30,9 @@ const SongsPage = () => {
 						songs.map((song) => {
 							return (
 								<li key={song.id}>
-									<div
-										className='song-list-item'
-										onClick={() => goToDetails(song.id)}
-									>
+									<div className='song-list-item' onClick={() => goToDetails(song.id)}>
 										<div className='song-list-image'>
-											<img src={song.previewImage} alt='Song icon' />
+											<img className='song-detail-image'src={song.previewImage} alt='Song icon' />
 										</div>
 										<div>
 											<p className='song-list-title'>{song.title}</p>

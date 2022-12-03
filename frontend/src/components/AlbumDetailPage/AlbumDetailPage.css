@@ -1,0 +1,74 @@
+.album-detail {
+	display: flex;
+	justify-content: center;
+	width: 80%;
+	margin: auto;
+}
+.album-detail-image {
+	height: 150px;
+	width: 150px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 30%;
+}
+
+.album-detail-info {
+	display: inline-flex;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	border: orange solid;
+	width: 100%;
+	color: black;
+	margin-top: 20px;
+	margin-right: 5px;
+	max-width: 550px;
+  opacity: 1;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  transition: opacity .3s;
+  background: linear-gradient(135deg, rgb(232, 232, 232) 0%, rgb(121, 121, 121) 100%);
+}
+
+li {
+	list-style: none;
+}
+
+#album-title {
+	font-size: 30px;
+	font-weight: bold;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+}
+
+#album-artist {
+	font-size: 20px;
+}
+
+.album-detail-buttons {
+	margin-top: 20px;
+}
+.album-delete-button {
+  background-color: black;
+  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: black;
+	border-color: #ccc;
+	color: #fff;
+	border-radius: 3px;
+	margin-left: 10px;
+}
+
+.album-edit-button {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: #f50;
+	border-color: #f50;
+
+	color: #fff;
+	border-radius: 3px;
+	/* padding: 2px 15px; */
+	/* margin-top: 5px; */
+}

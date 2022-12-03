@@ -33,17 +33,9 @@ const AlbumsPage = () => {
 						albums.map((album) => {
 							return (
 								<li key={album.id}>
-									<div
-										className='album-list-item'
-										onClick={() => goToDetails(album.id)}
-									>
-										<div
-											className='album-list-image'
-											// style={{
-											// 	backgroundImage: `url('${album.previewImage}')`,
-											// }}
-										>
-											<img src={album.previewImage} alt='album icon' />
+									<div className='album-list-item' onClick={() => goToDetails(album.id)}>
+										<div className='album-list-image'>
+											<img className='album-detail-image'src={album.previewImage} alt='album icon' />
 										</div>
 										<div>
 											<p className='album-list-title'>{album.title}</p>

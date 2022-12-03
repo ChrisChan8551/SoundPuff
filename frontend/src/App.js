@@ -9,6 +9,7 @@ import Navigation from './components/Navigation';
 import SongsPage from './components/SongsPage';
 import HomePage from './components/HomePage';
 import AlbumsPage from './components/AlbumsPage';
+import AlbumDetailPage from './components/AlbumDetailPage';
 import SongDetailPage from './components/SongDetailsPage';
 
 function App() {
@@ -36,12 +37,14 @@ function App() {
 						<SongsPage />
 					</Route>
 					<Route path='/songs/:songId'>
-						<SongDetailPage/>
+						<SongDetailPage />
 					</Route>
 					<Route exact path='/albums'>
-					<AlbumsPage />
+						<AlbumsPage />
 					</Route>
-					<Route path='/albums/:albumId'></Route>
+					<Route path='/albums/:albumId'>
+            <AlbumDetailPage />
+          </Route>
 				</Switch>
 			)}
 		</>

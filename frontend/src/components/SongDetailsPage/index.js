@@ -13,7 +13,7 @@ const SongDetailPage = () => {
 	const song = useSelector((state) => state.song[songId]);
 	const [showEditSongForm, setShowEditSongForm] = useState(false);
 	const loggedInUser = useSelector((state) => state.session.user);
-	let otherInfo;
+	let songEditForm;
 
 	useEffect(() => {
 		setShowEditSongForm(false);
@@ -30,7 +30,7 @@ const SongDetailPage = () => {
 	};
 
 	if (showEditSongForm && song.userId === loggedInUser?.id) {
-		otherInfo = (
+		songEditForm = (
 			<EditSongFormModal
 				song={song}
 				hideForm={() => setShowEditSongForm(false)}
@@ -42,9 +42,9 @@ const SongDetailPage = () => {
 		<div className='song-detail'>
 			<div className='song-detail-info'>
 				<div className='song-detail-image'>
-					<img src={song.previewImage} alt='songimg'></img>
+					<img className='song-detail-image'src={song.previewImage} alt='songimg'></img>
 				</div>
-				{otherInfo}
+				{songEditForm}
 				<ul>
 					<li id='song-title'>{song.title}</li>
 					<li id='song-artist'>{song?.Artist?.username}</li>

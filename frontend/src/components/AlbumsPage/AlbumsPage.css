@@ -17,11 +17,19 @@
 }
 
 .album-list-item {
-  display: inline-flex;
+	display: inline-flex;
 	border: orange solid;
-	background: linear-gradient(135deg, rgb(232, 232, 232) 0%, rgb(121, 121, 121) 100%);
+	background: linear-gradient(
+		135deg,
+		rgb(232, 232, 232) 0%,
+		rgb(121, 121, 121) 100%
+	);
 	/* width: 50%; */
 	/* padding-bottom: 50%; */
+}
+
+.album-list-item:hover {
+	cursor: pointer;
 }
 
 .ul-albums {
@@ -35,15 +43,19 @@
 
 .album-list-title {
 	padding-left: 20px;
+	font-size: 30px;
+	font-weight: bold;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
 }
 
-/* .album-list-image {
+.album-list-image {
 	height: 150px;
 	width: 150px;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: 50% 30%;
-} */
+}
 
 .album-list-item {
 	display: inline-flex;
@@ -56,9 +68,11 @@
 	/* flex-shrink: 0; */
 }
 
-.nav-pic {
+
+
+/* .nav-pic {
 	position: relative;
-}
+} */
 
 li {
 	list-style: none;
