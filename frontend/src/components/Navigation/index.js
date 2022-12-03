@@ -36,16 +36,16 @@ function Navigation() {
 			<nav id='navigation-bar'>
 				<ul id='all-nav-items'>
 					<img
-						src='https://a-v2.sndcdn.com/assets/images/peace-cloud-28ad0963.svg'
+						src='https://cdn-icons-png.flaticon.com/512/148/148828.png'
 						className='logo'
 						alt='logo'
 					></img>
-					<img
+					{/* <img
 						src='https://a-v2.sndcdn.com/assets/images/wordmark@2x-8fdb346f.png'
 						className='logo2'
 						alt='logo2'
-					></img>
-					{/* <p className='nav-text-title nav-item'>SOUNDCLOUD</p> */}
+					></img> */}
+					<p className='nav-text-title nav-item logo2'>SONG PUFF</p>
 					<NavLink className='nav-text nav-item' to='/'>
 						Home
 					</NavLink>

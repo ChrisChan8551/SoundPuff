@@ -32,6 +32,17 @@ const AlbumDetailPage = () => {
       />
       );
     };
+    const deleteAlbum = (albumId) => {
+      album?.Songs?.map(song => {
+        return dispatch(removeSong(song.id))
+      });
+    return (
+      dispatch(removeAlbum(albumId))
+      .then(() => {
+        history.push('/albums')
+      })
+    );
+  };
 
 	return (
 		<div className='album-detail'>
@@ -58,9 +69,14 @@ const AlbumDetailPage = () => {
 						);
 					})}
 				</ul>
+        <div className='album-detail-buttons'>
+
+              {(album.userId === loggedInUser?.id) && (
+                <button className='album-delete-button'onClick={() => (deleteAlbum(albumId))}>Delete</button>
+              )}
+
+            </div>
 			</div>
-
-
 		</div>
 	);
 };

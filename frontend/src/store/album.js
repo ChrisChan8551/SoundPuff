@@ -50,6 +50,14 @@ export const getAlbums = () => async (dispatch) => {
 	}
 };
 
+export const removeAlbum = (albumId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/albums/${albumId}`, {
+        method: 'DELETE'
+    });
+		dispatch(deleteAlbum(albumId));
+        return response;
+	};
+
 const initialState = {};
 
 const albumReducer = (state = initialState, action) => {
