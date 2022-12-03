@@ -31,6 +31,24 @@ const deleteAlbum = (albumId) => ({
 	albumId,
 });
 
+export const editCurrentAlbum = (albumId, album) => async (dispatch) => {
+	console.log('test1', album);
+	const response = await csrfFetch(`/api/albums/${albumId}`, {
+			method: 'PUT',
+			headers: {
+					"Content-Type": "application/json"
+			},
+			body: JSON.stringify(album)
+	});
+
+	if(response.ok){
+			const album = await response.json();
+			console.log('edited album', album);
+			dispatch(editAlbum(album));
+			return album;
+	}
+};
+
 export const getOneAlbum = (albumId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/albums/${albumId}`);
 

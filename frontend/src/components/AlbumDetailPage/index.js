@@ -10,45 +10,47 @@ const AlbumDetailPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { albumId } = useParams();
-  const [showEditAlbumForm, setShowEditAlbumForm] = useState(false);
+	const [showEditAlbumForm, setShowEditAlbumForm] = useState(false);
 	const album = useSelector((state) => state.album[albumId]);
 	const loggedInUser = useSelector((state) => state.session.user);
-  let albumEditForm;
+	let albumEditForm;
 
-  useEffect(() => {
-    setShowEditAlbumForm(false);
-	  dispatch (getOneAlbum(albumId));
-  }, [albumId, dispatch]);
+	useEffect(() => {
+		setShowEditAlbumForm(false);
+		dispatch(getOneAlbum(albumId));
+	}, [albumId, dispatch]);
 
-  if (!album) {
-    return null;
-  }
+	if (!album) {
+		return null;
+	}
 
-  if (showEditAlbumForm && album.userId === loggedInUser?.id){
-    albumEditForm = (
-      <EditAlbumModal
-      album={album}
-      hideForm={() => setShowEditAlbumForm(false)}
-      />
-      );
-    };
-    const deleteAlbum = (albumId) => {
-      album?.Songs?.map(song => {
-        return dispatch(removeSong(song.id))
-      });
-    return (
-      dispatch(removeAlbum(albumId))
-      .then(() => {
-        history.push('/albums')
-      })
-    );
-  };
+	if (showEditAlbumForm && album.userId === loggedInUser?.id) {
+		albumEditForm = (
+			<EditAlbumModal
+				album={album}
+				hideForm={() => setShowEditAlbumForm(false)}
+			/>
+		);
+	}
+
+	const deleteAlbum = (albumId) => {
+		album?.Songs?.map((song) => {
+			return dispatch(removeSong(song.id));
+		});
+		return dispatch(removeAlbum(albumId)).then(() => {
+			history.push('/albums');
+		});
+	};
 
 	return (
 		<div className='album-detail'>
 			<div className='album-detail-info'>
 				<div className='album-detail-image'>
-					<img className='album-detail-image'src={album.previewImage} alt='albumimg'></img>
+					<img
+						className='album-detail-image'
+						src={album.previewImage}
+						alt='albumimg'
+					></img>
 				</div>
 				<ul>
 					<li id='album-title' key={`${album.id}${album.title}`}>
@@ -69,14 +71,22 @@ const AlbumDetailPage = () => {
 						);
 					})}
 				</ul>
-        <div className='album-detail-buttons'>
 
-              {(album.userId === loggedInUser?.id) && (
-                <button className='album-delete-button'onClick={() => (deleteAlbum(albumId))}>Delete</button>
-              )}
-
-            </div>
 			</div>
+      <div className='album-detail-buttons'>
+					{!showEditAlbumForm && album.userId === loggedInUser?.id && (
+						<button className='album-edit-button' onClick={() => setShowEditAlbumForm(true)}>Edit</button>
+					)}
+					{album.userId === loggedInUser?.id && (
+						<button
+							className='album-delete-button'
+							onClick={() => deleteAlbum(albumId)}
+						>
+							Delete
+						</button>
+					)}
+				</div>
+      {albumEditForm}
 		</div>
 	);
 };
