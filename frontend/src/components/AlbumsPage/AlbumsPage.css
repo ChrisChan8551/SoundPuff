@@ -3,6 +3,59 @@
 	max-width: 2480px;
 }
 
+.create-album-form {
+	max-width: auto;
+	min-height: auto;
+	padding: 7px 7px;
+	/* margin: auto; */
+	border-radius: 10px;
+	border: solid 1px #ccc;
+	box-shadow: 1px 2px 5px rgb(0 0 0 / 31%);
+	background: #ebebeb;
+}
+
+.create-album-button {
+	background-color: black;
+  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: #f50;
+	border-color: #f50;
+	color: #fff;
+	border-radius: 3px;
+	margin-top: 5px;
+}
+
+.create-album-input {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+	Garuda, Verdana, Tahoma, sans-serif;
+	margin-left: 5px;
+	max-width: 195px;
+	display: flex;
+  flex-direction: column;
+}
+
+.create-album-label-form {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+}
+
+.create-album-button:hover {
+	cursor: pointer;
+}
+
+.cancel-create-album-button {
+  background-color: black;
+  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	/* background-color: #f50; */
+	border-color: black;
+	color: #fff;
+	border-radius: 3px;
+	margin-left: 10px;
+}
+
 .album-detail {
 	/* position: absolute; */
 	/* top: 50px;

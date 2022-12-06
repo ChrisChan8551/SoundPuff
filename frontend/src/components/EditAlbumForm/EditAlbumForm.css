@@ -1,5 +1,4 @@
 .edit-album-form {
-	max-width: auto;
 	min-height: auto;
 	padding: 7px 7px;
 	/* margin: auto; */
@@ -31,7 +30,7 @@
 	border-color: #f50;
 	color: #fff;
 	border-radius: 3px;
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 .update-album-button:hover{
@@ -48,7 +47,7 @@
 	border-color: black;
 	color: #fff;
 	border-radius: 3px;
-	/* margin-left: 10px; */
+	margin-left: 10px;
 }
 
 .cancel-update-album-button:hover{

@@ -1,15 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getAlbums } from '../../store/album';
+import CreateAlbumModal from '../CreateAlbumModal';
 import './AlbumsPage.css';
 
 const AlbumsPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const loggedInUser = useSelector(state => state.session.user);
+	const [showCreateAlbumForm, setShowCreateAlbumForm] = useState(false);
 	const albums = Object.values(useSelector((state) => state.album));
 
 	let content;
+	let CreateAlbum = (
+    <CreateAlbumModal
+      hideForm={() => setShowCreateAlbumForm(false)}
+    />
+  );
 
 	useEffect(() => {
 		dispatch(getAlbums());
@@ -18,6 +26,19 @@ const AlbumsPage = () => {
 	if (!albums) {
 		return null;
 	}
+
+	if(!loggedInUser || loggedInUser?.id === undefined){
+  content = (
+    <p className='all-albums-header'>Log In Or Sign Up To Create An Album!</p>
+  );
+} else if(loggedInUser?.id && loggedInUser?.id !== undefined){
+    content = (
+    <div>
+      {<button className='create-album-button' onClick={() => setShowCreateAlbumForm(true)}>Create An Album</button>}
+      {showCreateAlbumForm && CreateAlbum}
+    </div>
+    );
+}
 
 	const goToDetails = (albumId) => {
 		console.log('albumId', albumId);
