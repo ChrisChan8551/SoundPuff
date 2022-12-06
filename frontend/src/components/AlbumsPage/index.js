@@ -9,6 +9,7 @@ const AlbumsPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const loggedInUser = useSelector(state => state.session.user);
+
 	const [showCreateAlbumForm, setShowCreateAlbumForm] = useState(false);
 	const albums = Object.values(useSelector((state) => state.album));
 
@@ -18,6 +19,7 @@ const AlbumsPage = () => {
       hideForm={() => setShowCreateAlbumForm(false)}
     />
   );
+
 
 	useEffect(() => {
 		dispatch(getAlbums());
