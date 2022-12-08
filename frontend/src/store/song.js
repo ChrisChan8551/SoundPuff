@@ -6,6 +6,7 @@ const CREATE_SONG = 'songs/CREATE_SONG';
 const EDIT_SONG = 'songs/EDIT_SONG';
 const DELETE_SONG = 'songs/DELETE_SONG';
 
+
 export const loadSongs = (songs) => ({
 	type: LOAD_SONGS,
 	songs,
@@ -81,7 +82,8 @@ export const getSongs = () => async (dispatch) => {
 
 	if (response.ok) {
 		const songsObj = await response.json();
-
+		// console.log('******SONGS_OBJ_GETSONGS******')
+		// console.log(songsObj)
 		const songs = songsObj.Songs;
 		dispatch(loadSongs(songs));
 	}
