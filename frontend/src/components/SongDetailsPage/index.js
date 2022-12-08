@@ -80,7 +80,7 @@ const SongDetailPage = () => {
 							</button>
 						)}
 						<div className='ul-comments'>
-							Comments:
+							User Comments:
 							{comments &&
 								comments?.map((comment, idx) => {
 									return (

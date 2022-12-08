@@ -42,7 +42,7 @@
 .comment-list {
 
 	list-style: none;
-	border: orange solid;
+	/* border: orange solid; */
 }
 .ul-comments {
 	margin-top: 10px;
