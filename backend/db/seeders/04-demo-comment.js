@@ -15,10 +15,32 @@ module.exports = {
       songId: "3",
       body: "Goot"
     },
+
+    {
+      userId: 1,
+      songId: "3",
+      body: "Goot"
+    },
+    {
+      userId: 1,
+      songId: "3",
+      body: "Goot"
+    },
+
     {
       userId: 2,
       songId: "1",
       body: "No Bueno"
+    },
+    {
+      userId: 1,
+      songId: "1",
+      body: "Don't like"
+    },
+    {
+      userId: 2,
+      songId: "1",
+      body: "Awesome!"
     },
     {
       userId: 3,

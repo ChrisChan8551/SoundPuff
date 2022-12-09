@@ -93,13 +93,13 @@ console.log('*****SONGID*****')
 // 	}
 // };
 
-// export const removeComment = (commentId) => async (dispatch) => {
-// 	const response = await csrfFetch(`/api/comments/${commentId}`, {
-//         method: 'DELETE'
-//     });
-// 		dispatch(deleteComment(commentId));
-//         return response;
-// 	};
+export const removeComment = (commentId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/comments/${commentId}`, {
+        method: 'DELETE'
+    });
+		dispatch(deleteComment(commentId));
+        return response;
+	};
 
 const initialState = {};
 
@@ -120,9 +120,9 @@ const commentReducer = (state = initialState, action) => {
 		// case EDIT_COMMENT:
 		// 	newState[action.comment.id] = action.comment;
 		// 	return newState;
-		// case DELETE_COMMENT:
-		// 	delete newState[action.commentId];
-		// 	return newState;
+		case DELETE_COMMENT:
+			delete newState[action.commentId];
+			return newState;
 		default:
 			return newState;
 	}

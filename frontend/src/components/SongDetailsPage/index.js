@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import EditSongFormModal from '../EditSongModal';
 import { getOneSong, removeSong } from '../../store/song';
-import commentReducer, { getCommentsBySongId } from '../../store/comment';
+import { removeComment, getCommentsBySongId } from '../../store/comment';
 import './SongDetailPage.css';
 
 const SongDetailPage = () => {
@@ -29,6 +29,13 @@ const SongDetailPage = () => {
 	if (!song) {
 		return null;
 	}
+
+	if (!comments) return null;
+
+	const deleteComment = (commentId) => {
+		history.push(`/songs/${songId}`);
+		return dispatch(removeComment(commentId));
+	};
 
 	const deleteSong = (songId) => {
 		history.push('/songs');
@@ -81,16 +88,26 @@ const SongDetailPage = () => {
 						)}
 						<div className='ul-comments'>
 							User Comments:
-							{comments &&
-								comments?.map((comment, idx) => {
-									return (
-										Number(comment.songId) === Number(songId) && (
-											<li className='comment-list' key={`${comment.id}`}>
-												{`${comment.body}`}
-											</li>
-										)
-									);
-								})}
+							<div className='comments'>
+								{comments &&
+									comments?.map((comment, idx) => {
+										return (
+											Number(comment.songId) === Number(songId) && (
+												<li className='comment-list' key={`${comment.id}`}>
+													{`${comment.body}`}
+													{comment.userId === loggedInUser?.id && (
+														<button
+															className='song-delete-button'
+															onClick={() => deleteComment(comment.id)}
+														>
+															Delete
+														</button>
+													)}
+												</li>
+											)
+										);
+									})}
+							</div>
 						</div>
 					</div>
 				</ul>
