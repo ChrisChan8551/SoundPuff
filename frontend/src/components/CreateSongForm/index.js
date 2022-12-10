@@ -32,69 +32,83 @@ function CreateSongForm({ album, hideForm }) {
 			description,
 			url,
 			imageUrl: previewImage,
-      albumId:albumId,
+			albumId: albumId,
 		};
 
 		history.push('/songs');
 
-		return dispatch(songActions.createNewSong(song)).catch(
-			async (res) => {
-				const data = await res.json();
-				if (data && data.errors) setErrors(data.errors);
-			}
-		);
+		return dispatch(songActions.createNewSong(song)).catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<ul>
-				{errors.map((error, idx) => (
-					<li key={idx}>{error}</li>
-				))}
-			</ul>
-			<label>
-				Title:
-				<input
-					type='text'
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-					required
-				/>
-			</label>
-			<label>
-				Description:
-				<input
-					type='text'
-					value={description}
-					onChange={(e) => setDescription(e.target.value)}
-					required
-				/>
-			</label>
-			<label>
-				Url:
-				<input
-					type='text'
-					value={url}
-					onChange={(e) => setUrl(e.target.value)}
-					required
-				/>
-			</label>
-			<label>
-				Image Url:
-				<input
-					type='text'
-					value={previewImage}
-					onChange={(e) => setPreviewImage(e.target.value)}
-					required
-				/>
-			</label>
-			<button type='submit' disabled={errors.length > 0}>
-				Create Song
-			</button>
-			<button type='button' onClick={handleClickAway}>
-				Cancel
-			</button>
-		</form>
+		<section className='create-album-form'>
+			<form onSubmit={handleSubmit}>
+				<label className='create-album-label-form'>
+					Title:
+					<input
+						className='create-album-input'
+						type='text'
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+						required
+					/>
+				</label>
+				<label className='create-album-label-form'>
+					Description:
+					<input
+						className='create-album-input'
+						type='text'
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
+						required
+					/>
+				</label>
+				<label className='create-album-label-form'>
+					Url:
+					<input
+						className='create-album-input'
+						type='text'
+						value={url}
+						onChange={(e) => setUrl(e.target.value)}
+						required
+					/>
+				</label>
+				<label className='create-album-label-form'>
+					Image Url:
+					<input
+						className='create-album-input'
+						type='text'
+						value={previewImage}
+						onChange={(e) => setPreviewImage(e.target.value)}
+						required
+					/>
+				</label>
+				<div>
+					<button
+						className='create-album-button'
+						type='submit'
+						disabled={errors.length > 0}
+					>
+						Create Song
+					</button>
+					<button
+						className='cancel-create-album-button'
+						type='button'
+						onClick={handleClickAway}
+					>
+						Cancel
+					</button>
+				</div>
+				<ul>
+					{errors.map((error, idx) => (
+						<li key={idx}>{error}</li>
+					))}
+				</ul>
+			</form>
+		</section>
 	);
 }
 

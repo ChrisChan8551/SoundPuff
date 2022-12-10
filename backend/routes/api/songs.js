@@ -141,7 +141,16 @@ router.get('/current', requireAuth, async (req, res) => {
 router.post('/', requireAuth, async (req, res) => {
 	const userId = req.user.id;
 	const { title, description, url, imageUrl, albumId } = req.body;
-	const album = await Album.findByPk(albumId);
+	let album;
+	if (albumId) {
+		album = await Album.findByPk(albumId);
+		if(!album) {
+			return res.status(404).json({
+				message: "Album couldn't be found",
+				statusCode: 404,
+			});
+		}
+	}
 
 	if (!title || !url) {
 		res.status(400);
@@ -155,22 +164,15 @@ router.post('/', requireAuth, async (req, res) => {
 		});
 	}
 
-	if (albumId === null || album) {
 		const newSong = await Song.create({
 			userId,
-			albumId,
+			albumId: albumId || null,
 			title,
 			description,
 			url,
 			previewImage: imageUrl,
 		});
 		res.status(200).json(newSong);
-	} else {
-		return res.status(404).json({
-			message: "Album couldn't be found",
-			statusCode: 404,
-		});
-	}
 });
 
 // Get a Song By Id

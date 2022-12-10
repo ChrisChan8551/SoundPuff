@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			previewImage: {
 				type: DataTypes.STRING,
+				defaultValue:
+					'https://cdn.pixabay.com/photo/2016/10/14/19/33/ankreuzen-1740989_960_720.png',
 			},
 		},
 		{
