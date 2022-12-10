@@ -75,14 +75,14 @@ const SongDetailPage = () => {
 					<li id='song-description'>{`Description: ${song.description}`}</li>
 
 					<div className='song-detail-buttons'>
-						{/* {!showEditSongForm && song.userId === loggedInUser?.id && (
+						{!showEditSongForm && song.userId === loggedInUser?.id && (
 							<button
 								className='song-edit-button'
 								onClick={() => setShowEditSongForm(true)}
 							>
 								Edit
 							</button>
-						)} */}
+						)}
 						{song.userId === loggedInUser?.id && (
 							<button
 								className='song-delete-button'
@@ -109,7 +109,7 @@ const SongDetailPage = () => {
 															Delete
 														</button>
 
-														<button>EDIT</button>
+														{/* <button>EDIT</button> */}
 														</div>
 													)}
 												</div>
