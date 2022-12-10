@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Redirect, NavLink} from 'react-router-dom';
 import { getSongs, getSongsbyCurrentUser } from '../../store/song';
-import './SongsPage.css';
+// import './SongsPage.css';
 
-const SongsPage = () => {
+const SongsByCurrentUser = () => {
 	const songs = Object.values(useSelector((state) => state.song));
 	const usersongs = useSelector((state) => state.song)
 	const dispatch = useDispatch();
@@ -12,13 +12,13 @@ const SongsPage = () => {
 	const loggedInUser = useSelector((state) => state.session.user);
 
 
-	useEffect(() => {
-		dispatch(getSongs());
-	}, [dispatch]);
-
 	// useEffect(() => {
-	// 	dispatch(getSongsbyCurrentUser());
+	// 	dispatch(getSongs());
 	// }, [dispatch]);
+
+	useEffect(() => {
+		dispatch(getSongsbyCurrentUser());
+	}, [dispatch]);
 
 
 	if (!songs) {
@@ -37,6 +37,9 @@ const SongsPage = () => {
 	console.log('****USERSONGS***', usersongs)
 	return (
 		<div className='song-container'>
+			<div className='getSong-by-currentuser'>
+
+				</div>
 			<div className='song-detail'>
 				<ul className='ul-songs'>
 					{songs &&
@@ -60,4 +63,4 @@ const SongsPage = () => {
 	);
 };
 
-export default SongsPage;
+export default SongsByCurrentUser;

@@ -22,7 +22,7 @@ function Navigation() {
 				{/* <NavLink className='nav-text nav-item' to='/login'> */}
 				{/* Login */}
 				{/* </NavLink> */}
-				<GuestUserButton className='nav-text nav-item'/>
+				<GuestUserButton className='nav-text nav-item' />
 			</>
 		);
 	} else if (loggedInUser)
@@ -51,6 +51,9 @@ function Navigation() {
 					</NavLink>
 					<NavLink className='nav-text nav-item' to='/songs'>
 						Songs
+					</NavLink>
+					<NavLink className='nav-text nav-item' to='/songs/current'>
+						Your Songs
 					</NavLink>
 					<NavLink className='nav-text nav-item' to='/albums'>
 						Albums

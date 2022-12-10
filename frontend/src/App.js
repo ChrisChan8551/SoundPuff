@@ -11,6 +11,7 @@ import HomePage from './components/HomePage';
 import AlbumsPage from './components/AlbumsPage';
 import AlbumDetailPage from './components/AlbumDetailPage';
 import SongDetailPage from './components/SongDetailsPage';
+import SongsbyCurrentUser from './components/SongsByCurrentUser';
 
 function App() {
 	const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
 					<Route exact path='/songs'>
 						<SongsPage />
 					</Route>
+					<Route exact path='/songs/current'>
+						<SongsbyCurrentUser />
+					</Route>
 					<Route path='/songs/:songId'>
 						<SongDetailPage />
 					</Route>
@@ -43,8 +47,8 @@ function App() {
 						<AlbumsPage />
 					</Route>
 					<Route path='/albums/:albumId'>
-            <AlbumDetailPage />
-          </Route>
+						<AlbumDetailPage />
+					</Route>
 				</Switch>
 			)}
 		</>

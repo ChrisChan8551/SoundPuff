@@ -17,9 +17,14 @@ const SongDetailPage = () => {
 	const loggedInUser = useSelector((state) => state.session.user);
 	let songEditForm;
 
+	// useEffect(() => {
+	// 	 setShowEditCommentForm(false)
+
+	// }, [commentId, dispatch]);
+
 	useEffect(() => {
 		dispatch(getCommentsBySongId(songId));
-	}, [songId, dispatch]);
+ }, [songId, dispatch]);
 
 	useEffect(() => {
 		setShowEditSongForm(false);
@@ -93,17 +98,21 @@ const SongDetailPage = () => {
 									comments?.map((comment, idx) => {
 										return (
 											Number(comment.songId) === Number(songId) && (
-												<li className='comment-list' key={`${comment.id}`}>
+												<div className='comment-list' key={`${comment.id}`}>
 													{`${comment.body}`}
 													{comment.userId === loggedInUser?.id && (
+														<div>
 														<button
 															className='song-delete-button'
 															onClick={() => deleteComment(comment.id)}
 														>
 															Delete
 														</button>
+
+														<button>EDIT</button>
+														</div>
 													)}
-												</li>
+												</div>
 											)
 										);
 									})}
