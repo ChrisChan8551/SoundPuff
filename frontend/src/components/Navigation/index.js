@@ -28,9 +28,9 @@ function Navigation() {
 	} else if (loggedInUser)
 		sessionNavLinks = (
 			<>
-				<NavLink className='nav-text nav-item' to='/songs/current'>
+				{/* <NavLink className='nav-text nav-item' to='/songs/current'>
 					Your Songs
-				</NavLink>
+				</NavLink> */}
 				<ProfileButton user={loggedInUser} />
 			</>
 		);
@@ -55,7 +55,9 @@ function Navigation() {
 					<NavLink className='nav-text nav-item' to='/songs'>
 						Songs
 					</NavLink>
-
+				{	loggedInUser && <NavLink className='nav-text nav-item' to='/songs/current'>
+					Your Songs
+				</NavLink>}
 					<NavLink className='nav-text nav-item' to='/albums'>
 						Albums
 					</NavLink>

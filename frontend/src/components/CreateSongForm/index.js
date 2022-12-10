@@ -15,8 +15,8 @@ function CreateSongForm({ album, hideForm }) {
 	const [previewImage, setPreviewImage] = useState('');
 	const [errors, setErrors] = useState([]);
 
-	if (loggedInUser?.id !== album?.userId)
-		return <Redirect to={`/albums/${albumId}`} />;
+	// if (loggedInUser?.id !== album?.userId)
+	// 	return <Redirect to={`/albums/${albumId}`} />;
 
 	const handleClickAway = (e) => {
 		e.preventDefault();
@@ -32,15 +32,16 @@ function CreateSongForm({ album, hideForm }) {
 			description,
 			url,
 			imageUrl: previewImage,
-			albumId: albumId,
+			albumId: albumId
 		};
-
+		hideForm();
 		history.push('/songs');
 
 		return dispatch(songActions.createNewSong(song)).catch(async (res) => {
 			const data = await res.json();
 			if (data && data.errors) setErrors(data.errors);
 		});
+
 	};
 
 	return (
