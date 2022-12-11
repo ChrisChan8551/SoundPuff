@@ -35,7 +35,8 @@ function ProfileButton({ user }) {
 	return (
 		<>
 			<button className='profile-button' onClick={openMenu}>
-				<i className='fas fa-user-circle' />
+				{/* <i className='fas fa-user-circle' /> */}
+				<img src='https://img.favpng.com/10/19/0/youtube-video-photography-user-profile-avatar-png-favpng-9GZkYjtixC5rYqPwYxPixQ2kp.jpg' alt ='profile'></img>
 			</button>
 			{showMenu && (
 				<ul className='profile-dropdown'>

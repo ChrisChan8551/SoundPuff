@@ -13,6 +13,7 @@
 	max-width: 2480px;
 	color: black;
 }
+
 .song-detail-image {
 	height: 150px;
 	width: 150px;
@@ -32,6 +33,7 @@
 		rgb(121, 121, 121) 100%
 	);
 }
+
 .song-list-item:hover {
 	cursor: pointer;
 }
@@ -71,9 +73,9 @@
 	/* flex-shrink: 0; */
 }
 
-.nav-pic {
+/* .nav-pic {
 	position: relative;
-}
+} */
 
 li {
 	list-style: none;
