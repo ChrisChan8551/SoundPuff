@@ -1,8 +1,13 @@
+.album-container {
+	margin: auto;
+	max-width: 2480px;
+}
+
 .album-detail {
 	display: flex;
 	justify-content: center;
 	width: 80%;
-	margin: auto;
+	margin: 0;
 }
 .album-detail-image {
 	height: 150px;

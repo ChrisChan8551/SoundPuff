@@ -7,7 +7,7 @@
 	display: flex;
 	justify-content: center;
 	width: 80%;
-	margin: auto;
+	margin: 0;
 }
 .song-list-image {
 	height: 150px;
@@ -30,13 +30,16 @@
 	opacity: 1;
 	height: 100%;
 	width: 100%;
-	opacity: 1;
 	transition: opacity 0.3s;
 	background: linear-gradient(
 		135deg,
 		rgb(232, 232, 232) 0%,
 		rgb(121, 121, 121) 100%
 	);
+}
+
+li {
+	list-style: none;
 }
 
 .comment-list {
@@ -162,15 +165,3 @@
 	margin-left: 10px;
 }
 
-.song-detail {
-	/* position: absolute; */
-	/* top: 50px;
-	left: 70px; */
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-	min-width: 720px;
-	display: flex;
-	justify-content: left;
-	max-width: 2480px;
-	color: black;
-}
