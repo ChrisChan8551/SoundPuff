@@ -59,6 +59,7 @@ const SongDetailPage = () => {
 	console.log(comments);
 	// console.log(song)
 	return (
+		<div className='song-container'>
 		<div className='song-detail'>
 			<div className='song-detail-info'>
 				<div className='song-detail-image'>
@@ -121,6 +122,7 @@ const SongDetailPage = () => {
 					</div>
 				</ul>
 			</div>
+		</div>
 		</div>
 	);
 };

@@ -60,6 +60,7 @@ const AlbumDetailPage = () => {
 	};
 
 	return (
+		<div className='album-container'>
 		<div className='album-detail'>
 			<div className='album-detail-info'>
 				<div className='album-detail-image'>
@@ -114,6 +115,7 @@ const AlbumDetailPage = () => {
 			{createSongForm}
 			</div>
 			{albumEditForm}
+		</div>
 		</div>
 	);
 };
