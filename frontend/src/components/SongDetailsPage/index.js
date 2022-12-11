@@ -102,7 +102,7 @@ const SongDetailPage = () => {
 												<div className='comment-list' key={`${comment.id}`}>
 													{`${comment.body}`}
 													{comment.userId === loggedInUser?.id && (
-														<div>
+														<>
 														<button
 															className='song-delete-button'
 															onClick={() => deleteComment(comment.id)}
@@ -111,7 +111,7 @@ const SongDetailPage = () => {
 														</button>
 
 														{/* <button>EDIT</button> */}
-														</div>
+														</>
 													)}
 												</div>
 											)
