@@ -13,6 +13,7 @@ const SongsPage = () => {
 	const loggedInUser = useSelector((state) => state.session.user);
 	const [showCreateSongForm, setShowCreateSongForm] = useState(false);
 	let createSongForm;
+	console.log('*****SONGS*****',songs)
 
 	useEffect(() => {
 		dispatch(getSongs());

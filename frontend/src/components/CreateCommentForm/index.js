@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as commentActions from '../../store/comment';
 import { Redirect, useParams, useHistory } from 'react-router-dom';
 
-function CreateCommentForm({ song,comment, hideForm }) {
+function CreateCommentForm({ song, hideForm }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { commentId } = useParams();
+	const { songId } = useParams();
 
 	const loggedInUser = useSelector((state) => state.session.user);
 	const [body, setBody] = useState('');
-
+	const [commentId] = useState('');
 	const [errors, setErrors] = useState([]);
 
 	if (loggedInUser?.id !== song?.userId)
-		return <Redirect to={`/comments/${commentId}/comments`} />;
+		return <Redirect to={`/songs/${songId}`} />;
 
 	const handleClickAway = (e) => {
 		e.preventDefault();
@@ -27,7 +27,7 @@ function CreateCommentForm({ song,comment, hideForm }) {
 
 		let comment = {
 			body,
-      commentId:commentId,
+			commentId: commentId,
 		};
 
 		history.push('/comments');
