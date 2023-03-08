@@ -16,11 +16,12 @@ router.delete('/:playlistId/songs/:songId', requireAuth, async (req, res) => {
 	const playlistsong = await PlaylistSong.findOne({
 		where: { songId, playlistId },
 	});
-	if(playlistsong) {
-		await playlistsong.destroy()
+	if (playlistsong) {
+		await playlistsong.destroy();
 		return res.json({ message: 'Successfully deleted', statusCode: 200 });
 	} else {
-		return res.status(404)
+		return res
+			.status(404)
 			.json({ message: "Song couldn't be found", statusCode: 404 });
 	}
 });

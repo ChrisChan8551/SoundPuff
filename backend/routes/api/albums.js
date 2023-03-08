@@ -103,7 +103,7 @@ router.get('/current', async (req, res) => {
 	const userId = req.user.id;
 
 	const customeralbums = await Album.findAll({ where: { userId: userId } });
-	res.json({Albums: customeralbums});
+	res.json({ Albums: customeralbums });
 });
 
 //Get Details of an Album By Id

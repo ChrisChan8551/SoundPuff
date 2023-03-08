@@ -8,18 +8,15 @@ import './AlbumsPage.css';
 const AlbumsPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const loggedInUser = useSelector(state => state.session.user);
+	const loggedInUser = useSelector((state) => state.session.user);
 
 	const [showCreateAlbumForm, setShowCreateAlbumForm] = useState(false);
 	const albums = Object.values(useSelector((state) => state.album));
 
 	let content;
 	let CreateAlbum = (
-    <CreateAlbumModal
-      hideForm={() => setShowCreateAlbumForm(false)}
-    />
-  );
-
+		<CreateAlbumModal hideForm={() => setShowCreateAlbumForm(false)} />
+	);
 
 	useEffect(() => {
 		dispatch(getAlbums());
@@ -29,18 +26,27 @@ const AlbumsPage = () => {
 		return null;
 	}
 
-	if(!loggedInUser || loggedInUser?.id === undefined){
-  content = (
-    <p className='all-albums-header'>Log In Or Sign Up To Create An Album!</p>
-  );
-} else if(loggedInUser?.id && loggedInUser?.id !== undefined){
-    content = (
-    <div>
-      {<button className='create-album-button' onClick={() => setShowCreateAlbumForm(true)}>Create An Album</button>}
-      {showCreateAlbumForm && CreateAlbum}
-    </div>
-    );
-}
+	if (!loggedInUser || loggedInUser?.id === undefined) {
+		content = (
+			<p className='all-albums-header'>
+				Log In Or Sign Up To Create An Album!
+			</p>
+		);
+	} else if (loggedInUser?.id && loggedInUser?.id !== undefined) {
+		content = (
+			<div>
+				{
+					<button
+						className='create-album-button'
+						onClick={() => setShowCreateAlbumForm(true)}
+					>
+						Create An Album
+					</button>
+				}
+				{showCreateAlbumForm && CreateAlbum}
+			</div>
+		);
+	}
 
 	const goToDetails = (albumId) => {
 		console.log('albumId', albumId);
@@ -56,12 +62,21 @@ const AlbumsPage = () => {
 						albums.map((album) => {
 							return (
 								<li key={album.id}>
-									<div className='album-list-item' onClick={() => goToDetails(album.id)}>
+									<div
+										className='album-list-item'
+										onClick={() => goToDetails(album.id)}
+									>
 										<div className='album-list-image'>
-											<img className='album-detail-image'src={album.previewImage} alt='album icon' />
+											<img
+												className='album-detail-image'
+												src={album.previewImage}
+												alt='album icon'
+											/>
 										</div>
 										<div>
-											<p className='album-list-title'>{album.title}</p>
+											<p className='album-list-title'>
+												{album.title}
+											</p>
 										</div>
 									</div>
 								</li>

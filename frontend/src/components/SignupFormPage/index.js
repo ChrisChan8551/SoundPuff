@@ -111,7 +111,9 @@ function SignupFormPage() {
 			</div>
 			<ul className='signupform-ul'>
 				{errors.map((error, idx) => (
-					<li className='signup-li-errors' key={idx}>{error}</li>
+					<li className='signup-li-errors' key={idx}>
+						{error}
+					</li>
 				))}
 			</ul>
 		</form>

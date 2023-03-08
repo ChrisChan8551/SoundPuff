@@ -26,20 +26,20 @@ const EditSongForm = ({ song, hideForm }) => {
 			imageUrl: previewImage,
 		};
 
-		let updatedSong = await dispatch(editCurrentSong(songId, songEdited)).catch(
-			async (res) => {
-				const data = await res.json();
-				if (data && data.errors) {
-					let newErrors = Object.values(data.errors);
-					if (newErrors.length > 0) {
-						setDisabled(true);
-					} else {
-						setDisabled(false);
-					}
-					setErrors(newErrors);
+		let updatedSong = await dispatch(
+			editCurrentSong(songId, songEdited)
+		).catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) {
+				let newErrors = Object.values(data.errors);
+				if (newErrors.length > 0) {
+					setDisabled(true);
+				} else {
+					setDisabled(false);
 				}
+				setErrors(newErrors);
 			}
-		);
+		});
 
 		if (updatedSong) {
 			dispatch(getOneSong(songId));

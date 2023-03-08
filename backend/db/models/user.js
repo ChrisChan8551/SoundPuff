@@ -31,7 +31,13 @@ module.exports = (sequelize, DataTypes) => {
 			}
 		}
 
-		static async signup({ firstName, lastName, email, username, password }) {
+		static async signup({
+			firstName,
+			lastName,
+			email,
+			username,
+			password,
+		}) {
 			const hashedPassword = bcrypt.hashSync(password);
 			// console.log(firstName,lastName)
 			const user = await User.create({
@@ -64,14 +70,14 @@ module.exports = (sequelize, DataTypes) => {
 			username: {
 				type: DataTypes.STRING,
 				allowNull: false,
-				unique:true,
+				unique: true,
 				validate: {
 					len: [4, 30],
-					isNotEmail(value){
-						if(Validator.isEmail(value)){
-							throw new Error("Cannot be an email.");
+					isNotEmail(value) {
+						if (Validator.isEmail(value)) {
+							throw new Error('Cannot be an email.');
 						}
-					}
+					},
 				},
 			},
 			email: {
@@ -92,7 +98,7 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			},
 			previewImage: {
-				type:DataTypes.STRING
+				type: DataTypes.STRING,
 			},
 		},
 		{
@@ -100,22 +106,44 @@ module.exports = (sequelize, DataTypes) => {
 			modelName: 'User',
 			defaultScope: {
 				attributes: {
-					exclude: ['firstName','lastName', 'hashedPassword', 'email', 'createdAt', 'updatedAt'],
+					exclude: [
+						'firstName',
+						'lastName',
+						'hashedPassword',
+						'email',
+						'createdAt',
+						'updatedAt',
+					],
 				},
 			},
 			scopes: {
 				currentUser: {
 					attributes: {
 						// exclude: ['hashedPassword', 'createdAt', 'updatedAt','previewImage'],
-						exclude: ['firstName','lastName','hashedPassword','previewImage'],
+						exclude: [
+							'firstName',
+							'lastName',
+							'hashedPassword',
+							'previewImage',
+						],
 					},
 				},
 				loginUser: {
-					attributes: {}
+					attributes: {},
 				},
 				artistDetails: {
-					attributes: { exclude: ["hashedPassword", "createdAt", "updatedAt", "isArtist", "firstName", 'lastName', 'email'] }
-				}
+					attributes: {
+						exclude: [
+							'hashedPassword',
+							'createdAt',
+							'updatedAt',
+							'isArtist',
+							'firstName',
+							'lastName',
+							'email',
+						],
+					},
+				},
 			},
 		}
 	);

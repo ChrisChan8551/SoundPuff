@@ -90,8 +90,8 @@ li {
 	/* margin-top: 5px; */
 }
 .song-delete-button {
-  background-color: black;
-  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+	background-color: black;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
 	background-color: black;
@@ -125,7 +125,7 @@ li {
 
 .create-song-button {
 	background-color: black;
-  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
 	background-color: #f50;
@@ -137,11 +137,11 @@ li {
 
 .create-song-input {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-	Garuda, Verdana, Tahoma, sans-serif;
+		Garuda, Verdana, Tahoma, sans-serif;
 	margin-left: 5px;
 	max-width: 195px;
 	display: flex;
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .create-song-label-form {
@@ -154,8 +154,8 @@ li {
 }
 
 .cancel-create-song-button {
-  background-color: black;
-  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+	background-color: black;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
 	/* background-color: #f50; */
@@ -164,4 +164,3 @@ li {
 	border-radius: 3px;
 	margin-left: 10px;
 }
-

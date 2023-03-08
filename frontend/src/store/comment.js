@@ -6,11 +6,10 @@ const CREATE_COMMENT = 'comments/CREATE_COMMENT';
 const EDIT_COMMENT = 'comments/EDIT_COMMENT';
 const DELETE_COMMENT = 'comments/DELETE_COMMENT';
 
-
 export const loadComments = (comments) => ({
 	type: LOAD_COMMENTS,
-	comments
-})
+	comments,
+});
 
 const loadAComment = (comment) => ({
 	type: LOAD_ONE_COMMENT,
@@ -34,14 +33,14 @@ const deleteComment = (commentId) => ({
 
 export const getCommentsBySongId = (songId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/songs/${songId}/comments`);
-console.log('*****SONGID*****')
-  console.log(songId)
+	console.log('*****SONGID*****');
+	console.log(songId);
 	if (response.ok) {
 		const songsObj = await response.json();
-    console.log('******SONGS_OBJ_COMMENTS******')
-		console.log(songsObj)
+		console.log('******SONGS_OBJ_COMMENTS******');
+		console.log(songsObj);
 		const comments = songsObj.Comments;
-    console.log(comments)
+		console.log(comments);
 		dispatch(loadComments(comments));
 	}
 };
@@ -80,8 +79,6 @@ console.log('*****SONGID*****')
 // 	}
 // };
 
-
-
 // export const getComments = () => async (dispatch) => {
 // 	const response = await csrfFetch('/api/comments');
 
@@ -95,11 +92,11 @@ console.log('*****SONGID*****')
 
 export const removeComment = (commentId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/comments/${commentId}`, {
-        method: 'DELETE'
-    });
-		dispatch(deleteComment(commentId));
-        return response;
-	};
+		method: 'DELETE',
+	});
+	dispatch(deleteComment(commentId));
+	return response;
+};
 
 const initialState = {};
 

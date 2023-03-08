@@ -27,12 +27,16 @@
 	margin-top: 20px;
 	margin-right: 5px;
 	max-width: 550px;
-  opacity: 1;
-  height: 100%;
-  width: 100%;
-  opacity: 1;
-  transition: opacity .3s;
-  background: linear-gradient(135deg, rgb(232, 232, 232) 0%, rgb(121, 121, 121) 100%);
+	opacity: 1;
+	height: 100%;
+	width: 100%;
+	opacity: 1;
+	transition: opacity 0.3s;
+	background: linear-gradient(
+		135deg,
+		rgb(232, 232, 232) 0%,
+		rgb(121, 121, 121) 100%
+	);
 }
 
 li {
@@ -58,8 +62,8 @@ li {
 }
 
 .album-delete-button {
-  background-color: black;
-  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+	background-color: black;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
 	background-color: black;

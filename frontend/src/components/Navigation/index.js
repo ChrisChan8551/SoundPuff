@@ -55,9 +55,14 @@ function Navigation() {
 					<NavLink className='nav-text nav-item' to='/songs'>
 						Songs
 					</NavLink>
-				{	loggedInUser && <NavLink className='nav-text nav-item' to='/songs/current'>
-					Your Songs
-				</NavLink>}
+					{loggedInUser && (
+						<NavLink
+							className='nav-text nav-item'
+							to='/songs/current'
+						>
+							Your Songs
+						</NavLink>
+					)}
 					<NavLink className='nav-text nav-item' to='/albums'>
 						Albums
 					</NavLink>

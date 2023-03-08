@@ -19,36 +19,36 @@ const AlbumDetailPage = () => {
 	let createSongForm;
 
 	useEffect(() => {
-    setShowEditAlbumForm(false);
-	  dispatch (getOneAlbum(albumId));
-  }, [albumId, dispatch]);
+		setShowEditAlbumForm(false);
+		dispatch(getOneAlbum(albumId));
+	}, [albumId, dispatch]);
 
-  useEffect(() => {
-    setShowCreateSongForm(false);
-	  dispatch (getOneAlbum(albumId));
-  }, [albumId, dispatch]);
+	useEffect(() => {
+		setShowCreateSongForm(false);
+		dispatch(getOneAlbum(albumId));
+	}, [albumId, dispatch]);
 
 	if (!album) {
 		return null;
 	}
 
-	if (showEditAlbumForm && album.userId === loggedInUser?.id){
+	if (showEditAlbumForm && album.userId === loggedInUser?.id) {
 		albumEditForm = (
 			<EditAlbumModal
-			album={album}
-			hideForm={() => setShowEditAlbumForm(false)}
+				album={album}
+				hideForm={() => setShowEditAlbumForm(false)}
 			/>
-			);
-		};
+		);
+	}
 
-		if(showCreateSongForm && album.userId === loggedInUser?.id){
-			createSongForm = (
-				<CreateSongModal
+	if (showCreateSongForm && album.userId === loggedInUser?.id) {
+		createSongForm = (
+			<CreateSongModal
 				album={album}
 				hideForm={() => setShowCreateSongForm(false)}
-				/>
-				);
-			}
+			/>
+		);
+	}
 
 	const deleteAlbum = (albumId) => {
 		album?.Songs?.map((song) => {
@@ -61,61 +61,69 @@ const AlbumDetailPage = () => {
 
 	return (
 		<div className='album-container'>
-		<div className='album-detail'>
-			<div className='album-detail-info'>
-				<div className='album-detail-image'>
-					<img
-						className='album-detail-image'
-						src={album.previewImage}
-						alt='albumimg'
-					></img>
+			<div className='album-detail'>
+				<div className='album-detail-info'>
+					<div className='album-detail-image'>
+						<img
+							className='album-detail-image'
+							src={album.previewImage}
+							alt='albumimg'
+						></img>
+					</div>
+					<ul>
+						<li id='album-title' key={`${album.id}${album.title}`}>
+							{album.title}
+						</li>
+						<li
+							id='album-artist'
+							key={`${album.id}${album?.Artist?.username}`}
+						>
+							{album?.Artist?.username}
+						</li>
+						<li
+							id='album-songs'
+							key={`${album.id}${album.description}`}
+						>{`Description: ${album.description}`}</li>
+						{album?.Songs?.map((song, idx) => {
+							return (
+								<li key={`${album.id}${song.id}`}>{`Song #${
+									idx + 1
+								}: ${song.title}`}</li>
+							);
+						})}
+					</ul>
 				</div>
-				<ul>
-					<li id='album-title' key={`${album.id}${album.title}`}>
-						{album.title}
-					</li>
-					<li id='album-artist' key={`${album.id}${album?.Artist?.username}`}>
-						{album?.Artist?.username}
-					</li>
-					<li
-						id='album-songs'
-						key={`${album.id}${album.description}`}
-					>{`Description: ${album.description}`}</li>
-					{album?.Songs?.map((song, idx) => {
-						return (
-							<li key={`${album.id}${song.id}`}>{`Song #${idx + 1}: ${
-								song.title
-							}`}</li>
-						);
-					})}
-				</ul>
+				<div className='album-detail-buttons'>
+					{!showCreateSongForm &&
+						album.userId === loggedInUser?.id && (
+							<button
+								className='add-song-button'
+								onClick={() => setShowCreateSongForm(true)}
+							>
+								Add Song
+							</button>
+						)}
+					{!showEditAlbumForm &&
+						album.userId === loggedInUser?.id && (
+							<button
+								className='album-edit-button'
+								onClick={() => setShowEditAlbumForm(true)}
+							>
+								Edit
+							</button>
+						)}
+					{album.userId === loggedInUser?.id && (
+						<button
+							className='album-delete-button'
+							onClick={() => deleteAlbum(albumId)}
+						>
+							Delete
+						</button>
+					)}
+				</div>
+				<div>{createSongForm}</div>
+				{albumEditForm}
 			</div>
-			<div className='album-detail-buttons'>
-			{(!showCreateSongForm && album.userId === loggedInUser?.id) && (
-                <button className='add-song-button'onClick={() => setShowCreateSongForm(true)}>Add Song</button>
-              )}
-				{!showEditAlbumForm && album.userId === loggedInUser?.id && (
-					<button
-						className='album-edit-button'
-						onClick={() => setShowEditAlbumForm(true)}
-					>
-						Edit
-					</button>
-				)}
-				{album.userId === loggedInUser?.id && (
-					<button
-						className='album-delete-button'
-						onClick={() => deleteAlbum(albumId)}
-					>
-						Delete
-					</button>
-				)}
-			</div>
-			<div>
-			{createSongForm}
-			</div>
-			{albumEditForm}
-		</div>
 		</div>
 	);
 };

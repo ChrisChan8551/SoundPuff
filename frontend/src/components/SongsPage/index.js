@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Redirect, NavLink } from 'react-router-dom';
-import { getSongs, getSongsbyCurrentUser} from '../../store/song';
+import { getSongs, getSongsbyCurrentUser } from '../../store/song';
 import CreateSongModal from '../CreateSongModal';
 import './SongsPage.css';
 
@@ -13,7 +13,7 @@ const SongsPage = () => {
 	const loggedInUser = useSelector((state) => state.session.user);
 	const [showCreateSongForm, setShowCreateSongForm] = useState(false);
 	let createSongForm;
-	console.log('*****SONGS*****',songs)
+	console.log('*****SONGS*****', songs);
 
 	useEffect(() => {
 		dispatch(getSongs());
@@ -21,7 +21,6 @@ const SongsPage = () => {
 
 	useEffect(() => {
 		setShowCreateSongForm(false);
-
 	}, [dispatch]);
 
 	if (!songs) {
@@ -75,7 +74,9 @@ const SongsPage = () => {
 											/>
 										</div>
 										<div>
-											<p className='song-list-title'>{song.title}</p>
+											<p className='song-list-title'>
+												{song.title}
+											</p>
 										</div>
 									</div>
 								</li>

@@ -24,7 +24,7 @@ const SongDetailPage = () => {
 
 	useEffect(() => {
 		dispatch(getCommentsBySongId(songId));
- }, [songId, dispatch]);
+	}, [songId, dispatch]);
 
 	useEffect(() => {
 		setShowEditSongForm(false);
@@ -60,69 +60,81 @@ const SongDetailPage = () => {
 	// console.log(song)
 	return (
 		<div className='song-container'>
-		<div className='song-detail'>
-			<div className='song-detail-info'>
-				<div className='song-detail-image'>
-					<img
-						className='song-detail-image'
-						src={song.previewImage}
-						alt='songimg'
-					></img>
-				</div>
-				{songEditForm}
-				<ul>
-					<li id='song-title'>{song.title}</li>
-					<li id='song-artist'>{song?.Artist?.username}</li>
-					<li id='song-description'>{`Description: ${song.description}`}</li>
+			<div className='song-detail'>
+				<div className='song-detail-info'>
+					<div className='song-detail-image'>
+						<img
+							className='song-detail-image'
+							src={song.previewImage}
+							alt='songimg'
+						></img>
+					</div>
+					{songEditForm}
+					<ul>
+						<li id='song-title'>{song.title}</li>
+						<li id='song-artist'>{song?.Artist?.username}</li>
+						<li id='song-description'>{`Description: ${song.description}`}</li>
 
-					<div className='song-detail-buttons'>
-						{!showEditSongForm && song.userId === loggedInUser?.id && (
-							<button
-								className='song-edit-button'
-								onClick={() => setShowEditSongForm(true)}
-							>
-								Edit
-							</button>
-						)}
-						{song.userId === loggedInUser?.id && (
-							<button
-								className='song-delete-button'
-								onClick={() => deleteSong(songId)}
-							>
-								Delete
-							</button>
-						)}
-						<div className='ul-comments'>
-							User Comments:
-							<div className='comments'>
-								{comments &&
-									comments?.map((comment, idx) => {
-										return (
-											Number(comment.songId) === Number(songId) && (
-												<div className='comment-list' key={`${comment.id}`}>
-													{`${comment.body}`}
-													{comment.userId === loggedInUser?.id && (
-														<>
-														<button
-															className='song-delete-button'
-															onClick={() => deleteComment(comment.id)}
-														>
-															Delete
-														</button>
+						<div className='song-detail-buttons'>
+							{!showEditSongForm &&
+								song.userId === loggedInUser?.id && (
+									<button
+										className='song-edit-button'
+										onClick={() =>
+											setShowEditSongForm(true)
+										}
+									>
+										Edit
+									</button>
+								)}
+							{song.userId === loggedInUser?.id && (
+								<button
+									className='song-delete-button'
+									onClick={() => deleteSong(songId)}
+								>
+									Delete
+								</button>
+							)}
+							<div className='ul-comments'>
+								User Comments:
+								<div className='comments'>
+									{comments &&
+										comments?.map((comment, idx) => {
+											return (
+												Number(comment.songId) ===
+													Number(songId) && (
+													<div
+														className='comment-list'
+														key={`${comment.id}`}
+													>
+														{`${comment.body}`}
+														{comment.userId ===
+															loggedInUser?.id && (
+															<>
+																<button
+																	className='song-delete-button'
+																	onClick={() =>
+																		deleteComment(
+																			comment.id
+																		)
+																	}
+																>
+																	Delete
+																</button>
 
-														{/* <button>EDIT</button> */}
-														</>
-													)}
-												</div>
-											)
-										);
-									})}
+																{/* <button>EDIT</button> */}
+															</>
+														)}
+													</div>
+												)
+											);
+										})}
+								</div>
 							</div>
 						</div>
-					</div>
-				</ul>
+					</ul>
+				</div>
 			</div>
-		</div>
 		</div>
 	);
 };

@@ -47,7 +47,7 @@ const SongsByCurrentUser = () => {
 			<div className='getSong-by-currentuser'></div>
 			<div className='song-detail'>
 				<ul className='ul-songs'>
-				{!showCreateSongForm && loggedInUser?.id && (
+					{!showCreateSongForm && loggedInUser?.id && (
 						<button
 							className='add-song-button'
 							onClick={() => setShowCreateSongForm(true)}
@@ -71,13 +71,15 @@ const SongsByCurrentUser = () => {
 											/>
 										</div>
 										<div>
-											<p className='song-list-title'>{song.title}</p>
+											<p className='song-list-title'>
+												{song.title}
+											</p>
 										</div>
 									</div>
 								</li>
 							);
 						})}
-						{createSongForm}
+					{createSongForm}
 				</ul>
 			</div>
 		</div>

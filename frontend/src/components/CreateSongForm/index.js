@@ -32,7 +32,7 @@ function CreateSongForm({ album, hideForm }) {
 			description,
 			url,
 			imageUrl: previewImage,
-			albumId: albumId
+			albumId: albumId,
 		};
 		hideForm();
 		history.push('/songs');
@@ -41,7 +41,6 @@ function CreateSongForm({ album, hideForm }) {
 			const data = await res.json();
 			if (data && data.errors) setErrors(data.errors);
 		});
-
 	};
 
 	return (

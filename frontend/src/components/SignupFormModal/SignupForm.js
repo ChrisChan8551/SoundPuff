@@ -42,78 +42,78 @@ function SignupFormPage() {
 
 	return (
 		// <div className='background-image'>
-			<form onSubmit={handleSubmit}>
-				<ul className='signupform-ul'>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
-				<div className='signup-container'>
-					<label className='signup-label-form'>
-						First Name
-						<input
-							className='box_input'
-							type='text'
-							value={firstName}
-							onChange={(e) => setFirstName(e.target.value)}
-							required
-						/>
-					</label>
-					<label className='signup-label-form'>
-						Last Name
-						<input
-							className='box_input'
-							type='text'
-							value={lastName}
-							onChange={(e) => setLastName(e.target.value)}
-							required
-						/>
-					</label>
-					<label className='signup-label-form'>
-						Email
-						<input
-							className='box_input'
-							type='text'
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							required
-						/>
-					</label>
-					<label className='signup-label-form'>
-						Username
-						<input
-							className='box_input'
-							type='text'
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
-							required
-						/>
-					</label>
-					<label className='signup-label-form'>
-						Password
-						<input
-							className='box_input'
-							type='password'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							required
-						/>
-					</label>
-					<label className='signup-label-form'>
-						Confirm Password
-						<input
-							className='box_input'
-							type='password'
-							value={confirmPassword}
-							onChange={(e) => setConfirmPassword(e.target.value)}
-							required
-						/>
-					</label>
-					<button className='create-button-font' type='submit'>
-						Create Account
-					</button>
-				</div>
-			</form>
+		<form onSubmit={handleSubmit}>
+			<ul className='signupform-ul'>
+				{errors.map((error, idx) => (
+					<li key={idx}>{error}</li>
+				))}
+			</ul>
+			<div className='signup-container'>
+				<label className='signup-label-form'>
+					First Name
+					<input
+						className='box_input'
+						type='text'
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
+						required
+					/>
+				</label>
+				<label className='signup-label-form'>
+					Last Name
+					<input
+						className='box_input'
+						type='text'
+						value={lastName}
+						onChange={(e) => setLastName(e.target.value)}
+						required
+					/>
+				</label>
+				<label className='signup-label-form'>
+					Email
+					<input
+						className='box_input'
+						type='text'
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						required
+					/>
+				</label>
+				<label className='signup-label-form'>
+					Username
+					<input
+						className='box_input'
+						type='text'
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						required
+					/>
+				</label>
+				<label className='signup-label-form'>
+					Password
+					<input
+						className='box_input'
+						type='password'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						required
+					/>
+				</label>
+				<label className='signup-label-form'>
+					Confirm Password
+					<input
+						className='box_input'
+						type='password'
+						value={confirmPassword}
+						onChange={(e) => setConfirmPassword(e.target.value)}
+						required
+					/>
+				</label>
+				<button className='create-button-font' type='submit'>
+					Create Account
+				</button>
+			</div>
+		</form>
 		// </div>
 	);
 }

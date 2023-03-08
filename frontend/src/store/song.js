@@ -116,14 +116,14 @@ const initialState = {};
 const songReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case USER_SONGS: {
-			const newState = { };
+			const newState = {};
 			action.songs.forEach((usersong) => {
 				newState[usersong.id] = usersong;
 			});
 			return newState;
 		}
 		case LOAD_SONGS: {
-			const newState = {  };
+			const newState = {};
 			action.songs.forEach((song) => {
 				newState[song.id] = song;
 			});
@@ -131,7 +131,7 @@ const songReducer = (state = initialState, action) => {
 		}
 
 		case LOAD_ONE_SONG: {
-			const newState = {  };
+			const newState = {};
 			newState[action.song.id] = action.song;
 			return newState;
 		}
@@ -151,7 +151,6 @@ const songReducer = (state = initialState, action) => {
 			return newState;
 		}
 		default: {
-
 			return state;
 		}
 	}
