@@ -1,4 +1,4 @@
-// npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all
+npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all
 
 // npx dotenv sequelize db:seed:all
 
@@ -11,4 +11,3 @@
 //<script src="https://kit.fontawesome.com/23e74cd26b.js" crossorigin="anonymous"></script>
 
 //npm --prefix backend install backend && npm --prefix frontend install frontend
-
