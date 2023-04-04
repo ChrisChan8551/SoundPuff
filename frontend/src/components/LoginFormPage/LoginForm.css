@@ -1,0 +1,74 @@
+form {
+	display: flex;
+	margin-top: 0em;
+	align-items: flex-start;
+	align-content: flex-start;
+	flex-direction: column;
+}
+
+/* .background-image {
+	background-image: url(https://cdn.pixabay.com/photo/2018/01/16/10/18/headphones-3085681_960_720.jpg);
+	max-width: 1920px;
+	min-height: 1080px;
+	background-size: cover;
+	background-repeat: no-repeat;
+} */
+
+.input-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.login-label-form {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	/* font-weight:bold; */
+}
+
+.create-button-font {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: #f50;
+	border-color: #f50;
+	color: #fff;
+	border-radius: 3px;
+	padding: 2px 15px;
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+
+.create-button-font:hover {
+	cursor: pointer;
+}
+
+.login-button-font {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: black;
+	border-color: #ccc;
+	color: #fff;
+	border-radius: 3px;
+	padding: 2px 15px;
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+
+.login-button-font:hover {
+	border-color: white;
+	cursor: pointer;
+}
+
+.login-container {
+	max-width: auto;
+	min-height: auto;
+	padding: 7px 7px;
+	/* margin: auto; */
+	border-radius: 10px;
+	border: solid 1px #ccc;
+	box-shadow: 1px 2px 5px rgb(0 0 0 / 31%);
+	background: #ebebeb;
+}

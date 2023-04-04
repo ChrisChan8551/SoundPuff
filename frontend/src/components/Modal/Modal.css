@@ -1,0 +1,37 @@
+#modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#modal-background {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modal-content {
+	display: flex;
+	flex-direction: column;
+	word-wrap: break-word;
+	position: absolute;
+	background-color: rgb(235, 230, 230);
+	border-radius: 5px;
+	padding: 15px;
+	max-width: 1300px;
+	max-height: 100%;
+}
+
+.modal-label {
+	display: block;
+	margin-bottom: 5px;
+	width: 100%;
+}

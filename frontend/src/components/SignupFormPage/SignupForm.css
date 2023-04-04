@@ -1,0 +1,62 @@
+form {
+	display: flex;
+	/* margin-top: 0em; */
+	margin: 5px;
+	align-items: flex-start;
+	align-content: flex-start;
+	flex-direction: column;
+}
+
+.create-button-font-modal {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: #f50;
+	border-color: #f50;
+	color: #fff;
+	border-radius: 3px;
+	padding: 2px 15px;
+	margin-top: 5px;
+	margin-left: auto;
+}
+
+.create-button-font-modal:hover {
+	cursor: pointer;
+}
+.signupform-ul {
+	word-wrap: break-word;
+	margin: 0px;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	color: red;
+	padding: 0px;
+	max-width: 195px;
+}
+
+/* .background-image {
+	background-image: url(https://cdn.pixabay.com/photo/2018/01/16/10/18/headphones-3085681_960_720.jpg);
+	max-width: 960px;
+	min-height: 640px;
+	background-size: cover;
+	background-repeat: no-repeat;
+} */
+
+.box_input {
+	display: flex;
+}
+
+.signup-label-form {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+}
+
+.signup-container {
+	max-width: auto;
+	min-height: auto;
+	padding: 10px 7px;
+	/* margin: auto; */
+	border-radius: 5px;
+	border: solid 1px #ccc;
+	box-shadow: 1px 2px 5px rgb(0 0 0 / 31%);
+	background-color: #ebebeb;
+}
