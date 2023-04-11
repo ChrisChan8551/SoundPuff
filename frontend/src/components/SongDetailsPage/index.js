@@ -29,8 +29,8 @@ const SongDetailPage = () => {
 
 	useEffect(() => {
 		dispatch(getCommentsBySongId(songId));
-		dispatch(getOneComment(currentComment));
-	}, [dispatch, songId, currentComment]);
+		// dispatch(getOneComment(currentComment));
+	}, [dispatch, songId]);
 
 	useEffect(() => {
 		dispatch(getOneSong(songId));
@@ -139,7 +139,7 @@ const SongDetailPage = () => {
 													{comment.userId ===
 														loggedInUser?.id && (
 														<>
-															<button
+															{/* <button
 																className='song-delete-button'
 																onClick={() =>
 																	deleteComment(
@@ -148,21 +148,46 @@ const SongDetailPage = () => {
 																}
 															>
 																Delete
-															</button>
+															</button> */}
+															<img
+																className='trash-icon'
+																src='/trash-icon.png'
+																alt=''
+																onClick={() =>
+																	dispatch(
+																		deleteComment(
+																			comment.id
+																		)
+																	)
+																}
+															/>
 															{!showEditCommentForm && (
-																<button
-																	className='song-edit-button'
-																	onClick={() => {
-																		setCurrentComment(
-																			comment
-																		);
-																		setShowEditCommentForm(
-																			true
-																		);
-																	}}
-																>
-																	EDIT
-																</button>
+																// <button
+																// 	className='song-edit-button'
+																// 	onClick={() => {
+																// 		setCurrentComment(
+																// 			comment
+																// 		);
+																// 		setShowEditCommentForm(
+																// 			true
+																// 		);
+																// 	}}
+																// >
+																// 	Edit
+																// </button>
+																<img
+																		className='edit-icon'
+																		src='/edit-icon.png'
+																		alt=''
+																		onClick={() => {
+																			setShowEditCommentForm(
+																				true
+																			);
+																			setCurrentComment(
+																				comment
+																			);
+																		}}
+																	/>
 															)}
 														</>
 													)}

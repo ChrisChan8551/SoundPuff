@@ -36,28 +36,32 @@ function CreateCommentForm({ hideForm }) {
 	};
 	// console.log('*********CREATE SONGFORM SONGID***************', songId);
 	return (
-		<form onSubmit={handleSubmit}>
-			<ul>
-				{errors.map((error, idx) => (
-					<li key={idx}>{error}</li>
-				))}
-			</ul>
-			<label>
-				Comment:
+		<form className='create-album-form' onSubmit={handleSubmit}>
+			<label className='create-album-label-input'>
 				<textarea
 					type='text'
+					placeholder='Comment'
 					value={body}
 					onChange={(e) => setBody(e.target.value)}
 					required
 				/>
 			</label>
-
-			<button type='submit' disabled={errors.length > 0}>
-				Create Comment
-			</button>
-			<button type='button' onClick={handleClickAway}>
-				Cancel
-			</button>
+			<div>
+				<button
+					className='create-album-button'
+					type='submit'
+					disabled={errors.length > 0}
+				>
+					Create
+				</button>
+				<button
+					className='cancel-create-album-button'
+					type='button'
+					onClick={handleClickAway}
+				>
+					Cancel
+				</button>
+			</div>
 		</form>
 	);
 }

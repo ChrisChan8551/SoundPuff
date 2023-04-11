@@ -1,3 +1,16 @@
+.trash-icon,
+.edit-icon {
+	opacity: 0.5;
+	width: 20px;
+	height: 20px;
+}
+
+.trash-icon:hover,
+.edit-icon:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
 .song-container {
 	margin: auto;
 	max-width: 2480px;
@@ -74,7 +87,7 @@ li {
 	border-color: #ccc;
 	color: #fff;
 	border-radius: 3px;
-	margin-left: 10px;
+	/* margin-left: 10px; */
 }
 
 .song-edit-button {
