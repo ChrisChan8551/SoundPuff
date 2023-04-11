@@ -39,7 +39,7 @@ export const restoreUser = () => async (dispatch) => {
 };
 
 const setUser = (user) => {
-	console.log(user);
+	// console.log(user);
 	return {
 		type: SET_USER,
 		user: user,
@@ -75,7 +75,7 @@ const sessionReducer = (state = initialState, action) => {
 		case SET_USER:
 			newState = Object.assign({}, state);
 			newState.user = action.user;
-			console.log(action);
+			// console.log(action);
 			return newState;
 		case REMOVE_USER:
 			newState = Object.assign({}, state);

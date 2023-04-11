@@ -5,11 +5,7 @@ import EditSongFormModal from '../EditSongModal';
 import EditCommentFormModal from '../EditComment';
 import CreateCommentModal from '../CreateCommentModal';
 import { getOneSong, removeSong } from '../../store/song';
-import {
-	removeComment,
-	getCommentsBySongId,
-	getOneComment,
-} from '../../store/comment';
+import { removeComment, getCommentsBySongId } from '../../store/comment';
 import './SongDetailPage.css';
 
 const SongDetailPage = () => {
@@ -29,7 +25,6 @@ const SongDetailPage = () => {
 
 	useEffect(() => {
 		dispatch(getCommentsBySongId(songId));
-		// dispatch(getOneComment(currentComment));
 	}, [dispatch, songId]);
 
 	useEffect(() => {
@@ -97,16 +92,21 @@ const SongDetailPage = () => {
 						<li id='song-description'>{`Description: ${song.description}`}</li>
 
 						<div className='song-detail-buttons'>
-							<button
-								className='comment-add-button'
-								onClick={() => setShowCreateCommentForm(true)}
-							>
-								Add Comment
-							</button>
+							{!showCreateCommentForm && (
+								<button
+									className='blue-button'
+									onClick={() =>
+										setShowCreateCommentForm(true)
+									}
+								>
+									Add Comment
+								</button>
+							)}
+
 							{!showEditSongForm &&
 								song.userId === loggedInUser?.id && (
 									<button
-										className='song-edit-button'
+										className='orange-button'
 										onClick={() =>
 											setShowEditSongForm(true)
 										}
@@ -116,7 +116,7 @@ const SongDetailPage = () => {
 								)}
 							{song.userId === loggedInUser?.id && (
 								<button
-									className='song-delete-button'
+									className='grey-button'
 									onClick={() => deleteSong(songId)}
 								>
 									Delete
@@ -139,16 +139,6 @@ const SongDetailPage = () => {
 													{comment.userId ===
 														loggedInUser?.id && (
 														<>
-															{/* <button
-																className='song-delete-button'
-																onClick={() =>
-																	deleteComment(
-																		comment.id
-																	)
-																}
-															>
-																Delete
-															</button> */}
 															<img
 																className='trash-icon'
 																src='/trash-icon.png'
@@ -162,32 +152,19 @@ const SongDetailPage = () => {
 																}
 															/>
 															{!showEditCommentForm && (
-																// <button
-																// 	className='song-edit-button'
-																// 	onClick={() => {
-																// 		setCurrentComment(
-																// 			comment
-																// 		);
-																// 		setShowEditCommentForm(
-																// 			true
-																// 		);
-																// 	}}
-																// >
-																// 	Edit
-																// </button>
 																<img
-																		className='edit-icon'
-																		src='/edit-icon.png'
-																		alt=''
-																		onClick={() => {
-																			setShowEditCommentForm(
-																				true
-																			);
-																			setCurrentComment(
-																				comment
-																			);
-																		}}
-																	/>
+																	className='edit-icon'
+																	src='/edit-icon.png'
+																	alt=''
+																	onClick={() => {
+																		setShowEditCommentForm(
+																			true
+																		);
+																		setCurrentComment(
+																			comment
+																		);
+																	}}
+																/>
 															)}
 														</>
 													)}

@@ -47,7 +47,7 @@ export const editCurrentSong = (songId, song) => async (dispatch) => {
 
 	if (response.ok) {
 		const song = await response.json();
-		console.log(song);
+		// console.log(song);
 		dispatch(editSong(song));
 		return song;
 	}
@@ -64,7 +64,7 @@ export const createNewSong = (song) => async (dispatch) => {
 
 	if (response.ok) {
 		const song = await response.json();
-		console.log('try to add song', song);
+		// console.log('try to add song', song);
 		dispatch(createSong(song));
 		return song;
 	}
@@ -96,8 +96,8 @@ export const getSongsbyCurrentUser = () => async (dispatch) => {
 
 	if (response.ok) {
 		const songsObj = await response.json();
-		console.log('******SONGS_OBJ_GETSONGS******');
-		console.log(songsObj);
+		// console.log('******SONGS_OBJ_GETSONGS******');
+		// console.log(songsObj);
 		const currentUsersongs = songsObj.Songs;
 		dispatch(getsongscurrentuser(currentUsersongs));
 	}

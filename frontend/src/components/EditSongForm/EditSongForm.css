@@ -10,12 +10,11 @@
 }
 
 .edit-input-form {
-  max-width: 195px;
+	max-width: 195px;
 	display: flex;
-  flex-direction: column;
-  /* font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+	flex-direction: column;
+	/* font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif; */
-
 }
 
 .edit-label-form {
@@ -24,8 +23,8 @@
 }
 
 .update-song-button {
-  background-color: black;
-  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+	background-color: black;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
 	background-color: #f50;
@@ -35,14 +34,14 @@
 	margin-top: 5px;
 }
 
-.update-song-button:hover{
-  cursor: pointer;
-  border-color: white;
+.update-song-button:hover {
+	cursor: pointer;
+	border-color: white;
 }
 
 .cancel-update-song-button {
-  background-color: black;
-  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+	background-color: black;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
 	/* background-color: #f50; */
@@ -52,7 +51,7 @@
 	margin-left: 10px;
 }
 
-.cancel-update-song-button:hover{
-  cursor: pointer;
-  border-color: white;
+.cancel-update-song-button:hover {
+	cursor: pointer;
+	border-color: white;
 }

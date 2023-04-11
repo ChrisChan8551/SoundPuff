@@ -59,7 +59,6 @@ router.get('/:songId/comments', async (req, res) => {
 	return res.json({ Comments: allSongComments });
 });
 
-
 //Edit a Song
 router.put('/:songId', requireAuth, async (req, res, next) => {
 	const { title, description, url, imageUrl, albumId } = req.body;

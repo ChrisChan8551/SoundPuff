@@ -13,7 +13,7 @@ const SongsPage = () => {
 	const loggedInUser = useSelector((state) => state.session.user);
 	const [showCreateSongForm, setShowCreateSongForm] = useState(false);
 	let createSongForm;
-	console.log('*****SONGS*****', songs);
+	// console.log('*****SONGS*****', songs);
 
 	useEffect(() => {
 		dispatch(getSongs());
@@ -37,7 +37,7 @@ const SongsPage = () => {
 	}
 
 	const goToDetails = (songId) => {
-		console.log('songId', songId);
+		// console.log('songId', songId);
 		history.push(`/songs/${songId}`);
 	};
 
@@ -45,7 +45,7 @@ const SongsPage = () => {
 	// 	return dispatch(getSongsbyCurrentUser());
 	// };
 
-	console.log('****USERSONGS***', usersongs);
+	// console.log('****USERSONGS***', usersongs);
 	return (
 		<div className='song-container'>
 			<div className='song-detail'>

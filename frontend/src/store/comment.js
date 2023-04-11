@@ -72,31 +72,31 @@ export const editCurrentComment = (commentId, comment) => async (dispatch) => {
 export const createNewComment = (comment) => async (dispatch) => {
 	// console.log('**********STORE CREATE COMMENT**********',JSON.stringify(comment))
 	const response = await csrfFetch(`/api/comments`, {
-			method: 'POST',
-			headers: {
-					"Content-Type": "application/json"
-			},
-			body: JSON.stringify(comment)
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(comment),
 	});
 
-	if(response.ok){
-			const comment = await response.json();
-			// console.log('try to add comment', comment);
-			dispatch(createComment(comment));
-			return comment;
+	if (response.ok) {
+		const comment = await response.json();
+		// console.log('try to add comment', comment);
+		dispatch(createComment(comment));
+		return comment;
 	}
 };
 
-// export const getComments = () => async (dispatch) => {
-// 	const response = await csrfFetch('/api/comments');
+export const getComments = () => async (dispatch) => {
+	const response = await csrfFetch('/api/comments');
 
-// 	if (response.ok) {
-// 		const commentsObj = await response.json();
+	if (response.ok) {
+		const commentsObj = await response.json();
 
-// 		const comments = commentsObj.Comments;
-// 		dispatch(loadComments(comments));
-// 	}
-// };
+		const comments = commentsObj.Comments;
+		dispatch(loadComments(comments));
+	}
+};
 
 export const removeComment = (commentId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/comments/${commentId}`, {
@@ -116,9 +116,9 @@ const commentReducer = (state = initialState, action) => {
 				newState[comment.id] = comment;
 			});
 			return newState;
-		// case LOAD_ONE_COMMENT:
-		// 	newState[action.comment.id] = action.comment;
-		// 	return newState;
+		case LOAD_ONE_COMMENT:
+			newState[action.comment.id] = action.comment;
+			return newState;
 		case CREATE_COMMENT:
 			newState[action.comment.id] = action.comment;
 			return newState;

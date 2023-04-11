@@ -49,7 +49,7 @@ const AlbumsPage = () => {
 	}
 
 	const goToDetails = (albumId) => {
-		console.log('albumId', albumId);
+		// console.log('albumId', albumId);
 		history.push(`/albums/${albumId}`);
 	};
 

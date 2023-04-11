@@ -34,7 +34,7 @@ const SongsByCurrentUser = () => {
 		);
 	}
 	const goToDetails = (songId) => {
-		console.log('songId', songId);
+		// console.log('songId', songId);
 		history.push(`/songs/${songId}`);
 	};
 
