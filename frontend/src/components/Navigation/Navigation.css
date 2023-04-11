@@ -122,3 +122,18 @@ img {
 	margin-right: 10px;
 	/* padding: 0px */
 }
+
+.blue-button {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: blue;
+	border-color: #ccc;
+	color: #fff;
+	border-radius: 3px;
+	padding: 2px 15px;
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+	/* padding: 0px */
+}

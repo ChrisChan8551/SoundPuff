@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as commentActions from '../../store/comment';
-import { Redirect, useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-function CreateCommentForm({ song, hideForm }) {
+function CreateCommentForm({ hideForm }) {
 	const dispatch = useDispatch();
-	const history = useHistory();
 	const { songId } = useParams();
 
 	const loggedInUser = useSelector((state) => state.session.user);
 	const [body, setBody] = useState('');
-	const [commentId] = useState('');
 	const [errors, setErrors] = useState([]);
-
-	if (loggedInUser?.id !== song?.userId)
-		return <Redirect to={`/songs/${songId}`} />;
 
 	const handleClickAway = (e) => {
 		e.preventDefault();
@@ -27,10 +22,10 @@ function CreateCommentForm({ song, hideForm }) {
 
 		let comment = {
 			body,
-			commentId: commentId,
+			userId: loggedInUser?.id,
+			songId: songId,
 		};
-
-		history.push('/comments');
+		hideForm();
 
 		return dispatch(commentActions.createNewComment(comment)).catch(
 			async (res) => {
@@ -39,7 +34,7 @@ function CreateCommentForm({ song, hideForm }) {
 			}
 		);
 	};
-
+	// console.log('*********CREATE SONGFORM SONGID***************', songId);
 	return (
 		<form onSubmit={handleSubmit}>
 			<ul>
@@ -48,8 +43,8 @@ function CreateCommentForm({ song, hideForm }) {
 				))}
 			</ul>
 			<label>
-				Title:
-				<input
+				Comment:
+				<textarea
 					type='text'
 					value={body}
 					onChange={(e) => setBody(e.target.value)}

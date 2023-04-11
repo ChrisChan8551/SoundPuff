@@ -12,6 +12,37 @@ const {
 	PlaylistSong,
 } = require('../../db/models');
 
+// Create a Comment for a Song based on the Song's id
+router.post('/', requireAuth, async (req, res) => {
+	const { body, songId } = req.body;
+	// const { songId } = req.params;
+	console.log('*******BACK END CREATE COMMENT ******', body, songId);
+
+	if (!songId) {
+		return res
+			.status(404)
+			.json({ message: "Song couldn't be found", statusCode: 404 });
+	}
+
+	if (!body) {
+		return res.status(400).json({
+			message: 'Validation Error',
+			statusCode: 400,
+			errors: {
+				body: 'Comment body text is required',
+			},
+		});
+	}
+
+	const newComment = await Comment.create({
+		userId: req.user.id,
+		songId,
+		body,
+	});
+
+	return res.status(200).json(newComment);
+});
+
 //Delete a comment
 router.delete('/:commentId', requireAuth, async (req, res) => {
 	const { commentId } = req.params;

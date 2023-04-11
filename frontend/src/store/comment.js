@@ -33,14 +33,14 @@ const deleteComment = (commentId) => ({
 
 export const getCommentsBySongId = (songId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/songs/${songId}/comments`);
-	console.log('*****SONGID*****');
-	console.log(songId);
+	// console.log('*****SONGID*****');
+	// console.log(songId);
 	if (response.ok) {
 		const songsObj = await response.json();
-		console.log('******SONGS_OBJ_COMMENTS******');
-		console.log(songsObj);
+		// console.log('******SONGS_OBJ_COMMENTS******');
+		// console.log(songsObj);
 		const comments = songsObj.Comments;
-		console.log(comments);
+		// console.log(comments);
 		dispatch(loadComments(comments));
 	}
 };
@@ -69,22 +69,23 @@ export const editCurrentComment = (commentId, comment) => async (dispatch) => {
 	}
 };
 
-// export const createNewComment = (songId,comment) => async (dispatch) => {
-// 	const response = await csrfFetch(`/api/:songId/comments`, {
-// 			method: 'POST',
-// 			headers: {
-// 					"Content-Type": "application/json"
-// 			},
-// 			body: JSON.stringify(comment)
-// 	});
+export const createNewComment = (comment) => async (dispatch) => {
+	// console.log('**********STORE CREATE COMMENT**********',JSON.stringify(comment))
+	const response = await csrfFetch(`/api/comments`, {
+			method: 'POST',
+			headers: {
+					"Content-Type": "application/json"
+			},
+			body: JSON.stringify(comment)
+	});
 
-// 	if(response.ok){
-// 			const comment = await response.json();
-// 			console.log('try to add comment', comment);
-// 			dispatch(createComment(comment));
-// 			return comment;
-// 	}
-// };
+	if(response.ok){
+			const comment = await response.json();
+			// console.log('try to add comment', comment);
+			dispatch(createComment(comment));
+			return comment;
+	}
+};
 
 // export const getComments = () => async (dispatch) => {
 // 	const response = await csrfFetch('/api/comments');
@@ -118,9 +119,9 @@ const commentReducer = (state = initialState, action) => {
 		// case LOAD_ONE_COMMENT:
 		// 	newState[action.comment.id] = action.comment;
 		// 	return newState;
-		// case CREATE_COMMENT:
-		// 	newState[action.comment.id] = action.comment;
-		// 	return newState;
+		case CREATE_COMMENT:
+			newState[action.comment.id] = action.comment;
+			return newState;
 		case EDIT_COMMENT:
 			newState[action.comment.id] = action.comment;
 			return newState;

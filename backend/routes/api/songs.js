@@ -59,36 +59,6 @@ router.get('/:songId/comments', async (req, res) => {
 	return res.json({ Comments: allSongComments });
 });
 
-// Create a Comment for a Song based on the Song's id
-router.post('/:songId/comments', requireAuth, async (req, res) => {
-	const { body } = req.body;
-	const { songId } = req.params;
-	const song = await Song.findByPk(songId);
-
-	if (!song) {
-		return res
-			.status(404)
-			.json({ message: "Song couldn't be found", statusCode: 404 });
-	}
-
-	if (!body) {
-		return res.status(400).json({
-			message: 'Validation Error',
-			statusCode: 400,
-			errors: {
-				body: 'Comment body text is required',
-			},
-		});
-	}
-
-	const newComment = await Comment.create({
-		userId: req.user.id,
-		songId,
-		body,
-	});
-
-	return res.status(200).json(newComment);
-});
 
 //Edit a Song
 router.put('/:songId', requireAuth, async (req, res, next) => {
