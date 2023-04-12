@@ -1,36 +1,32 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useLocation, NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import GuestUserButton from './GuestUserButton';
+import { setSearchbarValue, selectSearchbarValue } from '../../store/searchbar';
 import './Navigation.css';
 
 function Navigation() {
 	const loggedInUser = useSelector((state) => state.session.user);
+	const searchbarValue = useSelector(selectSearchbarValue);
+	const location = useLocation();
+	const dispatch = useDispatch();
 	let sessionNavLinks;
 	if (loggedInUser === null) {
 		sessionNavLinks = (
 			<>
 				<SignupFormModal className='nav-text nav-item' to='/signup' />
-				{/* <NavLink className='nav-text nav-item' to='/signup'>
-					Sign Up
-				</NavLink> */}
 
 				<LoginFormModal className='nav-text nav-item' to='/login' />
-				{/* <NavLink className='nav-text nav-item' to='/login'> */}
-				{/* Login */}
-				{/* </NavLink> */}
+
 				<GuestUserButton className='nav-text nav-item' />
 			</>
 		);
 	} else if (loggedInUser)
 		sessionNavLinks = (
 			<>
-				{/* <NavLink className='nav-text nav-item' to='/songs/current'>
-					Your Songs
-				</NavLink> */}
 				<ProfileButton user={loggedInUser} />
 			</>
 		);
@@ -43,11 +39,6 @@ function Navigation() {
 						className='logo'
 						alt='logo'
 					></img>
-					{/* <img
-						src='https://a-v2.sndcdn.com/assets/images/wordmark@2x-8fdb346f.png'
-						className='logo2'
-						alt='logo2'
-					></img> */}
 					<p className='nav-text-title nav-item logo2'>SONG PUFF</p>
 					<NavLink className='nav-text nav-item' to='/'>
 						Home
@@ -66,6 +57,20 @@ function Navigation() {
 					<NavLink className='nav-text nav-item' to='/albums'>
 						Albums
 					</NavLink>
+					<div
+						// className={`search_middle ${
+						// 	location.pathname === '/' ? '' : 'hidden_search'
+						// }`}
+					>
+						<input
+							type='Text'
+							placeholder='Search Song Title'
+							value={searchbarValue}
+							onChange={(event) => {
+								dispatch(setSearchbarValue(event.target.value));
+							}}
+						/>
+					</div>
 				</ul>
 				{sessionNavLinks}
 			</nav>

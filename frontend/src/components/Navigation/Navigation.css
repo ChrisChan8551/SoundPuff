@@ -24,6 +24,12 @@
 	padding: 2px 11px 2px 10px;
 }
 
+.hidden_search {
+	pointer-events: none;
+	opacity: 0;
+}
+
+
 .orange-button {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;

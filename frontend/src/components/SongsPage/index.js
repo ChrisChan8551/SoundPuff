@@ -1,19 +1,51 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Redirect, NavLink } from 'react-router-dom';
 import { getSongs, getSongsbyCurrentUser } from '../../store/song';
 import CreateSongModal from '../CreateSongModal';
+import { selectSearchbarValue } from '../../store/searchbar';
 import './SongsPage.css';
 
+const MAX_SONG_COUNT = 30;
+
+function getLimitedSongsList(songs, searchbarValue = '') {
+	const filteredSongs = songs.filter((song) =>
+		song.title.toLowerCase().includes(searchbarValue.toLowerCase())
+	);
+	const songCount = Math.min(filteredSongs.length, MAX_SONG_COUNT);
+	const selectedSongs = [];
+
+	while (selectedSongs.length < songCount) {
+		const randomIndex = Math.floor(Math.random() * filteredSongs.length);
+		selectedSongs.push(filteredSongs[randomIndex]);
+		filteredSongs.splice(randomIndex, 1);
+	}
+
+	return selectedSongs;
+}
+
 const SongsPage = () => {
-	const songs = Object.values(useSelector((state) => state.song));
-	const usersongs = useSelector((state) => state.song);
-	const dispatch = useDispatch();
-	const history = useHistory();
+	const allSongs = Object.values(useSelector((state) => state.song));
 	const loggedInUser = useSelector((state) => state.session.user);
+	const searchbarValue = useSelector(selectSearchbarValue);
+	const [songs, setSongs] = useState([]);
 	const [showCreateSongForm, setShowCreateSongForm] = useState(false);
+	const [hasRenderedSongs, setHasRenderedSongs] = useState(false);
+	const lastSearchRef = useRef(searchbarValue);
 	let createSongForm;
 	// console.log('*****SONGS*****', songs);
+	const dispatch = useDispatch();
+	const history = useHistory();
+
+	useEffect(() => {
+		const unlisten = history.listen(() => {
+			if (history.location.pathname === '/') {
+				setHasRenderedSongs(false);
+				dispatch(getSongs());
+			}
+		});
+		return unlisten;
+	}, [dispatch, history]);
 
 	useEffect(() => {
 		dispatch(getSongs());
@@ -22,6 +54,28 @@ const SongsPage = () => {
 	useEffect(() => {
 		setShowCreateSongForm(false);
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (!hasRenderedSongs && allSongs.length) {
+			setHasRenderedSongs(true);
+			setSongs(getLimitedSongsList(allSongs));
+		}
+	}, [hasRenderedSongs, allSongs]);
+
+	useEffect(() => {
+		const handleKeyPress = (event) => {
+			if (event.key === 'Enter') {
+				lastSearchRef.current = searchbarValue;
+				setSongs(getLimitedSongsList(allSongs, searchbarValue));
+			}
+		};
+
+		document.addEventListener('keydown', handleKeyPress);
+
+		return () => {
+			document.removeEventListener('keydown', handleKeyPress);
+		};
+	}, [allSongs, searchbarValue]);
 
 	if (!songs) {
 		return null;
@@ -37,15 +91,9 @@ const SongsPage = () => {
 	}
 
 	const goToDetails = (songId) => {
-		// console.log('songId', songId);
 		history.push(`/songs/${songId}`);
 	};
 
-	// const getUserSongs = () => {
-	// 	return dispatch(getSongsbyCurrentUser());
-	// };
-
-	// console.log('****USERSONGS***', usersongs);
 	return (
 		<div className='song-container'>
 			<div className='song-detail'>
