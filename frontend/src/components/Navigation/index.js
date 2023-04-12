@@ -58,9 +58,9 @@ function Navigation() {
 						Albums
 					</NavLink>
 					<div
-						// className={`search_middle ${
-						// 	location.pathname === '/' ? '' : 'hidden_search'
-						// }`}
+						className={`search_middle ${
+							location.pathname === '/songs' ? '' : 'hidden_search'
+						}`}
 					>
 						<input
 							type='Text'
