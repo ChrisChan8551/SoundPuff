@@ -19,8 +19,9 @@ function getLimitedSongsList(songs, searchbarValue = '') {
 		const randomIndex = Math.floor(Math.random() * filteredSongs.length);
 		selectedSongs.push(filteredSongs[randomIndex]);
 		filteredSongs.splice(randomIndex, 1);
-	}
 
+	}
+	console.log(selectedSongs)
 	return selectedSongs;
 }
 
@@ -106,8 +107,8 @@ const SongsPage = () => {
 							Add Song
 						</button>
 					)}
-					{songs &&
-						songs.map((song) => {
+					{allSongs &&
+						allSongs.map((song) => {
 							return (
 								<li key={song.id}>
 									<div
@@ -136,5 +137,5 @@ const SongsPage = () => {
 		</div>
 	);
 };
-
+//
 export default SongsPage;
