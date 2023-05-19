@@ -39,7 +39,7 @@ function Navigation() {
 						className='logo'
 						alt='logo'
 					></img>
-					<p className='nav-text-title nav-item logo2'>SONG PUFF</p>
+					<p className='nav-text-title nav-item logo2'>SOUND PUFF</p>
 					<NavLink className='nav-text nav-item' to='/'>
 						Home
 					</NavLink>
