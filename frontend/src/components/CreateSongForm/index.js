@@ -31,8 +31,8 @@ function CreateSongForm({ album, hideForm }) {
 			title,
 			description,
 			url,
-			imageUrl: previewImage,
-			albumId: albumId,
+			previewImage,
+			albumId,
 		};
 		hideForm();
 		history.push('/songs');
@@ -83,7 +83,7 @@ function CreateSongForm({ album, hideForm }) {
 						type='text'
 						value={previewImage}
 						onChange={(e) => setPreviewImage(e.target.value)}
-						required
+
 					/>
 				</label>
 				<div>

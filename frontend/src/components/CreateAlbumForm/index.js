@@ -10,7 +10,7 @@ function CreateAlbumForm({ hideForm }) {
 	const loggedInUser = useSelector((state) => state.session.user);
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
-	const [imageUrl, setImageUrl] = useState('');
+	const [previewImage, setPreviewImage] = useState('');
 	const [errors, setErrors] = useState([]);
 
 	if (!loggedInUser?.id) return <Redirect to='/' />;
@@ -27,7 +27,7 @@ function CreateAlbumForm({ hideForm }) {
 		let album = {
 			title,
 			description,
-			imageUrl,
+			previewImage,
 		};
 
 		history.push(`/albums`);
@@ -68,9 +68,9 @@ function CreateAlbumForm({ hideForm }) {
 					<input
 						className='create-album-input'
 						type='text'
-						value={imageUrl}
-						onChange={(e) => setImageUrl(e.target.value)}
-						required
+						value={previewImage}
+						onChange={(e) => setPreviewImage(e.target.value)}
+
 					/>
 				</label>
 				<div>
