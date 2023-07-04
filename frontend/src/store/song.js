@@ -37,7 +37,7 @@ const deleteSong = (songId) => ({
 });
 
 export const editCurrentSong = (songId, song) => async (dispatch) => {
-	const response = await csrfFetch(`/api/songs/${songId}`, {
+	const res = await csrfFetch(`/api/songs/${songId}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -45,70 +45,91 @@ export const editCurrentSong = (songId, song) => async (dispatch) => {
 		body: JSON.stringify(song),
 	});
 
-	if (response.ok) {
-		const song = await response.json();
+	if (res.ok) {
+		const song = await res.json();
 		// console.log(song);
 		dispatch(editSong(song));
 		return song;
 	}
 };
 
-export const createNewSong = (song) => async (dispatch) => {
-	const response = await csrfFetch(`/api/songs`, {
+export const createNewSong = (payload) => async (dispatch) => {
+	const { title, description, url, previewImage, albumId } = payload;
+	console.log('**********CREATE NEW SONG STORE**********', payload);
+	let audioFile = url
+	const formData = new FormData();
+	if (title) {
+		formData.append('title', title);
+	}
+	if (description) {
+		formData.append('description', description);
+	}
+	if (albumId) {
+		formData.append('albumId', albumId);
+	}
+	if (previewImage) formData.append('previewImage', previewImage);
+
+	// for single file
+	if (audioFile) formData.append('audioFile', audioFile);
+
+	console.log('*****formData*****');
+	// Log the FormData object
+	console.log('FormData:', formData);
+
+	// Log the key-value pairs in the FormData
+	for (let pair of formData.entries()) {
+		console.log(pair[0], pair[1]);
+	}
+	const res = await csrfFetch(`/api/songs`, {
 		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(song),
+		headers: { 'Content-Type': 'multipart/form-data' },
+		body: formData,
 	});
 
-	if (response.ok) {
-		const song = await response.json();
-		// console.log('try to add song', song);
+	if (res.ok) {
+		const song = await res.json();
 		dispatch(createSong(song));
 		return song;
 	}
+	return res;
 };
 
 export const getOneSong = (songId) => async (dispatch) => {
-	const response = await csrfFetch(`/api/songs/${songId}`);
+	const res = await csrfFetch(`/api/songs/${songId}`);
 
-	if (response.ok) {
-		const song = await response.json();
+	if (res.ok) {
+		const song = await res.json();
 		dispatch(loadASong(song));
 	}
 };
 
 export const getSongs = () => async (dispatch) => {
-	const response = await csrfFetch('/api/songs');
+	const res = await csrfFetch('/api/songs');
 
-	if (response.ok) {
-		const songsObj = await response.json();
-		// console.log('******SONGS_OBJ_GETSONGS******')
-		// console.log(songsObj)
+	if (res.ok) {
+		const songsObj = await res.json();
+
 		const songs = songsObj.Songs;
 		dispatch(loadSongs(songs));
 	}
 };
 
 export const getSongsbyCurrentUser = () => async (dispatch) => {
-	const response = await csrfFetch('/api/songs/current');
+	const res = await csrfFetch('/api/songs/current');
 
-	if (response.ok) {
-		const songsObj = await response.json();
-		// console.log('******SONGS_OBJ_GETSONGS******');
-		// console.log(songsObj);
+	if (res.ok) {
+		const songsObj = await res.json();
 		const currentUsersongs = songsObj.Songs;
 		dispatch(getsongscurrentuser(currentUsersongs));
 	}
 };
 
 export const removeSong = (songId) => async (dispatch) => {
-	const response = await csrfFetch(`/api/songs/${songId}`, {
+	const res = await csrfFetch(`/api/songs/${songId}`, {
 		method: 'DELETE',
 	});
 	dispatch(deleteSong(songId));
-	return response;
+	return res;
 };
 
 const initialState = {};

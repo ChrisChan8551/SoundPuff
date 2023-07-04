@@ -1,8 +1,11 @@
 const express = require('express');
 const { session, route } = require('./session.js');
 const { setTokenCookie, requireAuth } = require('../../utils/auth.js');
-
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 const { Op } = require('sequelize');
+const { request } = require('express');
+const router = express.Router();
+const asyncHandler = require('express-async-handler');
 
 const {
 	User,
@@ -12,9 +15,6 @@ const {
 	Album,
 	PlaylistSong,
 } = require('../../db/models');
-const { request } = require('express');
-
-const router = express.Router();
 
 //Delete a song
 router.delete('/:songId', requireAuth, async (req, res) => {
@@ -107,42 +107,62 @@ router.get('/current', requireAuth, async (req, res) => {
 
 // Create a Song Based on Album id
 
-router.post('/', requireAuth, async (req, res) => {
-	const userId = req.user.id;
-	const { title, description, url, imageUrl, albumId } = req.body;
-	let album;
-	if (albumId) {
-		album = await Album.findByPk(albumId);
-		if (!album) {
-			return res.status(404).json({
-				message: "Album couldn't be found",
-				statusCode: 404,
+router.post(
+	'/',
+	singleMulterUpload('audioFile'),
+	requireAuth,
+	asyncHandler(async (req, res) => {
+		const userId = req.user.id;
+		const { title, description, previewImage, albumId } = req.body;
+		console.log('**********CREATE SONG ROUTE***************', req.body);
+		console.log(
+			'*****title*****',
+			title,
+			'*****description*****',
+			description,
+			'*****previewImage*****',
+			previewImage,
+			'*****albumId*****',
+			albumId
+		);
+
+		if (albumId) {
+			console.log('****** IF ALBUM ID ******', albumId);
+			let album = await Album.findByPk(albumId);
+			if (!album) {
+				return res.status(404).json({
+					message: "Album couldn't be found",
+					statusCode: 404,
+				});
+			}
+		}
+
+		console.log('******req.file:*******', req.file);
+		const audioFile = await singlePublicFileUpload(req.file);
+
+		if (!title) {
+			res.status(400);
+			return res.json({
+				message: 'Validation Error',
+				statusCode: 400,
+				errors: {
+					title: 'Song title is required',
+				},
 			});
 		}
-	}
 
-	if (!title || !url) {
-		res.status(400);
-		return res.json({
-			message: 'Validation Error',
-			statusCode: 400,
-			errors: {
-				title: 'Song title is required',
-				url: 'Audio is required',
-			},
+		const newSong = await Song.create({
+			userId: userId,
+			albumId: albumId || null,
+			title: title,
+			description: description,
+			url: audioFile,
+			previewImage: previewImage || null,
 		});
-	}
-
-	const newSong = await Song.create({
-		userId,
-		albumId: albumId || null,
-		title,
-		description,
-		url,
-		previewImage: imageUrl,
-	});
-	res.status(200).json(newSong);
-});
+		console.log('*******NEW SONG********', newSong);
+		res.status(200).json({ newSong });
+	})
+);
 
 // Get a Song By Id
 router.get('/:songId', async (req, res) => {

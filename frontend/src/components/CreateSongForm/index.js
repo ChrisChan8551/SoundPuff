@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as songActions from '../../store/song';
+import { createNewSong } from '../../store/song';
 import { Redirect, useParams, useHistory } from 'react-router-dom';
 
 function CreateSongForm({ album, hideForm }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { albumId } = useParams();
-
-	const loggedInUser = useSelector((state) => state.session.user);
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 	const [url, setUrl] = useState('');
 	const [previewImage, setPreviewImage] = useState('');
 	const [errors, setErrors] = useState([]);
+	const [audioFile, setAudioFile] = useState(null);
 
 	// if (loggedInUser?.id !== album?.userId)
 	// 	return <Redirect to={`/albums/${albumId}`} />;
@@ -30,17 +29,26 @@ function CreateSongForm({ album, hideForm }) {
 		let song = {
 			title,
 			description,
-			url,
+			url: audioFile,
 			previewImage,
 			albumId,
 		};
 		hideForm();
 		history.push('/songs');
 
-		return dispatch(songActions.createNewSong(song)).catch(async (res) => {
-			const data = await res.json();
-			if (data && data.errors) setErrors(data.errors);
+		return dispatch(createNewSong(song)).catch(async (res) => {
+			if (res.json) {
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			} else {
+				console.error('Response does not have json() method:', res);
+			}
 		});
+	};
+
+	const updateFile = (e) => {
+		const file = e.target.files[0];
+		if (file) setAudioFile(file);
 	};
 
 	return (
@@ -69,12 +77,18 @@ function CreateSongForm({ album, hideForm }) {
 				<label className='create-album-label-form'>
 					Url:
 					<input
+						type='file'
+						accept='audio/*'
 						className='create-album-input'
-						type='text'
-						value={url}
-						onChange={(e) => setUrl(e.target.value)}
-						required
+						onChange={updateFile}
 					/>
+					{/* <input
+						className='create-album-input'
+						type='file'
+						accept='audio/*'
+						onChange={updateFile}
+						// required
+					/> */}
 				</label>
 				<label className='create-album-label-form'>
 					Image Url:
@@ -83,7 +97,6 @@ function CreateSongForm({ album, hideForm }) {
 						type='text'
 						value={previewImage}
 						onChange={(e) => setPreviewImage(e.target.value)}
-
 					/>
 				</label>
 				<div>
