@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React,{ useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { editCurrentSong, getOneSong } from '../../store/song';
@@ -7,13 +7,13 @@ import './EditSongForm.css';
 const EditSongForm = ({ song, hideForm }) => {
 	const dispatch = useDispatch();
 	const { songId } = useParams();
-
-	const [title, setTitle] = useState(song.title);
-	const [description, setDescription] = useState(song.description);
-	const [url, setUrl] = useState(song.url);
-	const [previewImage, setPreviewImage] = useState(song.previewImage);
+	const [title, setTitle] = useState(song.title || '' );
+	const [description, setDescription] = useState(song.description || '' );
+	const [url, setUrl] = useState(song.url || '' );
+	const [previewImage, setPreviewImage] = useState(song.previewImage) || '' ;
 	const [errors, setErrors] = useState([]);
 	const [disabled, setDisabled] = useState(false);
+	const [audioFile, setAudioFile] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -22,10 +22,10 @@ const EditSongForm = ({ song, hideForm }) => {
 		let songEdited = {
 			title,
 			description,
-			url,
-			imageUrl: previewImage,
+			url: audioFile,
+			previewImage: previewImage,
 		};
-
+		console.log('*****EDIT SONG FORM***** SONG EDITED',songEdited);
 		let updatedSong = await dispatch(
 			editCurrentSong(songId, songEdited)
 		).catch(async (res) => {
@@ -50,6 +50,11 @@ const EditSongForm = ({ song, hideForm }) => {
 	const handleClickAway = (e) => {
 		e.preventDefault();
 		hideForm();
+	};
+
+	const updateFile = (e) => {
+		const file = e.target.files[0];
+		if (file) setAudioFile(file);
 	};
 
 	return (
@@ -82,13 +87,10 @@ const EditSongForm = ({ song, hideForm }) => {
 				<label className='edit-label-form'>
 					Url
 					<input
-						className='edit-input-form'
-						type='text'
-						value={url}
-						onChange={(e) => {
-							setDisabled(false);
-							setUrl(e.target.value);
-						}}
+						type='file'
+						accept='audio/*'
+						className='create-album-input'
+						onChange={updateFile}
 					/>
 				</label>
 				<label className='edit-label-form'>

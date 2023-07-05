@@ -60,42 +60,67 @@ router.get('/:songId/comments', async (req, res) => {
 });
 
 //Edit a Song
-router.put('/:songId', requireAuth, async (req, res, next) => {
-	const { title, description, url, imageUrl, albumId } = req.body;
-	const { songId } = req.params;
-	const updateSong = await Song.findByPk(songId);
-	if (!updateSong) {
-		return res
-			.status(404)
-			.json({ message: "Song couldn't be found", statusCode: 404 });
-	}
+router.put(
+	'/:songId',
+	singleMulterUpload("audioFile"),
+	requireAuth,
+	asyncHandler(async (req, res, next) => {
+		const { title, description, audioFile, previewImage, albumId } = req.body;
+		const { songId } = req.params;
+		const updateSong = await Song.findByPk(songId);
 
-	if (!title || !url) {
-		return res.status(400).json({
-			message: 'Validation Error',
-			statusCode: 400,
-			errors: {
-				title: 'Song title is required',
-				url: 'Audio is required',
-			},
-		});
-	}
+		console.log('************EDIT SONG BACKEND**************',req.params)
+		console.log('************EDIT SONG BACKEND**************',req.body)
 
-	if (updateSong.userId === req.user.id) {
-		updateSong.update({
-			title: title,
-			description: description,
-			url: url,
-			previewImage: imageUrl,
-			albumId: albumId,
-		});
-		return res.json(updateSong);
-	} else {
-		return res.json({
-			message: 'A song can only be updated by the song owner',
-		});
-	}
-});
+		console.log('************title**************',title)
+		console.log('************description**************',description)
+		console.log('************url**************',audioFile )
+		console.log('************previewImage**************',previewImage)
+		console.log('************albumId**************',albumId)
+
+
+		if (!updateSong) {
+			return res
+				.status(404)
+				.json({ message: "Song couldn't be found", statusCode: 404 });
+		}
+
+		// if (!title || !url) {
+		// 	return res.status(400).json({
+		// 		message: 'Validation Error',
+		// 		statusCode: 400,
+		// 		errors: {
+		// 			title: 'Song title is required',
+		// 			url: 'Audio is required',
+		// 		},
+		// 	});
+		// }
+
+		let songFile = audioFile
+		console.log('*****songFile*****',req.file)
+
+		if(req.file) {
+		  songFile = await singlePublicFileUpload(req.file);
+		  console.log('*****songFile*****',songFile)
+		}
+
+		if (updateSong.userId === req.user.id) {
+			updateSong.update({
+				title: title,
+				description: description,
+				url: songFile,
+				previewImage: previewImage,
+				albumId: albumId,
+			});
+			await updateSong.save();
+			return res.json(updateSong);
+		} else {
+			return res.json({
+				message: 'A song can only be updated by the song owner',
+			});
+		}
+	})
+);
 
 // Get all Songs by Current User
 
@@ -152,12 +177,12 @@ router.post(
 		}
 
 		const newSong = await Song.create({
-			userId: userId,
-			albumId: albumId || null,
-			title: title,
-			description: description,
+			userId,
+			albumId,
+			title,
+			description,
 			url: audioFile,
-			previewImage: previewImage || null,
+			previewImage,
 		});
 		console.log('*******NEW SONG********', newSong);
 		res.status(200).json({ newSong });

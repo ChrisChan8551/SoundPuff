@@ -57,7 +57,7 @@ function Navigation() {
 					<NavLink className='nav-text nav-item' to='/albums'>
 						Albums
 					</NavLink>
-					<div
+					{/* <div
 						className={`search_middle ${
 							location.pathname === '/songs' ? '' : 'hidden_search'
 						}`}
@@ -70,7 +70,7 @@ function Navigation() {
 								dispatch(setSearchbarValue(event.target.value));
 							}}
 						/>
-					</div>
+					</div> */}
 				</ul>
 				{sessionNavLinks}
 			</nav>

@@ -28,11 +28,11 @@ function getLimitedSongsList(songs, searchbarValue = '') {
 const SongsPage = () => {
 	const allSongs = Object.values(useSelector((state) => state.song));
 	const loggedInUser = useSelector((state) => state.session.user);
-	const searchbarValue = useSelector(selectSearchbarValue);
+	// const searchbarValue = useSelector(selectSearchbarValue);
 	const [songs, setSongs] = useState([]);
 	const [showCreateSongForm, setShowCreateSongForm] = useState(false);
 	const [hasRenderedSongs, setHasRenderedSongs] = useState(false);
-	const lastSearchRef = useRef(searchbarValue);
+	// const lastSearchRef = useRef(searchbarValue);
 	let createSongForm;
 	// console.log('*****SONGS*****', songs);
 	const dispatch = useDispatch();
@@ -63,20 +63,20 @@ const SongsPage = () => {
 		}
 	}, [hasRenderedSongs, allSongs]);
 
-	useEffect(() => {
-		const handleKeyPress = (event) => {
-			if (event.key === 'Enter') {
-				lastSearchRef.current = searchbarValue;
-				setSongs(getLimitedSongsList(allSongs, searchbarValue));
-			}
-		};
+	// useEffect(() => {
+	// 	const handleKeyPress = (event) => {
+	// 		if (event.key === 'Enter') {
+	// 			lastSearchRef.current = searchbarValue;
+	// 			setSongs(getLimitedSongsList(allSongs, searchbarValue));
+	// 		}
+	// 	};
 
-		document.addEventListener('keydown', handleKeyPress);
+	// 	document.addEventListener('keydown', handleKeyPress);
 
-		return () => {
-			document.removeEventListener('keydown', handleKeyPress);
-		};
-	}, [allSongs, searchbarValue]);
+	// 	return () => {
+	// 		document.removeEventListener('keydown', handleKeyPress);
+	// 	};
+	// }, [allSongs, searchbarValue]);
 
 	if (!songs) {
 		return null;

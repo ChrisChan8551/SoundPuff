@@ -37,26 +37,9 @@ const deleteSong = (songId) => ({
 });
 
 export const editCurrentSong = (songId, song) => async (dispatch) => {
-	const res = await csrfFetch(`/api/songs/${songId}`, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(song),
-	});
-
-	if (res.ok) {
-		const song = await res.json();
-		// console.log(song);
-		dispatch(editSong(song));
-		return song;
-	}
-};
-
-export const createNewSong = (payload) => async (dispatch) => {
-	const { title, description, url, previewImage, albumId } = payload;
-	console.log('**********CREATE NEW SONG STORE**********', payload);
-	let audioFile = url
+	const { title, description, url, previewImage, albumId } = song;
+	console.log('**********EDIT SONG STORE**********', song);
+	let audioFile = url;
 	const formData = new FormData();
 	if (title) {
 		formData.append('title', title);
@@ -68,6 +51,44 @@ export const createNewSong = (payload) => async (dispatch) => {
 		formData.append('albumId', albumId);
 	}
 	if (previewImage) formData.append('previewImage', previewImage);
+
+	// for single file
+	if (audioFile) formData.append('audioFile', audioFile);
+	console.log('******FORM DATA*****')
+	for (let pair of formData.entries()) {
+		console.log(pair[0], pair[1]);
+	}
+
+	const res = await csrfFetch(`/api/songs/${songId}`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'multipart/form-data' },
+		body: formData,
+	});
+
+	if (res.ok) {
+		const song = await res.json();
+		// console.log(song);
+		dispatch(editSong(song));
+		return song;
+	}
+	return res;
+};
+
+export const createNewSong = (payload) => async (dispatch) => {
+	const { title, description, url, previewImage, albumId } = payload;
+	console.log('**********CREATE NEW SONG STORE**********', payload);
+	let audioFile = url;
+	const formData = new FormData();
+	if (title) {
+		formData.append('title', title);
+	}
+	if (description) {
+		formData.append('description', description);
+	}
+	if (albumId) {
+		formData.append('albumId', albumId);
+	}
+	if (previewImage) {formData.append('previewImage', previewImage)};
 
 	// for single file
 	if (audioFile) formData.append('audioFile', audioFile);
