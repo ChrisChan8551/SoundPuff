@@ -90,7 +90,7 @@ const SongDetailPage = () => {
 						<li id='song-title'>{song.title}</li>
 						<li id='song-artist'>{song?.Artist?.username}</li>
 						<li id='song-description'>{`Description: ${song.description}`}</li>
-						<audio controls controlslist='nodownload'>
+						<audio controls controlsList='nodownload'>
 							<source src={song.url} type='audio/mp3' />
 							Your browser does not support the audio element.
 						</audio>
