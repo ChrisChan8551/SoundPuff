@@ -13,49 +13,89 @@ module.exports = {
 			{
 				userId: 1,
 				songId: '1',
-				body: 'Great',
+				body: 'Great Song! Very Groovy!',
 			},
 
 			{
 				userId: 3,
 				songId: '3',
-				body: 'Awesome',
+				body: 'One of my Favorites',
 			},
 			{
 				userId: 2,
 				songId: '3',
-				body: 'sucks!',
+				body: 'He knows really knows what women want',
 			},
 			{
 				userId: 1,
 				songId: '3',
-				body: 'Goot',
+				body: 'Every woman indeed',
 			},
 			{
 				userId: 1,
 				songId: '2',
-				body: 'like old times',
+				body: 'Very Groovy!',
 			},
 
 			{
 				userId: 2,
 				songId: '1',
-				body: 'No Bueno',
+				body: 'Not my cup of tea :(',
 			},
 			{
 				userId: 1,
 				songId: '1',
-				body: "Don't like",
+				body: "Not my favorite",
 			},
 			{
 				userId: 2,
 				songId: '1',
-				body: 'Awesome!',
+				body: 'One of his greatest hits!',
 			},
 			{
 				userId: 3,
 				songId: '2',
-				body: 'Bleh',
+				body: "He's a legend! One of a kind!",
+			},
+			{
+				userId: 3,
+				songId: '4',
+				body: "One of a kind!",
+			},
+			{
+				userId: 2,
+				songId: '4',
+				body: "There's no other!",
+			},
+			{
+				userId: 2,
+				songId: '7',
+				body: "The Next Mariah Carey",
+			},
+			{
+				userId: 2,
+				songId: '6',
+				body: "She's the greatest!",
+			},
+			{
+				userId: 3,
+				songId: '6',
+				body: "Love it!",
+			},
+			{
+				userId: 3,
+				songId: '5',
+				body: "Love it!",
+			},
+			{
+				userId: 1,
+				songId: '5',
+				body: "All I want is Mariah!",
+			},
+			{
+				userId: 2,
+				songId: '5',
+				body: "She would be the greatest present for Christmas!",
 			},
 		]);
 	},
