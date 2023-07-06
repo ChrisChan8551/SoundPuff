@@ -28,10 +28,10 @@ function App() {
 					<Route exact path='/'>
 						<HomePage />
 					</Route>
-					<Route path='/login'>
+					<Route exact path='/login'>
 						<LoginFormPage />
 					</Route>
-					<Route path='/signup'>
+					<Route exact path='/signup'>
 						<SignupFormPage />
 					</Route>
 					<Route exact path='/songs'>
@@ -40,13 +40,13 @@ function App() {
 					<Route exact path='/songs/current'>
 						<SongsbyCurrentUser />
 					</Route>
-					<Route path='/songs/:songId'>
+					<Route exact path='/songs/:songId'>
 						<SongDetailPage />
 					</Route>
 					<Route exact path='/albums'>
 						<AlbumsPage />
 					</Route>
-					<Route path='/albums/:albumId'>
+					<Route exact path='/albums/:albumId'>
 						<AlbumDetailPage />
 					</Route>
 				</Switch>
