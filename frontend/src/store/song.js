@@ -38,7 +38,7 @@ const deleteSong = (songId) => ({
 
 export const editCurrentSong = (songId, song) => async (dispatch) => {
 	const { title, description, url, previewImage, albumId } = song;
-	console.log('**********EDIT SONG STORE**********', song);
+	// console.log('**********EDIT SONG STORE**********', song);
 	let audioFile = url;
 	const formData = new FormData();
 	if (title) {
@@ -54,10 +54,10 @@ export const editCurrentSong = (songId, song) => async (dispatch) => {
 
 	// for single file
 	if (audioFile) formData.append('audioFile', audioFile);
-	console.log('******FORM DATA*****')
-	for (let pair of formData.entries()) {
-		console.log(pair[0], pair[1]);
-	}
+	// console.log('******FORM DATA*****')
+	// for (let pair of formData.entries()) {
+	// 	console.log(pair[0], pair[1]);
+	// }
 
 	const res = await csrfFetch(`/api/songs/${songId}`, {
 		method: 'PUT',
@@ -76,7 +76,7 @@ export const editCurrentSong = (songId, song) => async (dispatch) => {
 
 export const createNewSong = (payload) => async (dispatch) => {
 	const { title, description, url, previewImage, albumId } = payload;
-	console.log('**********CREATE NEW SONG STORE**********', payload);
+	// console.log('**********CREATE NEW SONG STORE**********', payload);
 	let audioFile = url;
 	const formData = new FormData();
 	if (title) {
@@ -93,14 +93,14 @@ export const createNewSong = (payload) => async (dispatch) => {
 	// for single file
 	if (audioFile) formData.append('audioFile', audioFile);
 
-	console.log('*****formData*****');
+	// console.log('*****formData*****');
 	// Log the FormData object
-	console.log('FormData:', formData);
+	// console.log('FormData:', formData);
 
 	// Log the key-value pairs in the FormData
-	for (let pair of formData.entries()) {
-		console.log(pair[0], pair[1]);
-	}
+	// for (let pair of formData.entries()) {
+	// 	console.log(pair[0], pair[1]);
+	// }
 	const res = await csrfFetch(`/api/songs`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'multipart/form-data' },

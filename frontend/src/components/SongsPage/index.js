@@ -21,7 +21,7 @@ function getLimitedSongsList(songs, searchbarValue = '') {
 		filteredSongs.splice(randomIndex, 1);
 
 	}
-	console.log(selectedSongs)
+	// console.log(selectedSongs)
 	return selectedSongs;
 }
 

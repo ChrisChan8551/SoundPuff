@@ -25,7 +25,7 @@ const EditSongForm = ({ song, hideForm }) => {
 			url: audioFile,
 			previewImage: previewImage,
 		};
-		console.log('*****EDIT SONG FORM***** SONG EDITED',songEdited);
+		// console.log('*****EDIT SONG FORM***** SONG EDITED',songEdited);
 		let updatedSong = await dispatch(
 			editCurrentSong(songId, songEdited)
 		).catch(async (res) => {

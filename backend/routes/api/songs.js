@@ -69,14 +69,14 @@ router.put(
 		const { songId } = req.params;
 		const updateSong = await Song.findByPk(songId);
 
-		console.log('************EDIT SONG BACKEND**************',req.params)
-		console.log('************EDIT SONG BACKEND**************',req.body)
+		// console.log('************EDIT SONG BACKEND**************',req.params)
+		// console.log('************EDIT SONG BACKEND**************',req.body)
 
-		console.log('************title**************',title)
-		console.log('************description**************',description)
-		console.log('************url**************',audioFile )
-		console.log('************previewImage**************',previewImage)
-		console.log('************albumId**************',albumId)
+		// console.log('************title**************',title)
+		// console.log('************description**************',description)
+		// console.log('************url**************',audioFile )
+		// console.log('************previewImage**************',previewImage)
+		// console.log('************albumId**************',albumId)
 
 
 		if (!updateSong) {
@@ -97,11 +97,11 @@ router.put(
 		// }
 
 		let songFile = audioFile
-		console.log('*****songFile*****',req.file)
+		// console.log('*****songFile*****',req.file)
 
 		if(req.file) {
 		  songFile = await singlePublicFileUpload(req.file);
-		  console.log('*****songFile*****',songFile)
+		//   console.log('*****songFile*****',songFile)
 		}
 
 		if (updateSong.userId === req.user.id) {
@@ -139,20 +139,20 @@ router.post(
 	asyncHandler(async (req, res) => {
 		const userId = req.user.id;
 		const { title, description, previewImage, albumId } = req.body;
-		console.log('**********CREATE SONG ROUTE***************', req.body);
-		console.log(
-			'*****title*****',
-			title,
-			'*****description*****',
-			description,
-			'*****previewImage*****',
-			previewImage,
-			'*****albumId*****',
-			albumId
-		);
+		// console.log('**********CREATE SONG ROUTE***************', req.body);
+		// console.log(
+		// 	'*****title*****',
+		// 	title,
+		// 	'*****description*****',
+		// 	description,
+		// 	'*****previewImage*****',
+		// 	previewImage,
+		// 	'*****albumId*****',
+		// 	albumId
+		// );
 
 		if (albumId) {
-			console.log('****** IF ALBUM ID ******', albumId);
+			// console.log('****** IF ALBUM ID ******', albumId);
 			let album = await Album.findByPk(albumId);
 			if (!album) {
 				return res.status(404).json({
@@ -162,7 +162,7 @@ router.post(
 			}
 		}
 
-		console.log('******req.file:*******', req.file);
+		// console.log('******req.file:*******', req.file);
 		const audioFile = await singlePublicFileUpload(req.file);
 
 		if (!title) {
@@ -184,7 +184,7 @@ router.post(
 			url: audioFile,
 			previewImage,
 		});
-		console.log('*******NEW SONG********', newSong);
+		// console.log('*******NEW SONG********', newSong);
 		res.status(200).json({ newSong });
 	})
 );
