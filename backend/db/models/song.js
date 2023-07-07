@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			previewImage: {
 				type: DataTypes.STRING,
-				defaultValue: 'images/defaultSongIcon.png',
+				defaultValue: 'https://mybucket8551.s3.amazonaws.com/songs/defaultSongIcon.png',
 			},
 		},
 		{

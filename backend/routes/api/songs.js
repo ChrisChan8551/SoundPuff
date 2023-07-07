@@ -224,12 +224,12 @@ router.get('/', async (req, res) => {
 		page = 1;
 	}
 	if (!size || isNaN(size) || size <= 0) {
-		size = 20;
+		size = 3;
 	}
 
-	if (size > 20) size = 20;
+	if (size > 3) size = 3;
 
-	if (page > 10) size = 10;
+	if (page > 4) size = 4;
 
 	page = Number(page);
 	size = Number(size);

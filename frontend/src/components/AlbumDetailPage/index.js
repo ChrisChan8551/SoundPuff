@@ -59,6 +59,11 @@ const AlbumDetailPage = () => {
 		});
 	};
 
+	const goToDetails = (songId) => {
+		// console.log('albumId', albumId);
+		history.push(`/songs/${songId}`);
+	};
+
 	return (
 		<div className='album-container'>
 			<div className='album-detail'>
@@ -86,9 +91,9 @@ const AlbumDetailPage = () => {
 						>{`Description: ${album.description}`}</li>
 						{album?.Songs?.map((song, idx) => {
 							return (
-								<li key={`${album.id}${song.id}`}>{`Song #${
-									idx + 1
-								}: ${song.title}`}</li>
+								<li key={`${album.id}${song.id}`} onClick={() => goToDetails(song.id)}>
+									{`Song #${idx + 1}: ${song.title}`}
+								</li>
 							);
 						})}
 					</ul>
