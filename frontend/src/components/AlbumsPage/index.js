@@ -13,7 +13,7 @@ const AlbumsPage = () => {
 	const [showCreateAlbumForm, setShowCreateAlbumForm] = useState(false);
 	const albums = Object.values(useSelector((state) => state.album));
 
-	let content;
+	let CreateAlbumForm;
 	let CreateAlbum = (
 		<CreateAlbumModal hideForm={() => setShowCreateAlbumForm(false)} />
 	);
@@ -27,13 +27,13 @@ const AlbumsPage = () => {
 	}
 
 	if (!loggedInUser || loggedInUser?.id === undefined) {
-		content = (
+		CreateAlbumForm = (
 			<p className='all-albums-header'>
 				Log In Or Sign Up To Create An Album!
 			</p>
 		);
 	} else if (loggedInUser?.id && loggedInUser?.id !== undefined) {
-		content = (
+		CreateAlbumForm = (
 			<div>
 				{
 					<button
@@ -54,37 +54,76 @@ const AlbumsPage = () => {
 	};
 
 	return (
-		<div className='album-container'>
-			<div className='album-detail'>
-				<ul className='ul-albums'>
-					<li>{content}</li>
-					{albums &&
-						albums.map((album) => {
-							return (
-								<li key={album.id}>
-									<div
-										className='album-list-item'
-										onClick={() => goToDetails(album.id)}
-									>
-										<div className='album-list-image'>
-											<img
-												className='album-detail-image'
+		<div className='song-main-container'>
+			{/* {!showCreateAlbumForm && loggedInUser?.id && (
+						<button
+							className='add-song-button'
+							onClick={() => setShowCreateAlbumForm(true)}
+						>
+							Create Album
+						</button>
+					)} */}
+					{CreateAlbumForm}
+			<div className='song-container'>
+				{albums &&
+					albums.map((album) => {
+						return (
+							<div className='song-box' key={album.id} onClick={() => goToDetails(album.id)}>
+								<div className='song-detail'>
+								<div className='song-image'><img
+												className='song-detail-image'
 												src={album.previewImage}
-												alt='album icon'
-											/>
-										</div>
-										<div>
-											<p className='album-list-title'>
-												{album.title}
-											</p>
-										</div>
-									</div>
-								</li>
-							);
-						})}
-				</ul>
+												alt='Song icon'
+											/></div>
+								<div className='song-title'>{album.title}</div>
+								<div className='song-description'></div>
+								</div>
+							</div>
+						);
+					})}
+
+				{/* <div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div> */}
+
 			</div>
 		</div>
+	// 	<div className='album-container'>
+	// 		<div className='album-detail'>
+	// 			<ul className='ul-albums'>
+	// 				<li>{content}</li>
+	// 				{albums &&
+	// 					albums.map((album) => {
+	// 						return (
+	// 							<li key={album.id}>
+	// 								<div
+	// 									className='album-list-item'
+	// 									onClick={() => goToDetails(album.id)}
+	// 								>
+	// 									<div className='album-list-image'>
+	// 										<img
+	// 											className='album-detail-image'
+	// 											src={album.previewImage}
+	// 											alt='album icon'
+	// 										/>
+	// 									</div>
+	// 									<div>
+	// 										<p className='album-list-title'>
+	// 											{album.title}
+	// 										</p>
+	// 									</div>
+	// 								</div>
+	// 							</li>
+	// 						);
+	// 					})}
+	// 			</ul>
+	// 		</div>
+	// 	</div>
 	);
 };
 

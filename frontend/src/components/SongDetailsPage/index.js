@@ -73,114 +73,149 @@ const SongDetailPage = () => {
 	}
 
 	return (
-		<div className='song-container'>
-			<div className='song-detail'>
-				<div className='song-detail-info'>
-					<div className='song-detail-image'>
-						<img
-							className='song-detail-image'
-							src={song.previewImage}
-							alt='songimg'
-						></img>
-					</div>
-					{songEditForm}
-					{commentEditForm}
-					{commentCreateForm}
+		<div className='song-detail-main-container'>
+			<div className='song-detail-container'>
+				<div className='song-detail-box'>
+					<img
+						className='song-detail-detail-image'
+						src={song.previewImage}
+						alt='songimg'
+					></img>
+				</div>
+				<div className='song-detail-box'>
 					<ul>
 						<li id='song-title'>{song.title}</li>
 						<li id='song-artist'>{song?.Artist?.username}</li>
 						<li id='song-description'>{`Description: ${song.description}`}</li>
-						<audio controls controlsList='nodownload'>
-							<source src={song.url} type='audio/mp3' />
-							Your browser does not support the audio element.
-						</audio>
-						<div className='song-detail-buttons'>
-							{!showCreateCommentForm && (
-								<button
-									className='blue-button'
-									onClick={() =>
-										setShowCreateCommentForm(true)
-									}
-								>
-									Add Comment
-								</button>
-							)}
-
-							{!showEditSongForm &&
-								song.userId === loggedInUser?.id && (
-									<button
-										className='orange-button'
-										onClick={() =>
-											setShowEditSongForm(true)
-										}
-									>
-										Edit
-									</button>
-								)}
-							{song.userId === loggedInUser?.id && (
-								<button
-									className='grey-button'
-									onClick={() => deleteSong(songId)}
-								>
-									Delete
-								</button>
-							)}
-						</div>
-						<div className='ul-comments'>
-							User Comments:
-							<div className='comments'>
-								{comments &&
-									comments?.map((comment, idx) => {
-										return (
-											Number(comment.songId) ===
-												Number(songId) && (
-												<div
-													className='comment-list'
-													key={`${comment.id}`}
-												>
-													{`${comment.body}`}
-													{comment.userId ===
-														loggedInUser?.id && (
-														<>
-															<img
-																className='trash-icon'
-																src='/trash-icon.png'
-																alt=''
-																onClick={() =>
-																	dispatch(
-																		deleteComment(
-																			comment.id
-																		)
-																	)
-																}
-															/>
-															{!showEditCommentForm && (
-																<img
-																	className='edit-icon'
-																	src='/edit-icon.png'
-																	alt=''
-																	onClick={() => {
-																		setShowEditCommentForm(
-																			true
-																		);
-																		setCurrentComment(
-																			comment
-																		);
-																	}}
-																/>
-															)}
-														</>
-													)}
-												</div>
-											)
-										);
-									})}
-							</div>
-						</div>
 					</ul>
+					<audio
+						controls
+						controlsList='nodownload'
+						className='audio-control'
+					>
+						<source src={song.url} type='audio/mp3' />
+						Your browser does not support the audio element.
+					</audio>
+
+					<div>[LIKE BUTTON]</div>
 				</div>
+				<div className='song-detail-box'></div>
+				<div className='song-detail-box'>
+					<div className='comments'>COMMENTS</div>
+				</div>
+				<div className='song-detail-box'></div>
+				<div className='song-detail-box'></div>
 			</div>
 		</div>
+
+		// 	<div className='song-container'>
+		// 		<div className='song-detail'>
+		// 			<div className='song-detail-info'>
+		// 				<div className='song-detail-image'>
+		// 					<img
+		// 						className='song-detail-image'
+		// 						src={song.previewImage}
+		// 						alt='songimg'
+		// 					></img>
+		// 				</div>
+		// 				{songEditForm}
+		// 				{commentEditForm}
+		// 				{commentCreateForm}
+		// 				<ul>
+		// 					<li id='song-title'>{song.title}</li>
+		// 					<li id='song-artist'>{song?.Artist?.username}</li>
+		// 					<li id='song-description'>{`Description: ${song.description}`}</li>
+		// 					<audio controls controlsList='nodownload'>
+		// 						<source src={song.url} type='audio/mp3' />
+		// 						Your browser does not support the audio element.
+		// 					</audio>
+		// 					<div className='song-detail-buttons'>
+		// 						{!showCreateCommentForm && (
+		// 							<button
+		// 								className='blue-button'
+		// 								onClick={() =>
+		// 									setShowCreateCommentForm(true)
+		// 								}
+		// 							>
+		// 								Add Comment
+		// 							</button>
+		// 						)}
+
+		// 						{!showEditSongForm &&
+		// 							song.userId === loggedInUser?.id && (
+		// 								<button
+		// 									className='orange-button'
+		// 									onClick={() =>
+		// 										setShowEditSongForm(true)
+		// 									}
+		// 								>
+		// 									Edit
+		// 								</button>
+		// 							)}
+		// 						{song.userId === loggedInUser?.id && (
+		// 							<button
+		// 								className='grey-button'
+		// 								onClick={() => deleteSong(songId)}
+		// 							>
+		// 								Delete
+		// 							</button>
+		// 						)}
+		// 					</div>
+		// <div className='ul-comments'>
+		// 	User Comments:
+		// 	<div className='comments'>
+		// 		{comments &&
+		// 			comments?.map((comment, idx) => {
+		// 				return (
+		// 					Number(comment.songId) ===
+		// 						Number(songId) && (
+		// 						<div
+		// 							className='comment-list'
+		// 							key={`${comment.id}`}
+		// 						>
+		// 							{`${comment.body}`}
+		// 							{comment.userId ===
+		// 								loggedInUser?.id && (
+		// 								<>
+		// 									<img
+		// 										className='trash-icon'
+		// 										src='/trash-icon.png'
+		// 										alt=''
+		// 										onClick={() =>
+		// 											dispatch(
+		// 												deleteComment(
+		// 													comment.id
+		// 												)
+		// 											)
+		// 										}
+		// 									/>
+		// 									{!showEditCommentForm && (
+		// 										<img
+		// 											className='edit-icon'
+		// 											src='/edit-icon.png'
+		// 											alt=''
+		// 											onClick={() => {
+		// 												setShowEditCommentForm(
+		// 													true
+		// 												);
+		// 												setCurrentComment(
+		// 													comment
+		// 												);
+		// 											}}
+		// 										/>
+		// 									)}
+		// 								</>
+		// 							)}
+		// 						</div>
+		// 					)
+		// 				);
+		// 			})}
+		// 	</div>
+		// 					</div>
+		// 				</ul>
+		// 			</div>
+		// 		</div>
+		// 	</div>
 	);
 };
 

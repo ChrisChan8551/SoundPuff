@@ -19,7 +19,6 @@ function getLimitedSongsList(songs, searchbarValue = '') {
 		const randomIndex = Math.floor(Math.random() * filteredSongs.length);
 		selectedSongs.push(filteredSongs[randomIndex]);
 		filteredSongs.splice(randomIndex, 1);
-
 	}
 	// console.log(selectedSongs)
 	return selectedSongs;
@@ -96,10 +95,47 @@ const SongsPage = () => {
 	};
 
 	return (
-		<div className='song-container'>
-			<div className='song-detail'>
-				<ul className='ul-songs'>
-					{!showCreateSongForm && loggedInUser?.id && (
+		// <div className='song-container'>
+					// {!showCreateSongForm && loggedInUser?.id && (
+					// 	<button
+					// 		className='add-song-button'
+					// 		onClick={() => setShowCreateSongForm(true)}
+					// 	>
+					// 		Add Song
+					// 	</button>
+					// )}
+		// 	<div className='song-detail'>
+		// 		<ul className='ul-songs'>
+		// 			{allSongs &&
+		// 				allSongs.map((song) => {
+		// 					return (
+		// 						<li key={song.id}>
+		// 							<div
+		// 								className='song-list-item'
+		// 								onClick={() => goToDetails(song.id)}
+		// 							>
+		// 								<div className='song-list-image'>
+		// 									<img
+		// 										className='song-detail-image'
+		// 										src={song.previewImage}
+		// 										alt='Song icon'
+		// 									/>
+		// 								</div>
+		// 								<div>
+		// 									<p className='song-list-title'>
+		// 										{song.title}
+		// 									</p>
+		// 								</div>
+		// 							</div>
+		// 						</li>
+		// 					);
+		// 				})}
+		// 			{createSongForm}
+		// 		</ul>
+		// 	</div>
+		// </div>
+		<div className='song-main-container'>
+			{!showCreateSongForm && loggedInUser?.id && (
 						<button
 							className='add-song-button'
 							onClick={() => setShowCreateSongForm(true)}
@@ -107,32 +143,33 @@ const SongsPage = () => {
 							Add Song
 						</button>
 					)}
-					{allSongs &&
-						allSongs.map((song) => {
-							return (
-								<li key={song.id}>
-									<div
-										className='song-list-item'
-										onClick={() => goToDetails(song.id)}
-									>
-										<div className='song-list-image'>
-											<img
+			<div className='song-container'>
+				{allSongs &&
+					allSongs.map((song) => {
+						return (
+							<div className='song-box' key={song.id} onClick={() => goToDetails(song.id)}>
+								<div className='song-detail'>
+								<div className='song-image'><img
 												className='song-detail-image'
 												src={song.previewImage}
 												alt='Song icon'
-											/>
-										</div>
-										<div>
-											<p className='song-list-title'>
-												{song.title}
-											</p>
-										</div>
-									</div>
-								</li>
-							);
-						})}
-					{createSongForm}
-				</ul>
+											/></div>
+								<div className='song-title'>{song.title}</div>
+								<div className='song-description'></div>
+								</div>
+							</div>
+						);
+					})}
+
+				{/* <div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div>
+				<div className='song-box'></div> */}
+				{createSongForm}
 			</div>
 		</div>
 	);

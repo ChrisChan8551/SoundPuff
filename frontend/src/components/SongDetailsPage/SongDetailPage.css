@@ -11,12 +11,67 @@
 	cursor: pointer;
 }
 
-.song-container {
-	margin: auto;
-	max-width: 2480px;
+.audio-control {
+	margin-left: 20px;
+	margin-top: 20px;
 }
 
-.song-detail {
+.song-detail-main-container {
+	border: red solid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	max-width: 2480px;
+	height: 1100px;
+}
+
+.song-detail-container {
+	border: blue solid;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	justify-items: center;
+	width: 1080px;
+	height: 1020px;
+}
+
+.song-detail-box {
+	/* display: flex; */
+	/* justify-content: center; */
+	/* margin: 20px; */
+	border: orange solid;
+	width: 100%;
+	/* height: 275px; */
+}
+
+.song-detail-details {
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+	align-items: center;
+	border: black solid;
+	width: 270px;
+	height: 270px;
+}
+
+.song-detail-image {
+	border: green solid;
+	width: 150px;
+	height: 150px;
+}
+.song-detail-title {
+	border: black solid;
+	max-width: 250px;
+	height: 20px;
+}
+.song-detail-description {
+	border: black solid;
+	width: 175px;
+	height: 20px;
+}
+
+/* .song-detail {
 	display: flex;
 	justify-content: center;
 	width: 80%;
@@ -49,7 +104,7 @@
 		rgb(232, 232, 232) 0%,
 		rgb(121, 121, 121) 100%
 	);
-}
+} */
 
 li {
 	list-style: none;
@@ -98,8 +153,7 @@ li {
 	border-color: #f50;
 	color: #fff;
 	border-radius: 3px;
-	/* padding: 2px 15px; */
-	/* margin-top: 5px; */
+
 }
 
 .comment-add-button {
@@ -110,8 +164,7 @@ li {
 	border-color: #ccc;
 	color: #fff;
 	border-radius: 3px;
-	/* padding: 2px 15px; */
-	/* margin-top: 5px; */
+
 }
 
 .song-delete-button {
@@ -123,7 +176,7 @@ li {
 	border-color: #ccc;
 	color: #fff;
 	border-radius: 3px;
-	/* margin-left: 10px; */
+
 }
 
 .song-edit-button {
@@ -134,14 +187,13 @@ li {
 	border-color: #f50;
 	color: #fff;
 	border-radius: 3px;
-	/* padding: 2px 15px; */
-	/* margin-top: 5px; */
+
 }
 .create-song-form {
 	max-width: auto;
 	min-height: auto;
 	padding: 7px 7px;
-	/* margin: auto; */
+
 	border-radius: 10px;
 	border: solid 1px #ccc;
 	box-shadow: 1px 2px 5px rgb(0 0 0 / 31%);
@@ -183,7 +235,7 @@ li {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	font-size: 16px;
-	/* background-color: #f50; */
+
 	border-color: black;
 	color: #fff;
 	border-radius: 3px;
