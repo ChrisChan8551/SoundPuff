@@ -13,6 +13,7 @@ const AlbumDetailPage = () => {
 	const { albumId } = useParams();
 	const [showEditAlbumForm, setShowEditAlbumForm] = useState(false);
 	const [showCreateSongForm, setShowCreateSongForm] = useState(false);
+	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 	const album = useSelector((state) => state.album[albumId]);
 	const loggedInUser = useSelector((state) => state.session.user);
 	let albumEditForm;
@@ -50,17 +51,24 @@ const AlbumDetailPage = () => {
 		);
 	}
 
-	const deleteAlbum = (albumId) => {
-		album?.Songs?.map((song) => {
-			return dispatch(removeSong(song.id));
+	const confirmDelete = () => {
+		setShowDeleteConfirmation(true);
+	};
+
+	const cancelDelete = () => {
+		setShowDeleteConfirmation(false);
+	};
+
+	const handleDelete = () => {
+		album?.Songs?.forEach((song) => {
+			dispatch(removeSong(song.id));
 		});
-		return dispatch(removeAlbum(albumId)).then(() => {
+		dispatch(removeAlbum(albumId)).then(() => {
 			history.push('/albums');
 		});
 	};
 
 	const goToDetails = (songId) => {
-		// console.log('albumId', albumId);
 		history.push(`/songs/${songId}`);
 	};
 
@@ -91,7 +99,10 @@ const AlbumDetailPage = () => {
 						>{`Description: ${album.description}`}</li>
 						{album?.Songs?.map((song, idx) => {
 							return (
-								<li key={`${album.id}${song.id}`} onClick={() => goToDetails(song.id)}>
+								<li
+									key={`${album.id}${song.id}`}
+									onClick={() => goToDetails(song.id)}
+								>
 									{`Song #${idx + 1}: ${song.title}`}
 								</li>
 							);
@@ -100,7 +111,8 @@ const AlbumDetailPage = () => {
 				</div>
 				<div className='album-detail-buttons'>
 					{!showCreateSongForm &&
-						album.userId === loggedInUser?.id && (
+						album.userId === loggedInUser?.id &&
+						!showDeleteConfirmation && (
 							<button
 								className='add-song-button'
 								onClick={() => setShowCreateSongForm(true)}
@@ -109,21 +121,47 @@ const AlbumDetailPage = () => {
 							</button>
 						)}
 					{!showEditAlbumForm &&
-						album.userId === loggedInUser?.id && (
-							<button
-								className='album-edit-button'
-								onClick={() => setShowEditAlbumForm(true)}
-							>
-								Edit
-							</button>
+						album.userId === loggedInUser?.id &&
+						!showDeleteConfirmation && (
+							<div>
+								<button
+									className='album-edit-button'
+									onClick={() => setShowEditAlbumForm(true)}
+								>
+									Edit
+								</button>
+							</div>
 						)}
-					{album.userId === loggedInUser?.id && (
-						<button
-							className='album-delete-button'
-							onClick={() => deleteAlbum(albumId)}
-						>
-							Delete
-						</button>
+					{album.userId === loggedInUser?.id &&
+						!showDeleteConfirmation && (
+							<div>
+								<button
+									className='album-delete-button'
+									onClick={confirmDelete}
+								>
+									Delete
+								</button>{' '}
+							</div>
+						)}
+					{showDeleteConfirmation && (
+						<div className='confirmation-dialog'>
+							<div>
+								<button
+									className='add-song-button'
+									onClick={handleDelete}
+								>
+									Confirm Delete
+								</button>
+							</div>
+							<div>
+								<button
+									className='album-delete-button'
+									onClick={cancelDelete}
+								>
+									Cancel
+								</button>
+							</div>
+						</div>
 					)}
 				</div>
 				<div>{createSongForm}</div>

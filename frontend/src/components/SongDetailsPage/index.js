@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Modal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import EditSongFormModal from '../EditSongModal';
@@ -18,6 +19,7 @@ const SongDetailPage = () => {
 	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
 	const [showCreateCommentForm, setShowCreateCommentForm] = useState(false);
 	const [currentComment, setCurrentComment] = useState('');
+	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 	const loggedInUser = useSelector((state) => state.session.user);
 	let songEditForm;
 	let commentEditForm;
@@ -40,9 +42,17 @@ const SongDetailPage = () => {
 		return dispatch(removeComment(commentId));
 	};
 
-	const deleteSong = (songId) => {
+	const confirmDelete = () => {
+		setShowDeleteConfirmation(true);
+	};
+
+	const cancelDelete = () => {
+		setShowDeleteConfirmation(false);
+	};
+
+	const handleDelete = () => {
 		history.push('/songs');
-		return dispatch(removeSong(songId));
+		dispatch(removeSong(songId));
 	};
 
 	if (showEditSongForm && song.userId === loggedInUser?.id) {
@@ -98,24 +108,43 @@ const SongDetailPage = () => {
 					</audio>
 					<div>
 						{!showEditSongForm &&
-							song.userId === loggedInUser?.id && (
+							song.userId === loggedInUser?.id &&
+							!showDeleteConfirmation && (
 								<button
-									className='orange-button'
+									className='update-song-button'
 									onClick={() => setShowEditSongForm(true)}
 								>
 									Edit
 								</button>
 							)}
-						{song.userId === loggedInUser?.id && (
-							<button
-								className='grey-button'
-								onClick={() => deleteSong(songId)}
-							>
-								Delete
-							</button>
+
+						{song.userId === loggedInUser?.id &&
+							!showDeleteConfirmation && (
+								<button
+									className='cancel-update-song-button'
+									onClick={confirmDelete}
+								>
+									Delete
+								</button>
+							)}
+
+						{showDeleteConfirmation && (
+							<>
+								<button
+									className='add-song-button'
+									onClick={handleDelete}
+								>
+									Confirm Delete
+								</button>
+								<button
+									className='song-delete-button'
+									onClick={cancelDelete}
+								>
+									Cancel
+								</button>
+							</>
 						)}
 					</div>
-					{/* <div>[LIKE BUTTON]</div> */}
 					{songEditForm}
 					{commentEditForm}
 					{commentCreateForm}
@@ -174,7 +203,6 @@ const SongDetailPage = () => {
 													)}
 												</>
 											)}
-											
 										</div>
 									)
 								);
@@ -185,115 +213,6 @@ const SongDetailPage = () => {
 				<div className='song-detail-box'></div>
 			</div>
 		</div>
-
-		// 	<div className='song-container'>
-		// 		<div className='song-detail'>
-		// 			<div className='song-detail-info'>
-		// 				<div className='song-detail-image'>
-		// 					<img
-		// 						className='song-detail-image'
-		// 						src={song.previewImage}
-		// 						alt='songimg'
-		// 					></img>
-		// 				</div>
-		// 				{songEditForm}
-		// 				{commentEditForm}
-		// 				{commentCreateForm}
-		// 				<ul>
-		// 					<li id='song-title'>{song.title}</li>
-		// 					<li id='song-artist'>{song?.Artist?.username}</li>
-		// 					<li id='song-description'>{`Description: ${song.description}`}</li>
-		// 					<audio controls controlsList='nodownload'>
-		// 						<source src={song.url} type='audio/mp3' />
-		// 						Your browser does not support the audio element.
-		// 					</audio>
-		// 					<div className='song-detail-buttons'>
-		// 						{!showCreateCommentForm && (
-		// 							<button
-		// 								className='blue-button'
-		// 								onClick={() =>
-		// 									setShowCreateCommentForm(true)
-		// 								}
-		// 							>
-		// 								Add Comment
-		// 							</button>
-		// 						)}
-
-		// 						{!showEditSongForm &&
-		// 							song.userId === loggedInUser?.id && (
-		// 								<button
-		// 									className='orange-button'
-		// 									onClick={() =>
-		// 										setShowEditSongForm(true)
-		// 									}
-		// 								>
-		// 									Edit
-		// 								</button>
-		// 							)}
-		// 						{song.userId === loggedInUser?.id && (
-		// 							<button
-		// 								className='grey-button'
-		// 								onClick={() => deleteSong(songId)}
-		// 							>
-		// 								Delete
-		// 							</button>
-		// 						)}
-		// 					</div>
-		// <div className='ul-comments'>
-		// 	User Comments:
-		// 	<div className='comments'>
-		// 		{comments &&
-		// 			comments?.map((comment, idx) => {
-		// 				return (
-		// 					Number(comment.songId) ===
-		// 						Number(songId) && (
-		// 						<div
-		// 							className='comment-list'
-		// 							key={`${comment.id}`}
-		// 						>
-		// 							{`${comment.body}`}
-		// 							{comment.userId ===
-		// 								loggedInUser?.id && (
-		// 								<>
-		// 									<img
-		// 										className='trash-icon'
-		// 										src='/trash-icon.png'
-		// 										alt=''
-		// 										onClick={() =>
-		// 											dispatch(
-		// 												deleteComment(
-		// 													comment.id
-		// 												)
-		// 											)
-		// 										}
-		// 									/>
-		// 									{!showEditCommentForm && (
-		// 										<img
-		// 											className='edit-icon'
-		// 											src='/edit-icon.png'
-		// 											alt=''
-		// 											onClick={() => {
-		// 												setShowEditCommentForm(
-		// 													true
-		// 												);
-		// 												setCurrentComment(
-		// 													comment
-		// 												);
-		// 											}}
-		// 										/>
-		// 									)}
-		// 								</>
-		// 							)}
-		// 						</div>
-		// 					)
-		// 				);
-		// 			})}
-		// 	</div>
-		// 					</div>
-		// 				</ul>
-		// 			</div>
-		// 		</div>
-		// 	</div>
 	);
 };
 

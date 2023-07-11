@@ -110,9 +110,14 @@ li {
 	list-style: none;
 }
 
+
+.comments {
+	border: black solid 1px;
+
+}
 .comment-list {
 	list-style: none;
-	border: orange solid 1px;
+	border: lightgrey solid .5px;
 }
 .ul-comments {
 	margin-top: 10px;
