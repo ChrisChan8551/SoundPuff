@@ -8,7 +8,7 @@
 } */
 
 .song-main-container {
-	border: red solid;
+	/* border: red solid; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -17,7 +17,7 @@
 	height: 1100px;
 }
 .song-container {
-	border: blue solid;
+	/* border: blue solid; */
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
@@ -30,7 +30,7 @@
 	display: inline-flex;
 	justify-content: center;
 	margin: 20px;
-	border: orange solid;
+	/* border: orange solid; */
 	width: 275px;
 	height: 275px;
 }
@@ -40,25 +40,26 @@
 	flex-direction: column;
 	justify-items: center;
 	align-items: center;
-	border: black solid;
+	/* border: black solid; */
 	width: 270px;
 	height: 270px;
 }
 
 .song-image {
-	border: green solid;
+	/* border: green solid; */
 	width: 150px;
 	height: 150px;
 }
 .song-title {
-	border: black solid;
+	/* border: black solid; */
 	max-width: 250px;
 	height: 20px;
 }
 .song-description {
-	border: black solid;
-	width: 175px;
-	height: 20px;
+	/* border: black solid; */
+	word-break: break-all;
+	/* width: 175px;
+	height: 20px; */
 }
 
 /* .song-detail {
