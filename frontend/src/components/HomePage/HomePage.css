@@ -4,7 +4,7 @@ body {
 }
 
 .home-container {
-	border: red solid;
+	/* border: red solid; */
 	margin: 0 auto;
 	/* min-width: 720px; */
 	max-width: 1980px;
