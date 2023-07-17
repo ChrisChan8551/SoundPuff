@@ -155,7 +155,7 @@ const SongsPage = () => {
 												alt='Song icon'
 											/></div>
 								<div className='song-title'>{song.title}</div>
-								<div className='song-description'>{song.description}</div>
+								<div className='song-description'></div>
 								</div>
 							</div>
 						);

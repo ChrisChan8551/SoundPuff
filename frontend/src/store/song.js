@@ -88,7 +88,9 @@ export const createNewSong = (payload) => async (dispatch) => {
 	if (albumId) {
 		formData.append('albumId', albumId);
 	}
-	if (previewImage) {formData.append('previewImage', previewImage)};
+	if (previewImage) {
+		formData.append('previewImage', previewImage);
+	}
 
 	// for single file
 	if (audioFile) formData.append('audioFile', audioFile);

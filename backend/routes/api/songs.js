@@ -259,6 +259,7 @@ router.get('/', async (req, res) => {
 			where: { createdAt },
 			limit: size,
 			offset: size * (page - 1),
+			
 		});
 
 		if (songs.length) {

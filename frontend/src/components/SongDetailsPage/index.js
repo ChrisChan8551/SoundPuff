@@ -21,9 +21,6 @@ const SongDetailPage = () => {
 	const [currentComment, setCurrentComment] = useState('');
 	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 	const loggedInUser = useSelector((state) => state.session.user);
-	let songEditForm;
-	let commentEditForm;
-	let commentCreateForm;
 
 	useEffect(() => {
 		dispatch(getCommentsBySongId(songId));
@@ -32,10 +29,6 @@ const SongDetailPage = () => {
 	useEffect(() => {
 		dispatch(getOneSong(songId));
 	}, [songId, dispatch]);
-
-	if (!song) return null;
-
-	if (!comments) return null;
 
 	const deleteComment = (commentId) => {
 		history.push(`/songs/${songId}`);
@@ -55,32 +48,38 @@ const SongDetailPage = () => {
 		dispatch(removeSong(songId));
 	};
 
-	if (showEditSongForm && song.userId === loggedInUser?.id) {
-		songEditForm = (
-			<EditSongFormModal
-				song={song}
-				hideForm={() => setShowEditSongForm(false)}
-			/>
-		);
-	}
+	const songEditForm = (song) => {
+		if (showEditSongForm && song.userId === loggedInUser?.id) {
+			return (
+				<EditSongFormModal
+					song={song}
+					hideForm={() => setShowEditSongForm(false)}
+				/>
+			);
+		}
+	};
 
-	if (showEditCommentForm && currentComment.userId === loggedInUser?.id) {
-		commentEditForm = (
-			<EditCommentFormModal
-				comment={currentComment}
-				hideForm={() => setShowEditCommentForm(false)}
-			/>
-		);
-	}
+	const commentEditForm = (comment) => {
+		if (showEditCommentForm && comment.userId === loggedInUser?.id) {
+			return (
+				<EditCommentFormModal
+					comment={comment}
+					hideForm={() => setShowEditCommentForm(false)}
+				/>
+			);
+		}
+	};
 
-	if (showCreateCommentForm && loggedInUser?.id) {
-		commentCreateForm = (
-			<CreateCommentModal
-				song={song}
-				hideForm={() => setShowCreateCommentForm(false)}
-			/>
-		);
-	}
+	const commentCreateForm = (song) => {
+		if (showCreateCommentForm && loggedInUser?.id) {
+			return (
+				<CreateCommentModal
+					song={song}
+					hideForm={() => setShowCreateCommentForm(false)}
+				/>
+			);
+		}
+	};
 
 	return (
 		<div className='song-detail-main-container'>
@@ -145,9 +144,9 @@ const SongDetailPage = () => {
 							</>
 						)}
 					</div>
-					{songEditForm}
-					{commentEditForm}
-					{commentCreateForm}
+					{songEditForm(song)}
+					{commentEditForm(currentComment)}
+					{commentCreateForm(song)}
 				</div>
 				<div className='song-detail-box'></div>
 				<div className='song-detail-box'>
@@ -162,51 +161,51 @@ const SongDetailPage = () => {
 							</button>
 						)}
 						{comments &&
-							comments?.map((comment, idx) => {
-								return (
-									Number(comment.songId) ===
-										Number(songId) && (
-										<div
-											className='comment-list'
-											key={`${comment.id}`}
-										>
-											{`${comment.body}`}
-											{comment.userId ===
-												loggedInUser?.id && (
-												<>
-													<img
-														className='trash-icon'
-														src='/trash-icon.png'
-														alt=''
-														onClick={() =>
-															dispatch(
-																deleteComment(
-																	comment.id
-																)
+							comments
+								.filter(
+									(comment) =>
+										Number(comment.songId) === Number(songId)
+								)
+								.map((comment, idx) => (
+									<div
+										className='comment-list'
+										key={`${comment.id}`}
+									>
+										{`${comment.body}`}
+										{comment.userId ===
+											loggedInUser?.id && (
+											<>
+												<img
+													className='trash-icon'
+													src='/trash-icon.png'
+													alt=''
+													onClick={() =>
+														dispatch(
+															deleteComment(
+																comment.id
 															)
-														}
+														)
+													}
+												/>
+												{!showEditCommentForm && (
+													<img
+														className='edit-icon'
+														src='/edit-icon.png'
+														alt=''
+														onClick={() => {
+															setShowEditCommentForm(
+																true
+															);
+															setCurrentComment(
+																comment
+															);
+														}}
 													/>
-													{!showEditCommentForm && (
-														<img
-															className='edit-icon'
-															src='/edit-icon.png'
-															alt=''
-															onClick={() => {
-																setShowEditCommentForm(
-																	true
-																);
-																setCurrentComment(
-																	comment
-																);
-															}}
-														/>
-													)}
-												</>
-											)}
-										</div>
-									)
-								);
-							})}
+												)}
+											</>
+										)}
+									</div>
+								))}
 					</div>
 				</div>
 				<div className='song-detail-box'></div>
