@@ -29,7 +29,6 @@
 	opacity: 0;
 }
 
-
 .orange-button {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
@@ -95,7 +94,7 @@ img {
 	right: 213px;
 	width: 40px;
 	height: 40px;
-	/* background-color: orange; */
+	border-radius: 20%;
 }
 
 .nav-text-title {
