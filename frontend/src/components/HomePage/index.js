@@ -3,6 +3,7 @@ import './HomePage.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Footer from '../Footer';
 
 function HomePage() {
 	const images = [
@@ -23,14 +24,18 @@ function HomePage() {
 	};
 
 	return (
-		<div className='home-container'>
-			<Slider {...settings}>
-				{images.map((imageUrl, index) => (
-					<div key={index}>
-						<img src={imageUrl} alt='' />
-					</div>
-				))}
-			</Slider>
+		<div>
+			<div className='home-container'>
+				<Slider {...settings}>
+					{images.map((imageUrl, index) => (
+						<div key={index}>
+							<img src={imageUrl} alt='' />
+						</div>
+					))}
+				</Slider>
+			</div>
+
+			<Footer />
 		</div>
 	);
 }
