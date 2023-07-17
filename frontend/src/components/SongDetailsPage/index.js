@@ -81,6 +81,10 @@ const SongDetailPage = () => {
 		}
 	};
 
+	if (!song || !comments) {
+		return null;
+	}
+
 	return (
 		<div className='song-detail-main-container'>
 			<div className='song-detail-container'>
@@ -164,7 +168,8 @@ const SongDetailPage = () => {
 							comments
 								.filter(
 									(comment) =>
-										Number(comment.songId) === Number(songId)
+										Number(comment.songId) ===
+										Number(songId)
 								)
 								.map((comment, idx) => (
 									<div

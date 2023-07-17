@@ -10,11 +10,13 @@
 .song-main-container {
 	/* border: red solid; */
 	display: flex;
+	margin: 0 auto;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	max-width: 2480px;
+	max-width: 1175px;
 	height: 1100px;
+	background-color: rgb(245, 245, 245);
 }
 .song-container {
 	/* border: blue solid; */

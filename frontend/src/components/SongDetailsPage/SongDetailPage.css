@@ -18,12 +18,14 @@
 
 .song-detail-main-container {
 	/* border: red solid; */
+	margin: 0 auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	max-width: 2480px;
+	width: 1175px;
 	height: 1100px;
+	background-color: rgb(245, 245, 245);
 }
 
 .song-detail-container {
@@ -110,14 +112,12 @@ li {
 	list-style: none;
 }
 
-
 .comments {
 	border: black solid 1px;
-
 }
 .comment-list {
 	list-style: none;
-	border: lightgrey solid .5px;
+	border: lightgrey solid 0.5px;
 }
 .ul-comments {
 	margin-top: 10px;
@@ -158,7 +158,6 @@ li {
 	border-color: #f50;
 	color: #fff;
 	border-radius: 3px;
-
 }
 
 .comment-add-button {
@@ -169,7 +168,6 @@ li {
 	border-color: #ccc;
 	color: #fff;
 	border-radius: 3px;
-
 }
 
 .song-delete-button {
@@ -181,7 +179,6 @@ li {
 	border-color: #ccc;
 	color: #fff;
 	border-radius: 3px;
-
 }
 
 .song-edit-button {
@@ -192,7 +189,6 @@ li {
 	border-color: #f50;
 	color: #fff;
 	border-radius: 3px;
-
 }
 .create-song-form {
 	max-width: auto;
