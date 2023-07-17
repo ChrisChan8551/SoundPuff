@@ -1,5 +1,12 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
 .home-container {
-	margin: auto;
-	min-width: 720px;
-	max-width: 2480px;
+	border: red solid;
+	margin: 0 auto;
+	/* min-width: 720px; */
+	max-width: 1980px;
+	background-color: rgb(238, 231, 231);
 }
