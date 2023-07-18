@@ -16,7 +16,7 @@ const {
 router.post('/', requireAuth, async (req, res) => {
 	const { body, songId } = req.body;
 	// const { songId } = req.params;
-	// console.log('*******BACK END CREATE COMMENT ******', body, songId);
+	console.log('*******BACK END CREATE COMMENT ******', 'body: ', body, songId);
 
 	if (!songId) {
 		return res

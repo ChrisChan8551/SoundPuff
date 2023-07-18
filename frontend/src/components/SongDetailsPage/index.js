@@ -6,7 +6,11 @@ import EditSongFormModal from '../EditSongModal';
 import EditCommentFormModal from '../EditComment';
 import CreateCommentModal from '../CreateCommentModal';
 import { getOneSong, removeSong } from '../../store/song';
-import { removeComment, getCommentsBySongId } from '../../store/comment';
+import {
+	createNewComment,
+	removeComment,
+	getCommentsBySongId,
+} from '../../store/comment';
 import './SongDetailPage.css';
 
 const SongDetailPage = () => {
@@ -19,8 +23,10 @@ const SongDetailPage = () => {
 	const [showEditCommentForm, setShowEditCommentForm] = useState(false);
 	const [showCreateCommentForm, setShowCreateCommentForm] = useState(false);
 	const [currentComment, setCurrentComment] = useState('');
+	const [body, setBody] = useState('');
 	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 	const loggedInUser = useSelector((state) => state.session.user);
+	const [errors, setErrors] = useState([]);
 
 	useEffect(() => {
 		dispatch(getCommentsBySongId(songId));
@@ -70,14 +76,28 @@ const SongDetailPage = () => {
 		}
 	};
 
-	const commentCreateForm = (song) => {
-		if (showCreateCommentForm && loggedInUser?.id) {
-			return (
-				<CreateCommentModal
-					song={song}
-					hideForm={() => setShowCreateCommentForm(false)}
-				/>
-			);
+	// const commentCreateForm = (song) => {
+	// 	if (showCreateCommentForm && loggedInUser?.id) {
+	// 		return (
+	// 			<CreateCommentModal
+	// 				song={song}
+	// 				hideForm={() => setShowCreateCommentForm(false)}
+	// 			/>
+	// 		);
+	// 	}
+	// };
+	const createComment = async (e) => {
+		if (e.keyCode === 13 && body.trimEnd() !== '') {
+			e.preventDefault();
+
+			let payload = { body, userId: loggedInUser.id, songId };
+			let data = await dispatch(createNewComment(payload));
+			setBody('');
+			if (data.errors) {
+				setErrors([...Object.values(data.errors)]);
+			} else {
+				history.push(`/songs/${songId}`);
+			}
 		}
 	};
 
@@ -150,20 +170,20 @@ const SongDetailPage = () => {
 					</div>
 					{songEditForm(song)}
 					{commentEditForm(currentComment)}
-					{commentCreateForm(song)}
+					{/* {commentCreateForm(song)} */}
 				</div>
 				<div className='song-detail-box'></div>
 				<div className='song-detail-box'>
 					<div className='comments'>COMMENTS</div>
 					<div className='comments'>
-						{!showCreateCommentForm && (
+						{/* {!showCreateCommentForm && (
 							<button
 								className='blue-button'
 								onClick={() => setShowCreateCommentForm(true)}
 							>
 								Add Comment
 							</button>
-						)}
+						)} */}
 						{comments &&
 							comments
 								.filter(
@@ -211,6 +231,19 @@ const SongDetailPage = () => {
 										)}
 									</div>
 								))}
+						<form className='comment-form'>
+							<label>
+								<textarea
+									onKeyUp={createComment}
+									type='text'
+									placeholder='Add a comment'
+									className='comment-input'
+									value={body}
+									required
+									onChange={(e) => setBody(e.target.value)}
+								/>
+							</label>
+						</form>
 					</div>
 				</div>
 				<div className='song-detail-box'></div>
