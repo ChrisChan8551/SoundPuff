@@ -113,11 +113,12 @@ li {
 }
 
 .comments {
-	border: black solid 1px;
+	border: lightgrey solid 1px;
 }
 .comment-list {
+	display: flex;
 	list-style: none;
-	border: lightgrey solid 0.5px;
+	/* border: lightgrey solid 0.5px; */
 }
 .ul-comments {
 	margin-top: 10px;

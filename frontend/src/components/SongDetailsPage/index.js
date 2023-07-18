@@ -172,10 +172,10 @@ const SongDetailPage = () => {
 					{commentEditForm(currentComment)}
 					{/* {commentCreateForm(song)} */}
 				</div>
-				<div className='song-detail-box'></div>
+				<div></div>
 				<div className='song-detail-box'>
-					<div className='comments'>COMMENTS</div>
-					<div className='comments'>
+					<div >User Comments</div>
+					<div>
 						{/* {!showCreateCommentForm && (
 							<button
 								className='blue-button'
@@ -199,7 +199,7 @@ const SongDetailPage = () => {
 										{`${comment.body}`}
 										{comment.userId ===
 											loggedInUser?.id && (
-											<>
+											<div className='comment-icons'>
 												<img
 													className='trash-icon'
 													src='/trash-icon.png'
@@ -227,7 +227,7 @@ const SongDetailPage = () => {
 														}}
 													/>
 												)}
-											</>
+											</div>
 										)}
 									</div>
 								))}
