@@ -137,7 +137,7 @@ const SongsPage = () => {
 		<div className='song-main-container'>
 			{!showCreateSongForm && loggedInUser?.id && (
 						<button
-							className='add-song-button'
+							className='blue-button'
 							onClick={() => setShowCreateSongForm(true)}
 						>
 							Add Song

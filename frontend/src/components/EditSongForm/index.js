@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { editCurrentSong, getOneSong } from '../../store/song';
@@ -7,10 +7,10 @@ import './EditSongForm.css';
 const EditSongForm = ({ song, hideForm }) => {
 	const dispatch = useDispatch();
 	const { songId } = useParams();
-	const [title, setTitle] = useState(song.title || '' );
-	const [description, setDescription] = useState(song.description || '' );
-	const [url, setUrl] = useState(song.url || '' );
-	const [previewImage, setPreviewImage] = useState(song.previewImage) || '' ;
+	const [title, setTitle] = useState(song.title || '');
+	const [description, setDescription] = useState(song.description || '');
+	const [url, setUrl] = useState(song.url || '');
+	const [previewImage, setPreviewImage] = useState(song.previewImage) || '';
 	const [errors, setErrors] = useState([]);
 	const [disabled, setDisabled] = useState(false);
 	const [audioFile, setAudioFile] = useState('');
@@ -85,7 +85,7 @@ const EditSongForm = ({ song, hideForm }) => {
 					/>
 				</label>
 				<label className='edit-label-form'>
-					Url
+					Upload Song File:
 					<input
 						type='file'
 						accept='audio/*'
@@ -105,21 +105,22 @@ const EditSongForm = ({ song, hideForm }) => {
 						}}
 					/>
 				</label>
-
-				<button
-					className='update-song-button'
-					type='submit'
-					disabled={disabled}
-				>
-					Update
-				</button>
-				<button
-					className='cancel-update-song-button'
-					type='button'
-					onClick={handleClickAway}
-				>
-					Cancel
-				</button>
+				<div className='button-container'>
+					<button
+						className='orange-button'
+						type='submit'
+						disabled={disabled}
+					>
+						Update
+					</button>
+					<button
+						className='grey-button'
+						type='button'
+						onClick={handleClickAway}
+					>
+						Cancel
+					</button>
+				</div>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>

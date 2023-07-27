@@ -23,7 +23,7 @@
 	flex-direction: column;
 	word-wrap: break-word;
 	position: absolute;
-	background-color: rgb(235, 230, 230);
+	/* background-color: rgb(235, 230, 230); */
 	border-radius: 5px;
 	padding: 15px;
 	max-width: 1300px;

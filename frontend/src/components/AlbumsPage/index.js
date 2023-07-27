@@ -37,7 +37,7 @@ const AlbumsPage = () => {
 			<div>
 				{
 					<button
-						className='create-album-button'
+						className='orange-button'
 						onClick={() => setShowCreateAlbumForm(true)}
 					>
 						Create An Album

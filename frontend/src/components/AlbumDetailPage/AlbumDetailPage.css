@@ -21,7 +21,7 @@
 	display: inline-flex;
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
-	border: orange solid;
+	/* border: orange solid; */
 	width: 100%;
 	color: black;
 	margin-top: 20px;
@@ -41,6 +41,11 @@
 
 li {
 	list-style: none;
+}
+
+.list-song:hover {
+	cursor: pointer;
+	color: #f50;
 }
 
 #album-title {

@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
 					<li>{user.username}</li>
 					<li>{user.email}</li>
 					<li>
-						<button className='logout-button-font' onClick={logout}>
+						<button className='grey-button' onClick={logout}>
 							Sign Out
 						</button>
 					</li>

@@ -73,16 +73,16 @@ function CreateAlbumForm({ hideForm }) {
 
 					/>
 				</label>
-				<div>
+				<div className='button-container'>
 					<button
-						className='create-album-button'
+						className='orange-button'
 						type='submit'
 						disabled={errors.length > 0}
 					>
 						Create Album
 					</button>
 					<button
-						className='cancel-create-album-button'
+						className='grey-button'
 						type='button'
 						onClick={handleClickAway}
 					>

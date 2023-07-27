@@ -134,7 +134,7 @@ const SongDetailPage = () => {
 							song.userId === loggedInUser?.id &&
 							!showDeleteConfirmation && (
 								<button
-									className='update-song-button'
+									className='orange-button'
 									onClick={() => setShowEditSongForm(true)}
 								>
 									Edit
@@ -144,7 +144,7 @@ const SongDetailPage = () => {
 						{song.userId === loggedInUser?.id &&
 							!showDeleteConfirmation && (
 								<button
-									className='cancel-update-song-button'
+									className='grey-button'
 									onClick={confirmDelete}
 								>
 									Delete
@@ -154,13 +154,13 @@ const SongDetailPage = () => {
 						{showDeleteConfirmation && (
 							<>
 								<button
-									className='add-song-button'
+									className='blue-button'
 									onClick={handleDelete}
 								>
 									Confirm Delete
 								</button>
 								<button
-									className='song-delete-button'
+									className='grey-button'
 									onClick={cancelDelete}
 								>
 									Cancel
@@ -172,9 +172,9 @@ const SongDetailPage = () => {
 					{commentEditForm(currentComment)}
 					{/* {commentCreateForm(song)} */}
 				</div>
-				<div></div>
+
 				<div className='song-detail-box'>
-					<div >User Comments</div>
+					<h2>User Comments</h2>
 					<div>
 						{/* {!showCreateCommentForm && (
 							<button
@@ -246,8 +246,9 @@ const SongDetailPage = () => {
 						</form>
 					</div>
 				</div>
+				{/* <div className='song-detail-box'></div>
 				<div className='song-detail-box'></div>
-				<div className='song-detail-box'></div>
+				<div className='song-detail-box'></div> */}
 			</div>
 		</div>
 	);

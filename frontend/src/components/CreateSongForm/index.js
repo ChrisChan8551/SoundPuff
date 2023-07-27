@@ -75,7 +75,7 @@ function CreateSongForm({ album, hideForm }) {
 					/>
 				</label>
 				<label className='create-album-label-form'>
-					Url:
+					Upload Song File:
 					<input
 						type='file'
 						accept='audio/*'
@@ -99,16 +99,16 @@ function CreateSongForm({ album, hideForm }) {
 						onChange={(e) => setPreviewImage(e.target.value)}
 					/>
 				</label>
-				<div>
+				<div className='button-container'>
 					<button
-						className='create-album-button'
+						className='orange-button'
 						type='submit'
 						disabled={errors.length > 0}
 					>
 						Create Song
 					</button>
 					<button
-						className='cancel-create-album-button'
+						className='grey-button'
 						type='button'
 						onClick={handleClickAway}
 					>

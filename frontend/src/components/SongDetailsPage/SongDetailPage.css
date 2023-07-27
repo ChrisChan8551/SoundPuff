@@ -62,6 +62,10 @@
 	width: 150px;
 	height: 150px;
 }
+
+.song-detail-image:hover {
+	border: #f50 solid 1px;
+}
 .song-detail-title {
 	/* border: black solid; */
 	max-width: 250px;

@@ -99,11 +99,11 @@ const AlbumDetailPage = () => {
 						>{`Description: ${album.description}`}</li>
 						{album?.Songs?.map((song, idx) => {
 							return (
-								<li
+								<li className='list-song'
 									key={`${album.id}${song.id}`}
 									onClick={() => goToDetails(song.id)}
 								>
-									{`Song #${idx + 1}: ${song.title}`}
+									{`${idx + 1}) ${song.title}`}
 								</li>
 							);
 						})}
@@ -114,7 +114,7 @@ const AlbumDetailPage = () => {
 						album.userId === loggedInUser?.id &&
 						!showDeleteConfirmation && (
 							<button
-								className='add-song-button'
+								className='blue-button'
 								onClick={() => setShowCreateSongForm(true)}
 							>
 								Add Song
@@ -125,7 +125,7 @@ const AlbumDetailPage = () => {
 						!showDeleteConfirmation && (
 							<div>
 								<button
-									className='album-edit-button'
+									className='orange-button'
 									onClick={() => setShowEditAlbumForm(true)}
 								>
 									Edit
@@ -136,7 +136,7 @@ const AlbumDetailPage = () => {
 						!showDeleteConfirmation && (
 							<div>
 								<button
-									className='album-delete-button'
+									className='grey-button'
 									onClick={confirmDelete}
 								>
 									Delete

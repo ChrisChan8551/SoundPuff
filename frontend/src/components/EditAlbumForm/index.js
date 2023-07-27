@@ -97,16 +97,16 @@ const EditAlbumForm = ({ album, hideForm }) => {
 						}}
 					/>
 				</label>
-				<div className='edit-album-button-container'>
+				<div className='button-container'>
 					<button
-						className='update-album-button'
+						className='orange-button'
 						type='submit'
 						disabled={disabled}
 					>
 						Update
 					</button>
 					<button
-						className='cancel-update-album-button'
+						className='grey-button'
 						type='button'
 						onClick={handleClickAway}
 					>

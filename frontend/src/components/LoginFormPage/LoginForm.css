@@ -41,6 +41,7 @@ form {
 
 .create-button-font:hover {
 	cursor: pointer;
+	border-color: white;
 }
 
 .login-button-font {
