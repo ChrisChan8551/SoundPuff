@@ -11,6 +11,13 @@ body {
 	background-color: rgb(238, 231, 231);
 }
 
+.home-container:hover {
+	cursor: grab;
+}
+.home-container:active {
+	cursor: grabbing;
+}
+
 .footer {
 	display: flex;
 	/* border: red solid; */

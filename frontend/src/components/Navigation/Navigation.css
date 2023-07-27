@@ -1,5 +1,5 @@
 #navigation-bar {
-	background-color: #141414;
+	background-color: #333;
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	min-width: 720px;
@@ -80,6 +80,7 @@
 	margin: 0;
 	min-width: 390px;
 	max-width: 100%;
+
 }
 
 img {
@@ -101,6 +102,7 @@ img {
 	color: rgb(240, 240, 240);
 	font-size: 20px;
 	font-weight: bolder;
+
 }
 
 .nav-text {
@@ -115,7 +117,7 @@ img {
 	font-size: large;
 	font-weight: bold;
 	text-decoration: none;
-
+	/* padding: 5px; */
 }
 
 .nav-item {
@@ -123,10 +125,13 @@ img {
 	justify-content: center;
 	align-items: center;
 	margin: 0px 10px 0px 10px;
+
+
 }
 
 #all-nav-items {
 	display: inline-flex;
+
 }
 
 .profile-dropdown {
