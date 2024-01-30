@@ -46,9 +46,9 @@
 	width: 270px;
 	height: 270px;
 }
-.song-detail:hover {
+/* .song-detail:hover {
 	cursor: pointer;
-}
+} */
 
 .song-image {
 	/* border: green solid; */

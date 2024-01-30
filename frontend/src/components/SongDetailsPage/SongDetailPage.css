@@ -65,6 +65,7 @@
 
 .song-detail-image:hover {
 	border: #f50 solid 1px;
+    cursor: pointer;
 }
 .song-detail-title {
 	/* border: black solid; */
