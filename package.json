@@ -29,7 +29,9 @@
     "aws-sdk": "^2.1410.0",
     "express-async-handler": "^1.2.0",
     "multer": "^1.4.5-lts.1",
+    "react-h5-audio-player": "^3.9.1",
     "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "wavesurfer.js": "^7.7.3"
   }
 }
