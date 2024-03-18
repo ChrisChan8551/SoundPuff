@@ -1,1 +1,40 @@
-/* TODO Add site wide styles */
+.add-button {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: blue;
+	border-color: white;
+	color: #fff;
+	border-radius: 3px;
+}
+
+.update-button {
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	background-color: #f50;
+	border-color: #f50;
+	color: #fff;
+	border-radius: 3px;
+	margin-top: 5px;
+}
+
+.button:hover {
+	cursor: pointer;
+	border-color: white;
+}
+
+.cancel-button {
+	background-color: black;
+	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+		Garuda, Verdana, Tahoma, sans-serif;
+	font-size: 16px;
+	border-color: black;
+	color: #fff;
+	border-radius: 3px;
+	margin-left: 10px;
+}
+
+li {
+	list-style: none;
+}

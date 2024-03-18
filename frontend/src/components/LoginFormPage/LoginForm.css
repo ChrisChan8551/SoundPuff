@@ -6,14 +6,6 @@ form {
 	flex-direction: column;
 }
 
-/* .background-image {
-	background-image: url(https://cdn.pixabay.com/photo/2018/01/16/10/18/headphones-3085681_960_720.jpg);
-	max-width: 1920px;
-	min-height: 1080px;
-	background-size: cover;
-	background-repeat: no-repeat;
-} */
-
 .input-form {
 	display: flex;
 	flex-direction: column;
@@ -22,7 +14,6 @@ form {
 .login-label-form {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
-	/* font-weight:bold; */
 }
 
 .create-button-font {

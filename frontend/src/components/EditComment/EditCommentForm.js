@@ -34,14 +34,14 @@ const EditCommentForm = ({ comment, hideForm }) => {
 				onChange={(e) => setBody(e.target.value)}
 			/>
 			<button
-				className='song-edit-button'
+				className='update-button'
 				type='submit'
 				onClick={handleSubmit}
 			>
 				Update
 			</button>
 			<button
-				className='cancel-update-song-button'
+				className='cancel-button'
 				type='button'
 				onClick={handleClickAway}
 			>

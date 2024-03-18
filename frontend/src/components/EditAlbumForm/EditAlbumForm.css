@@ -21,36 +21,3 @@
 		Garuda, Verdana, Tahoma, sans-serif;
 }
 
-.update-album-button {
-	background-color: black;
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-	font-size: 16px;
-	background-color: #f50;
-	border-color: #f50;
-	color: #fff;
-	border-radius: 3px;
-	margin-top: 10px;
-}
-
-.update-album-button:hover {
-	cursor: pointer;
-	border-color: white;
-}
-
-.cancel-update-album-button {
-	background-color: black;
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-	font-size: 16px;
-	/* background-color: #f50; */
-	border-color: black;
-	color: #fff;
-	border-radius: 3px;
-	margin-left: 10px;
-}
-
-.cancel-update-album-button:hover {
-	cursor: pointer;
-	border-color: white;
-}

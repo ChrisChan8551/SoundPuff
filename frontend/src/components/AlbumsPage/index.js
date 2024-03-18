@@ -57,7 +57,7 @@ const AlbumsPage = () => {
         <div className='song-main-container'>
             {/* {!showCreateAlbumForm && loggedInUser?.id && (
 						<button
-							className='add-song-button'
+							className='add-button'
 							onClick={() => setShowCreateAlbumForm(true)}
 						>
 							Create Album

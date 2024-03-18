@@ -21,7 +21,6 @@
 	display: inline-flex;
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
-	/* border: orange solid; */
 	width: 100%;
 	color: black;
 	margin-top: 20px;
@@ -37,10 +36,6 @@
 		rgb(232, 232, 232) 0%,
 		rgb(121, 121, 121) 100%
 	);
-}
-
-li {
-	list-style: none;
 }
 
 .list-song:hover {
@@ -64,40 +59,4 @@ li {
 	flex-direction: column;
 	margin-top: 20px;
 	min-width: 100px;
-}
-
-.album-delete-button {
-	background-color: black;
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-	font-size: 16px;
-	background-color: black;
-	border-color: #ccc;
-	color: #fff;
-	border-radius: 3px;
-	/* margin-left: 10px; */
-}
-
-.album-edit-button {
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-	font-size: 16px;
-	background-color: #f50;
-	border-color: #f50;
-	color: #fff;
-	border-radius: 3px;
-	/* padding: 2px 15px; */
-	/* margin-top: 5px; */
-}
-
-.add-song-button {
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-	font-size: 16px;
-	background-color: blue;
-	border-color: white;
-	color: #fff;
-	border-radius: 3px;
-	/* padding: 2px 15px; */
-	/* margin-bottom: 2px; */
 }

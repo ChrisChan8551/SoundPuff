@@ -14,18 +14,6 @@
 	background: #ebebeb;
 }
 
-.create-album-button {
-	background-color: black;
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-	font-size: 16px;
-	background-color: #f50;
-	border-color: #f50;
-	color: #fff;
-	border-radius: 3px;
-	margin-top: 5px;
-}
-
 .create-album-input {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
@@ -35,31 +23,7 @@
 	flex-direction: column;
 }
 
-.create-album-label-form {
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-}
-
-.create-album-button:hover {
-	cursor: pointer;
-}
-
-.cancel-create-album-button {
-	background-color: black;
-	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-		Garuda, Verdana, Tahoma, sans-serif;
-	font-size: 16px;
-	/* background-color: #f50; */
-	border-color: black;
-	color: #fff;
-	border-radius: 3px;
-	margin-left: 10px;
-}
-
 .album-detail {
-	/* position: absolute; */
-	/* top: 50px;
-	left: 70px; */
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	min-width: 720px;
@@ -77,8 +41,7 @@
 		rgb(232, 232, 232) 0%,
 		rgb(121, 121, 121) 100%
 	);
-	/* width: 50%; */
-	/* padding-bottom: 50%; */
+
 }
 
 .album-list-item:hover {
@@ -113,18 +76,8 @@
 .album-list-item {
 	display: inline-flex;
 	justify-content: left;
-	/* background-color: rgb(71, 71, 71); */
-	/* color: #ccc; */
 	margin-top: 20px;
 	width: 500px;
 	font-size: 30px;
-	/* flex-shrink: 0; */
-}
 
-/* .nav-pic {
-	position: relative;
-} */
-
-li {
-	list-style: none;
 }

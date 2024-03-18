@@ -147,7 +147,7 @@ const AlbumDetailPage = () => {
 						<div className='confirmation-dialog'>
 							<div>
 								<button
-									className='add-song-button'
+									className='add-button'
 									onClick={handleDelete}
 								>
 									Confirm Delete
@@ -155,7 +155,7 @@ const AlbumDetailPage = () => {
 							</div>
 							<div>
 								<button
-									className='album-delete-button'
+									className='cancel-button'
 									onClick={cancelDelete}
 								>
 									Cancel

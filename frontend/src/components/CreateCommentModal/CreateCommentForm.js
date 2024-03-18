@@ -48,14 +48,14 @@ function CreateCommentForm({ hideForm }) {
 			</label>
 			<div>
 				<button
-					className='create-album-button'
+					className='update-button'
 					type='submit'
 					disabled={errors.length > 0}
 				>
 					Create
 				</button>
 				<button
-					className='cancel-create-album-button'
+					className='cancel-button'
 					type='button'
 					onClick={handleClickAway}
 				>
