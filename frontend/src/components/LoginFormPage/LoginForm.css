@@ -30,10 +30,6 @@ form {
 	margin-right: 10px;
 }
 
-.create-button-font:hover {
-	cursor: pointer;
-	border-color: white;
-}
 
 .login-button-font {
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
@@ -49,10 +45,6 @@ form {
 	margin-right: 10px;
 }
 
-.login-button-font:hover {
-	border-color: white;
-	cursor: pointer;
-}
 
 .login-container {
 	max-width: auto;
