@@ -63,7 +63,7 @@
 	height: 150px;
 }
 
-.song-detail-image:hover {
+.song-image:hover {
 	border: #f50 solid 1px;
 	cursor: pointer;
 }

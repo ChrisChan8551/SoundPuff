@@ -150,7 +150,7 @@ const SongsPage = () => {
                             <div className='song-box'>
                                 <div className='song-detail'>
                                     <div className='song-image'><img
-                                        className='song-detail-image'
+                                        className='song-image'
                                         src={song.previewImage}
                                         alt='Song icon' key={song.id} onClick={() => goToDetails(song.id)}
                                     /></div>

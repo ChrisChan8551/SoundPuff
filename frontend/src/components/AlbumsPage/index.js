@@ -71,7 +71,7 @@ const AlbumsPage = () => {
                             <div className='song-box'>
                                 <div className='song-detail'>
                                     <div className='song-image'><img
-                                        className='song-detail-image'
+                                        className='song-image'
                                         src={album.previewImage}
                                         alt='Song icon' key={album.id} onClick={() => goToDetails(album.id)}
                                     /></div>
