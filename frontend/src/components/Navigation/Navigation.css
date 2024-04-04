@@ -3,7 +3,7 @@
 	font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
 		Garuda, Verdana, Tahoma, sans-serif;
 	min-width: 720px;
-	max-width: 2480px;
+	/* max-width: 2480px; */
 	height: 60px;
 	margin: auto;
 	position: relative;
@@ -91,7 +91,7 @@ button:hover {
 	/* display: block; */
 	position: relative;
 	margin: 0;
-	min-width: 390px;
+	min-width: 720px;
 	max-width: 100%;
 }
 

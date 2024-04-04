@@ -13,6 +13,7 @@ import AlbumDetailPage from './components/AlbumDetailPage';
 import SongDetailPage from './components/SongDetailsPage';
 import SongsbyCurrentUser from './components/SongsByCurrentUser';
 import './index.css'
+import Footer from './components/Footer'
 
 function App() {
     const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
                     </Route>
                 </Switch>
             )}
+            <Footer />
         </>
     );
 }

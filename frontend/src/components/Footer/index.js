@@ -1,45 +1,27 @@
-import React from 'react';
 
-const footerIcons = [
-	{
-		src: 'https://cdn.pixabay.com/photo/2016/06/13/17/30/mail-1454731_1280.png',
-		alt: 'Email',
-		onClick: () => {
-			window.location.href = 'mailto:chrischan8551@gmail.com';
-		},
-	},
-	{
-		src: 'https://cdn.pixabay.com/photo/2016/11/18/11/16/social-1834011_640.png',
-		alt: 'LinkedIn',
-		onClick: () => {
-			window.location.href =
-				'https://www.linkedin.com/in/chris-chan-94567289/';
-		},
-	},
-	{
-		src: 'https://cdn.pixabay.com/photo/2017/08/05/11/24/logo-2582757_640.png',
-		alt: 'GitHub',
-		onClick: () => {
-			window.location.href =
-				'https://github.com/ChrisChan8551/SoundPuff.git';
-		},
-	},
-];
+import React from 'react';
+import { AiOutlineLinkedin, AiOutlineGithub, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
+import './footer.css';
 
 function Footer() {
-	return (
-		<div className='footer'>
-			{footerIcons.map((icon, index) => (
-				<img
-					key={index}
-					className='icon'
-					src={icon.src}
-					alt={icon.alt}
-					onClick={icon.onClick}
-				/>
-			))}
-		</div>
-	);
+  return (
+    <div className='footer-container'>
+      <div className='footer-icons'>
+        <a href='https://www.linkedin.com/in/chris-chan-94567289/' target='_blank' rel='noopener noreferrer'>
+          <AiOutlineLinkedin className='footer-icon' />
+        </a>
+        <a href='https://github.com/ChrisChan8551' target='_blank' rel='noopener noreferrer'>
+          <AiOutlineGithub className='footer-icon' />
+        </a>
+        <a href='mailto:chrischan8551@gmail.com'>
+          <AiOutlineMail className='footer-icon' />
+        </a>
+        <a href='https://chrischan8551.github.io/' target='_blank' rel='noopener noreferrer'>
+          <AiOutlineUser className='footer-icon' />
+        </a>
+      </div>
+    </div>
+  );
 }
 
 export default Footer;
