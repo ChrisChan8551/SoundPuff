@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Modal } from '../../context/Modal';
+// import { Modal } from '../../context/Modal';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import EditSongFormModal from '../EditSongModal';
-import EditCommentFormModal from '../EditComment';
-import CreateCommentModal from '../CreateCommentModal';
+import EditCommentForm from '../EditComment/EditCommentForm';
 import { getOneSong, removeSong } from '../../store/song';
 import {
     createNewComment,
@@ -15,8 +14,6 @@ import './SongDetailPage.css';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import WaveSurfer from 'wavesurfer.js'
-import Regions from 'wavesurfer.js/dist/plugins/regions.esm.js'
-
 
 const SongDetailPage = () => {
     const dispatch = useDispatch();
@@ -26,17 +23,15 @@ const SongDetailPage = () => {
     const comments = Object.values(useSelector((state) => state.comment));
     const [showEditSongForm, setShowEditSongForm] = useState(false);
     const [showEditCommentForm, setShowEditCommentForm] = useState(false);
-    const [showCreateCommentForm, setShowCreateCommentForm] = useState(false);
     const [currentComment, setCurrentComment] = useState('');
     const [body, setBody] = useState('');
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const loggedInUser = useSelector((state) => state.session.user);
     const [errors, setErrors] = useState([]);
-    const songUrl = useSelector((state) => state.song)
     const wavesurferRef = useRef(null);
     const wavesurferInstanceRef = useRef(null);
     const audioPlayerRef = useRef(null);
-
+    let editComment;
     useEffect(() => {
         dispatch(getCommentsBySongId(songId));
         dispatch(getOneSong(songId));
@@ -58,18 +53,16 @@ const SongDetailPage = () => {
                 height: 100,
                 barWidth: 2,
                 barHeight: 1,
-                // barGap: 2,
                 backend: 'WebAudio',
                 cursorColor: '#f50',
                 progressColor: '#f50',
                 waveColor: '#999',
                 cursorWidth: 2,
-                interact: false, // Disable user interaction
+                interact: false,
             });
             wavesurfer.load(song.url);
             wavesurferInstanceRef.current = wavesurfer;
 
-            // Sync WaveSurfer with AudioPlayer
             audioPlayerRef.current.audio.current.addEventListener('timeupdate', () => {
                 const currentTime = audioPlayerRef.current.audio.current.currentTime;
                 wavesurfer.seekTo(currentTime / audioPlayerRef.current.audio.current.duration);
@@ -81,6 +74,7 @@ const SongDetailPage = () => {
         const currentTime = audioPlayerRef.current.audio.current.currentTime;
         wavesurferInstanceRef.current.seekTo(currentTime / audioPlayerRef.current.audio.current.duration);
     };
+
     const deleteComment = (commentId) => {
         history.push(`/songs/${songId}`);
         return dispatch(removeComment(commentId));
@@ -110,27 +104,16 @@ const SongDetailPage = () => {
         }
     };
 
-    const commentEditForm = (comment) => {
-        if (showEditCommentForm && comment.userId === loggedInUser?.id) {
-            return (
-                <EditCommentFormModal
-                    comment={comment}
-                    hideForm={() => setShowEditCommentForm(false)}
-                />
-            );
-        }
-    };
 
-    // const commentCreateForm = (song) => {
-    // 	if (showCreateCommentForm && loggedInUser?.id) {
-    // 		return (
-    // 			<CreateCommentModal
-    // 				song={song}
-    // 				hideForm={() => setShowCreateCommentForm(false)}
-    // 			/>
-    // 		);
-    // 	}
-    // };
+    if (showEditCommentForm) {
+        editComment = (
+            <EditCommentForm
+                comment={currentComment}
+                hideForm={() => setShowEditCommentForm(false)}
+            />
+        );
+    }
+
     const createComment = async (e) => {
         if (e.keyCode === 13 && body.trimEnd() !== '') {
             e.preventDefault();
@@ -152,20 +135,23 @@ const SongDetailPage = () => {
 
     return (
         <div className='song-detail-main-container'>
-            <div className='song-detail-container'>
+            <div className='detail-container'>
                 <div className='song-detail-box'>
                     <img
-                        className='song-detail-detail-image'
+                        className='song-detail-image'
                         src={song.previewImage}
                         alt='songimg'
                     ></img>
+
                 </div>
-                <div className='song-detail-box'>
-                    <ul>
+                <div className='song-detail-text-container'>
+                    <div className='song-detail-text-box'>
+
                         <li id='song-title'>{song.title}</li>
                         <li id='song-artist'>{song?.Artist?.username}</li>
-                        <li id='song-description'>{`Description: ${song.description}`}</li>
-                    </ul>
+                        <li id='song-description'>{`${song.description}`}</li>
+
+                    </div>
                     <div ref={wavesurferRef}></div>
                     <AudioPlayer
                         src={song.url}
@@ -175,109 +161,103 @@ const SongDetailPage = () => {
                         <source src={song.url} type='audio/mp3' />
                         Your browser does not support the audio element.
                     </AudioPlayer>
-                    <div>
-                        {!showEditSongForm &&
-                            song.userId === loggedInUser?.id &&
-                            !showDeleteConfirmation && (
-                                <button
-                                    className='orange-button'
-                                    onClick={() => setShowEditSongForm(true)}
-                                >
-                                    Edit
-                                </button>
-                            )}
 
-                        {song.userId === loggedInUser?.id &&
-                            !showDeleteConfirmation && (
-                                <button
-                                    className='grey-button'
-                                    onClick={confirmDelete}
-                                >
-                                    Delete
-                                </button>
-                            )}
-
-                        {showDeleteConfirmation && (
-                            <>
-                                <button
-                                    className='blue-button'
-                                    onClick={handleDelete}
-                                >
-                                    Confirm Delete
-                                </button>
-                                <button
-                                    className='grey-button'
-                                    onClick={cancelDelete}
-                                >
-                                    Cancel
-                                </button>
-                            </>
-                        )}
-                    </div>
-                    {songEditForm(song)}
-                    {commentEditForm(currentComment)}
-                    {/* {commentCreateForm(song)} */}
                 </div>
 
-                <div className='song-detail-box'>
-                    <h2>User Comments</h2>
-                    <div>
-                        {/* {!showCreateCommentForm && (
-							<button
-								className='blue-button'
-								onClick={() => setShowCreateCommentForm(true)}
-							>
-								Add Comment
-							</button>
-						)} */}
-                        {comments &&
-                            comments
-                                .filter(
-                                    (comment) =>
-                                        Number(comment.songId) ===
-                                        Number(songId)
-                                )
-                                .map((comment, idx) => (
-                                    <div
-                                        className='comment-list'
-                                        key={`${comment.id}`}
-                                    >
-                                        {`${comment.body}`}
-                                        {comment.userId ===
-                                            loggedInUser?.id && (
-                                                <div className='comment-icons'>
-                                                    <img
-                                                        className='trash-icon'
-                                                        src='/trash-icon.png'
-                                                        alt=''
-                                                        onClick={() =>
-                                                            dispatch(
-                                                                deleteComment(
-                                                                    comment.id
-                                                                )
+
+            </div>
+            <div className='detail-button-container'>
+
+                {!showEditSongForm &&
+                    song.userId === loggedInUser?.id &&
+                    !showDeleteConfirmation && (
+                        <button
+                            className='orange-button'
+                            onClick={() => setShowEditSongForm(true)}
+                        >
+                            Edit
+                        </button>
+                    )}
+
+                {song.userId === loggedInUser?.id &&
+                    !showDeleteConfirmation && (
+                        <button
+                            className='grey-button'
+                            onClick={confirmDelete}
+                        >
+                            Delete
+                        </button>
+                    )}
+
+                {showDeleteConfirmation && (
+                    <>
+                        <button
+                            className='blue-button'
+                            onClick={handleDelete}
+                        >
+                            Confirm Delete
+                        </button>
+                        <button
+                            className='grey-button'
+                            onClick={cancelDelete}
+                        >
+                            Cancel
+                        </button>
+                    </>
+                )}
+            </div>
+            <div className='comments-container'>
+                <h2>User Comments</h2>
+                <div>
+                    {comments &&
+                        comments
+                            .filter(
+                                (comment) =>
+                                    Number(comment.songId) ===
+                                    Number(songId)
+                            )
+                            .map((comment, idx) => (
+                                <div
+                                    className='comment-list'
+                                    key={`${comment.id}`}
+                                >
+                                    {`${comment.body}`}
+                                    {comment.userId ===
+                                        loggedInUser?.id && (
+                                            <div className='comment-icons'>
+                                                <img
+                                                    className='trash-icon'
+                                                    src='/trash-icon.png'
+                                                    alt=''
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            deleteComment(
+                                                                comment.id
                                                             )
-                                                        }
+                                                        )
+                                                    }
+                                                />
+                                                {!showEditCommentForm && (
+                                                    <img
+                                                        className='edit-icon'
+                                                        src='/edit-icon.png'
+                                                        alt=''
+                                                        onClick={() => {
+                                                            setShowEditCommentForm(
+                                                                true
+                                                            );
+                                                            setCurrentComment(
+                                                                comment
+                                                            );
+                                                        }}
                                                     />
-                                                    {!showEditCommentForm && (
-                                                        <img
-                                                            className='edit-icon'
-                                                            src='/edit-icon.png'
-                                                            alt=''
-                                                            onClick={() => {
-                                                                setShowEditCommentForm(
-                                                                    true
-                                                                );
-                                                                setCurrentComment(
-                                                                    comment
-                                                                );
-                                                            }}
-                                                        />
-                                                    )}
-                                                </div>
-                                            )}
-                                    </div>
-                                ))}
-                        <form className='comment-form'>
+                                                )}
+                                            </div>
+                                        )}
+                                </div>
+                            ))}
+                    {!showEditCommentForm &&
+                        (<form>
                             <label>
                                 <textarea
                                     onKeyUp={createComment}
@@ -289,13 +269,11 @@ const SongDetailPage = () => {
                                     onChange={(e) => setBody(e.target.value)}
                                 />
                             </label>
-                        </form>
-                    </div>
+                        </form>)}
                 </div>
-                {/* <div className='song-detail-box'></div>
-				<div className='song-detail-box'></div>
-				<div className='song-detail-box'></div> */}
+                {editComment}
             </div>
+            {songEditForm(song)}
         </div>
     );
 };

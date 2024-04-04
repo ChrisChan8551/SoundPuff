@@ -20,12 +20,20 @@
 	/* border: red solid; */
 	margin: 0 auto;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
 	width: 1175px;
 	height: 1100px;
 	background-color: rgb(245, 245, 245);
+}
+
+.detail-container {
+	/* border: blue solid; */
+	display: flex;
+	width: 50rem;
+	height: 20rem;
+	margin-top: 2rem;
 }
 
 .song-detail-container {
@@ -37,30 +45,64 @@
 	width: 1080px;
 	height: 1020px;
 }
+.detail-button-container {
+	/* border: purple solid; */
+	display: flex;
+	width: 160px;
+	height: 25px;
+	justify-content: right;
+	margin-left: 54%;
+	/* padding: 10px; */
+}
+
+.comments-container {
+	/* border: green solid; */
+	/* margin-right: 30%; */
+	width: 47rem;
+}
 
 .song-detail-box {
-	/* display: flex; */
-	/* justify-content: center; */
-	/* margin: 20px; */
 	/* border: orange solid; */
-	width: 100%;
+	display: flex;
+	/* justify-content: center; */
+	margin: 20px;
+	min-height: 10rem;
+	min-width: 9rem;
+	/* width: 100%; */
 	/* height: 275px; */
 }
 
-.song-detail-details {
+.song-detail-text-box {
+	/* border: green solid; */
+	/* min-width: fit-content; */
+	padding: 3px;
+	/* min-height: 9rem;
+	min-width: 9rem; */
+}
+
+/* .song-detail {
 	display: flex;
 	flex-direction: column;
 	justify-items: center;
 	align-items: center;
-	/* border: black solid; */
+	border: black solid;
 	width: 270px;
 	height: 270px;
-}
+} */
 
+.song-detail-text-container {
+	/* border: red solid; */
+	display: flex;
+	margin: auto;
+	flex-direction: column;
+	justify-content: space-between;
+	min-width: 30rem;
+	height: 17rem;
+}
 .song-detail-image {
 	/* border: green solid; */
-	width: 150px;
-	height: 150px;
+	width: 17rem;
+	height: 17rem;
 }
 
 .song-image:hover {
@@ -121,13 +163,26 @@ li {
 	border: lightgrey solid 1px;
 }
 .comment-list {
+	/* border: blue solid; */
 	display: flex;
 	list-style: none;
+	justify-content: space-between;
+	padding: 2px;
+	/* padding-left: 5px; */
+	/* padding-bottom: 5px; */
 	/* border: lightgrey solid 0.5px; */
 }
+.comment-input {
+	margin-top: 5px;
+	/* margin-left: 5px; */
+	width: 35rem;
+	height: 3rem;
+	resize: none;
+}
+
 .ul-comments {
+	/* border: blue solid; */
 	margin-top: 10px;
-	border: blue solid;
 }
 
 #song-title {

@@ -6,6 +6,7 @@ import albumReducer from './album';
 import commentReducer from './comment';
 import searchbarReducer from './searchbar';
 
+
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	song: songReducer,

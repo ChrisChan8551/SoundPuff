@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Redirect, NavLink } from 'react-router-dom';
 import { getSongs, getSongsbyCurrentUser } from '../../store/song';
 import CreateSongModal from '../CreateSongModal';
-// import './SongsPage.css';
 
 const SongsByCurrentUser = () => {
     const songs = Object.values(useSelector((state) => state.song));
@@ -38,9 +37,9 @@ const SongsByCurrentUser = () => {
         history.push(`/songs/${songId}`);
     };
 
-    const getUserSongs = () => {
-        return dispatch(getSongsbyCurrentUser());
-    };
+    // const getUserSongs = () => {
+    //     return dispatch(getSongsbyCurrentUser());
+    // };
 
     return (
         <div className='song-main-container'>
